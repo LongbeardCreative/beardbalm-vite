@@ -7,6 +7,7 @@ A boilerplate WordPress theme, powered by [Vite.js](https://vitejs.dev/) for ⚡
 - Clone this repository by running
 
   ```shell
+  cd /path/to/wp-content/themes
   git clone https://github.com/LongbeardCreative/beardbalm-vite.git
   ```
 

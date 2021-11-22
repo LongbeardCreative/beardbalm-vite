@@ -21,7 +21,7 @@ get_header();
 
 		<section class="container row section-m-t section-m-b">
 			<div class="col-xs-12 col-lg-10 col-lg-offset-1">
-				<h2>Accordionsss</h2>
+				<h2>Accordions</h2>
 				<?php
 				$data = array(
 					array(
