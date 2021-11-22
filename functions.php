@@ -24,7 +24,7 @@ if (!defined('LB_VERSION')) {
  * NOTE: Do not include trailing slash.
  */
 add_filter('wptt_get_local_fonts_base_path', function ($path) {
-  return get_template_directory();
+  return get_template_directory_uri() . '/src/fonts';
 });
 
 /**
