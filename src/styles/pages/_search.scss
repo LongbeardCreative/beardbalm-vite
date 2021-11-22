@@ -1,0 +1,16 @@
+/******************************************************************
+
+Stylesheet: Search Results
+
+Styles for search result page ONLY. If the styles will be used across the site,
+use the _base.scss file.
+
+******************************************************************/
+.search-result {
+  margin-bottom: 2rem;
+  list-style: none;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

@@ -1,0 +1,114 @@
+/******************************************************************
+
+Stylesheet: Variables
+
+******************************************************************/
+body {
+  position: relative;
+  background-color: #eff1f3;
+}
+body::before {
+  content: "";
+  height: 100%;
+  width: 20%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 158 158' width='158' height='158' %3E%3Cpath d='M52.666 105.333V52.666h52.667v52.667z' opacity='.8'%3E%3C/path%3E%3Cpath d='M105.333 105.333V52.666H158v52.667z' opacity='.4'%3E%3C/path%3E%3Cpath d='M52.667 52.667V0h52.667v52.667z' opacity='.4'%3E%3C/path%3E%3Cpath d='M0 52.667V0h52.667v52.667zM105.333 52.667V0H158v52.667z'%3E%3C/path%3E%3Cpath d='M105.333 158v-52.667H158V158z' opacity='.6'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: contain;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+input[type=checkbox]:focus,
+input[type=color]:focus,
+input[type=date]:focus,
+input[type=datetime-local]:focus,
+input[type=datetime]:focus,
+input[type=email]:focus,
+input[type=month]:focus,
+input[type=number]:focus,
+input[type=password]:focus,
+input[type=radio]:focus,
+input[type=search]:focus,
+input[type=tel]:focus,
+input[type=text]:focus,
+input[type=time]:focus,
+input[type=url]:focus,
+input[type=week]:focus,
+select:focus,
+textarea:focus {
+  border-color: #247ba0;
+  box-shadow: 0 0 0 1px #247ba0;
+}
+
+input[type=checkbox]:checked::before {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M14.83 4.89l1.34.94-5.81 8.38H9.02L5.78 9.67l1.34-1.25 2.57 2.4z' fill='%230054a4'/%3E%3C/svg%3E");
+}
+
+a {
+  color: #247ba0;
+  text-decoration: none;
+}
+a:active, a:hover {
+  color: #247ba0;
+  text-decoration: underline;
+}
+
+.login h1 a {
+  height: 65px;
+  width: 320px;
+  background-image: url("/wp-content/themes/beardbalm/assets/images/logo.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.login form {
+  border: 0;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+}
+.login form .input,
+.login form input[type=checkbox],
+.login input[type=text] {
+  border: 0;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+}
+.login #backtoblog a:hover,
+.login #nav a:hover,
+.login h1 a:hover {
+  color: #247ba0;
+}
+.login #login_error,
+.login .message,
+.login .success {
+  background-color: #ffffff;
+}
+.login #login_error {
+  border-color: #ff1654;
+}
+.login .message {
+  border-color: #247ba0;
+}
+
+.wp-core-ui .button,
+.wp-core-ui .button-secondary {
+  color: #247ba0;
+  border-color: #247ba0;
+}
+.wp-core-ui .button-secondary:hover,
+.wp-core-ui .button.hover,
+.wp-core-ui .button:hover {
+  color: #247ba0;
+  border-color: #247ba0;
+}
+.wp-core-ui .button-primary, .wp-core-ui .button-primary.focus, .wp-core-ui .button-primary.hover, .wp-core-ui .button-primary:focus, .wp-core-ui .button-primary:hover {
+  background: #247ba0;
+  border-color: #247ba0;
+  color: #ffffff;
+}
+.wp-core-ui .button-primary.hover, .wp-core-ui .button-primary:hover {
+  background: #ffffff;
+  border-color: #247ba0;
+  color: #247ba0;
+}
+
+/*# sourceMappingURL=login.css.map */

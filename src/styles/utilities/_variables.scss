@@ -1,0 +1,64 @@
+/******************************************************************
+
+Stylesheet: Variables
+
+******************************************************************/
+
+// Colours
+$color1: #247ba0;
+$color2: #70c1b3;
+$color3: #b2dbbf;
+$color4: #f3ffbd;
+$color5: #ffffff;
+$color6: #ffffff;
+$color-hover: #009fb7;
+$color-active: #009fb7;
+
+$color-p: #272727;
+$text-gray: #a4a3a6;
+$white: #ffffff;
+$gray: #eff1f3;
+$black: #000000;
+
+$color-error: #ff1654;
+$color-success: #70c1b3;
+
+$box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+$box-shadow-deep: 0 3px 6px rgba(0, 0, 0, 0.32);
+
+$bg-fallback: rgba($white, 0.85);
+
+// Grid Variables. Reference _grids.scss for usage.
+$margin: 10%;
+$col: 8.33333%;
+$col-vw: 8.33333%;
+$gutter: 16px;
+$gutter-md: 20px;
+
+// Device breakpoints
+$desktop: min-width 1920px;
+$laptop-lg: min-width 1750px;
+$laptop-md: min-width 1600px;
+$laptop: min-width 1440px;
+$laptop-sm: min-width 1025px;
+$tablet: min-width 1024px;
+$tablet-sm: min-width 768px;
+$mobile-lg: min-width 600px;
+$mobile: min-width 375px;
+$mobile-sm: min-width 340px;
+$mobile-only: max-width 767px;
+
+// Document margin
+$min-margin: 20px;
+$xs-margin: 5.263%;
+$sm-margin: 4.167%;
+$md-margin: 6.25%;
+$lg-margin: 5.21%;
+
+// Transitions
+$transition: 0.25s cubic-bezier(0.07, 0.75, 0.66, 0.9);
+$transition-slow: 0.5s cubic-bezier(0.07, 0.75, 0.66, 0.9);
+
+// icon system
+// usage e.g. background-image: url(#{$icons_dir}email.svg);
+$icons_dir: "/wp-content/themes/beardbalm/assets/icons/";

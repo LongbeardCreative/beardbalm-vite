@@ -1,0 +1,144 @@
+/******************************************************************
+
+Stylesheet: Typography
+
+******************************************************************/
+
+/*********************
+FONT FACE
+*********************/
+// font stacks
+$sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$serif: "Georgia", Cambria, Times New Roman, Times, serif;
+
+$primary: Arial;
+$secondary: Times New Roman;
+
+// theme fonts
+$body-font: 500 1em / 1.5em $secondary, $sans-serif;
+$h1: 700 1.75rem / 1em $primary, $sans-serif;
+$h2: 700 1.625rem / 1.25em $primary, $sans-serif;
+$h3: 600 1.5rem / 1.25em $primary, $sans-serif;
+$h4: 500 1.125rem / 1.4em $secondary, $sans-serif;
+$h5: 600 1.125rem / 1.4em $secondary, $sans-serif;
+$h6: 500 1rem / 1.5em $secondary, $sans-serif;
+
+@mixin h1 {
+  font: $h1;
+  color: $color1;
+
+  @include breakpoint($tablet-sm) {
+    font-size: 2.1875rem;
+  }
+
+  @include breakpoint($laptop-sm) {
+    font-size: 2.8125rem;
+  }
+
+  @include breakpoint($laptop-lg) {
+    font-size: 3.125rem;
+  }
+
+  @include breakpoint($desktop) {
+    font-size: 4.0625rem;
+  }
+}
+
+@mixin h2 {
+  font: $h2;
+  color: $color1;
+
+  @include breakpoint($tablet-sm) {
+    font-size: 1.875rem;
+  }
+
+  @include breakpoint($laptop-sm) {
+    font-size: 2.5rem;
+  }
+
+  @include breakpoint($laptop-lg) {
+    font-size: 2.8125rem;
+  }
+
+  @include breakpoint($desktop) {
+    font-size: 3.75rem;
+  }
+}
+
+@mixin h2-small {
+  font: $h2;
+  font-size: 1.375rem;
+  color: $color1;
+
+  @include breakpoint($tablet-sm) {
+    font-size: 1.5rem;
+  }
+
+  @include breakpoint($laptop-sm) {
+    font-size: 1.75rem;
+  }
+
+  @include breakpoint($laptop-lg) {
+    font-size: 1.875rem;
+  }
+
+  @include breakpoint($desktop) {
+    font-size: 2.8125rem;
+  }
+}
+
+@mixin h3 {
+  font: $h3;
+  color: $color1;
+
+  @include breakpoint($tablet-sm) {
+    font-size: 1.5rem;
+  }
+
+  @include breakpoint($laptop-lg) {
+    font-size: 1.75rem;
+  }
+
+  @include breakpoint($desktop) {
+    font-size: 2rem;
+  }
+}
+
+@mixin h4 {
+  font: $h4;
+  color: $color1;
+
+  @include breakpoint($tablet-sm) {
+    font-size: 1.25rem;
+  }
+
+  @include breakpoint($laptop-sm) {
+    font-size: 1.375rem;
+  }
+
+  @include breakpoint($desktop) {
+    font-size: 1.625rem;
+  }
+}
+
+@mixin h5 {
+  font: $h5;
+  color: $color1;
+
+  @include breakpoint($laptop-sm) {
+    font-size: 1.25rem;
+  }
+}
+
+@mixin h6 {
+  font: $h6;
+  color: $color1;
+
+  @include breakpoint($laptop-sm) {
+    font-size: 1.125rem;
+  }
+
+  @include breakpoint($desktop) {
+    font-size: 1.25rem;
+  }
+}

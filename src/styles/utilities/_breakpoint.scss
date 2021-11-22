@@ -1,0 +1,59 @@
+// Device breakpoints
+$desktop: min-width 1920px;
+$laptop-lg: min-width 1750px;
+$laptop-md: min-width 1600px;
+$laptop: min-width 1440px;
+$laptop-sm: min-width 1025px;
+$tablet: min-width 1024px;
+$tablet-sm: min-width 768px;
+$mobile-lg: min-width 600px;
+$mobile: min-width 375px;
+$mobile-sm: min-width 340px;
+$mobile-only: max-width 767px;
+
+$breakpoints: (
+  "mobile-sm": 340px,
+  "mobile": 375px,
+  "mobile-lg": 375px,
+  "tablet-sm": 768px,
+  "tablet": 1024px,
+  "laptop-sm": 1025px,
+  "laptop": 1440px,
+  "laptop-md": 1600px,
+  "laptop-lg": 1750px,
+  "desktop": 1920px,
+) !default;
+
+$breakpoints-only: (
+  "mobile-only": 767px,
+) !default;
+
+/// Mixin to manage responsive breakpoints
+/// @author Kitty Giraudel
+/// @param {String} $breakpoint - Breakpoint name
+/// @require $breakpoints
+@mixin breakpoint($breakpoint) {
+  // If the key exists in the map
+  @if map-has-key($breakpoints, $breakpoint) {
+    // Prints a media query based on the value
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  }
+
+  // Try max-width media query set
+  @else if map-has-key($breakpoints-only, $breakpoint) {
+    @media (max-width: map-get($breakpoints-only, $breakpoint)) {
+      @content;
+    }
+  }
+
+  // If the key doesn't exist in the map
+  @else {
+    // @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+    //     + "Available breakpoints are: #{map-keys($breakpoints)}.";
+    @media ($breakpoint) {
+      @content;
+    }
+  }
+}

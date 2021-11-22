@@ -1,0 +1,23 @@
+{
+  "name": "beardbalm",
+  "version": "1.0.0",
+  "description": "WordPress Boilerplate theme with Vite.js",
+  "main": "index.js",
+  "scripts": {
+    "dev": "APP_ENV=development vite",
+    "build": "APP_ENV=production vite build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LongbeardCreative/beardbalm.git"
+  },
+  "author": "LB",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^16.11.9",
+    "sass": "^1.43.4",
+    "typescript": "^4.5.2",
+    "vite": "^2.6.13",
+    "vite-plugin-live-reload": "^2.1.0"
+  }
+}

@@ -1,0 +1,17 @@
+/******************************************************************
+Stylesheet: cookieconsent.js Style
+@since 1.0.0
+@updated 1.0.0
+******************************************************************/
+
+.cc-revoke {
+  font-family: inherit;
+  display: none !important;
+  transform: translateY(100%);
+}
+
+.cc-window {
+  font-family: inherit;
+  background: $white;
+  @include box-shadow;
+}

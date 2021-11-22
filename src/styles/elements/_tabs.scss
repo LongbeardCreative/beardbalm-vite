@@ -1,0 +1,199 @@
+.tabs {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  margin-top: -0.625rem;
+  margin-bottom: -0.625rem;
+
+  @include breakpoint($tablet-sm) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  // @media (hover: hover) {
+  //   flex-flow: wrap;
+  //   @include margin(bottom, -10px, 0, 0, 10px);
+  // }
+
+  .tab {
+    white-space: nowrap;
+    height: 100%;
+
+    > span {
+      // @extend %link-underline;
+      color: $color1;
+      font-weight: 600;
+      white-space: nowrap;
+      height: auto;
+    }
+
+    &:not(:last-child) {
+      @include margin(right, 1.875rem, 1.875rem, 1.875rem, 2.375rem);
+    }
+
+    &:hover,
+    &:focus {
+      > span {
+        @extend %link-underline-hover;
+      }
+    }
+
+    &.active {
+      > span {
+        @extend %link-underline-active;
+      }
+    }
+
+    // &.slick-slide {
+    //   margin-right: 0;
+
+    //   &::after {
+    //     display: none;
+    //   }
+    // }
+  }
+}
+
+.tab-panels {
+  margin: 1.25rem 0 0;
+
+  .tab-panel {
+    &:not(.tab-default) {
+      // prevent animation on load
+      animation: fade-up 0.25s;
+      animation-fill-mode: forwards;
+      animation-timing-function: ease-in-out;
+    }
+
+    &:not(.active) {
+      // inactive style
+      display: none;
+    }
+  }
+}
+
+@keyframes fade-up {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.overflow {
+  &--x {
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 2rem;
+      transition: $transition;
+      opacity: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    &::before {
+      left: -5rem;
+      background: linear-gradient(
+        90deg,
+        rgba($white, 1) 0%,
+        rgba($white, 0) 100%
+      );
+    }
+
+    &::after {
+      right: -5rem;
+      background: linear-gradient(
+        270deg,
+        rgba($white, 1) 0%,
+        rgba($white, 0) 100%
+      );
+    }
+
+    &.overflow--left {
+      &::before {
+        left: -1px;
+        opacity: 1;
+      }
+    }
+
+    &.overflow--right {
+      &::after {
+        right: -1px;
+        opacity: 1;
+      }
+    }
+  }
+
+  &--y {
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      height: 3rem;
+      width: calc(100% - 5px); // space for scrollbar
+      transition: $transition;
+      opacity: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    &::before {
+      top: -5rem;
+      background: linear-gradient(
+        180deg,
+        rgba($color2, 1) 0%,
+        rgba($color2, 0) 100%
+      );
+    }
+
+    &::after {
+      bottom: -5rem;
+      background: linear-gradient(
+        0deg,
+        rgba($color2, 1) 0%,
+        rgba($color2, 0) 100%
+      );
+    }
+
+    &.overflow--top {
+      &::before {
+        top: -1px;
+        opacity: 1;
+      }
+    }
+
+    &.overflow--bottom {
+      &::after {
+        bottom: -1px;
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.overflow-wrapper {
+  overflow: hidden;
+  position: relative;
+  height: auto;
+  width: auto;
+}
+
+.overflow-ready {
+  &--x {
+    overflow-x: auto;
+  }
+  &--y {
+    overflow-y: auto;
+  }
+}

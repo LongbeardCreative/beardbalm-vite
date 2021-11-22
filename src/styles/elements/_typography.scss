@@ -1,0 +1,171 @@
+/******************************************************************
+Stylesheet: Global Header
+@since 1.0.0
+@updated 1.0.0
+******************************************************************/
+// This is the base font size that all typographic elements should be scaled to.
+html {
+  font-size: 16px;
+}
+
+body {
+  font: $body-font;
+  font-size: 100%;
+  color: $color-p;
+  color-adjust: economy;
+  -webkit-print-color-adjust: economy;
+  background-color: $white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/*********************
+LINK STYLES
+*********************/
+a,
+a:visited {
+  color: $color-active;
+  transition: $transition;
+
+  /* on hover */
+  &:focus,
+  &:hover {
+    color: $color-hover;
+  }
+
+  // hide outline for mouse users but preserves it for keyboard users.
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  /* on click */
+  &:active {
+  }
+
+  /* mobile tap color */
+  &:link {
+    /*
+        this highlights links on iPhones/iPads.
+        so it basically works like the :hover selector
+        for mobile devices.
+        */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.3);
+  }
+}
+
+/*********************
+WP STANDARD POST IMAGE & ALIGNMENTS
+*********************/
+
+.alignleft {
+  float: left;
+  max-width: 100%;
+  height: auto;
+
+  @include breakpoint($mobile-lg) {
+    padding: 10px 10px 10px 0px;
+  }
+}
+
+.alignright {
+  float: right;
+  max-width: 100%;
+  height: auto;
+
+  @include breakpoint($mobile-lg) {
+    padding: 10px 0 10px 10px;
+  }
+}
+
+.aligncenter {
+  display: block;
+  margin: 0 auto;
+  padding: 10px 0;
+}
+
+// Setting universal font styles
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+h1,
+h2,
+h3,
+h4,
+h5 {
+  text-rendering: optimizelegibility;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+h1,
+.h1 {
+  @include h1;
+
+  &:not(:last-child),
+  &.m-b {
+    margin-bottom: 0.875em;
+  }
+}
+
+h2,
+.h2 {
+  @include h2;
+
+  &:not(:last-child),
+  &.m-b {
+    margin-bottom: 0.875em;
+  }
+}
+
+h3,
+.h3 {
+  @include h3;
+}
+
+h4,
+.h4 {
+  @include h4;
+}
+
+h5,
+.h5 {
+  @include h5;
+}
+
+h6,
+.h6 {
+  @include h6;
+}
+
+p {
+  font: $body-font;
+  -ms-word-wrap: break-word;
+  word-break: break-word;
+  word-wrap: break-word;
+
+  // cleaning up the ragged lines and breaks
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
+
+  // sets a minimum number of characters before and after the break
+  -webkit-hyphenate-before: 2;
+  -webkit-hyphenate-after: 3;
+  hyphenate-lines: 3;
+
+  // enabling fancy ligatures when available
+  //   -webkit-font-feature-settings: 'liga', 'dlig';
+  //    -moz-font-feature-settings: 'liga=1, dlig=1';
+  //       -ms-font-feature-settings: 'liga', 'dlig';
+  //        -o-font-feature-settings: 'liga', 'dlig';
+  //           font-feature-settings: 'kern' 1, 'dlig' 1;
+}
+
+::selection {
+  background: $color2;
+  color: $white;
+}

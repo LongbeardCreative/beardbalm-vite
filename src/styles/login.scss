@@ -1,0 +1,138 @@
+@import "utilities/variables";
+
+body {
+  position: relative;
+  background-color: $gray;
+
+  &::before {
+    content: "";
+    height: 100%;
+    width: 20%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 158 158' width='158' height='158' %3E%3Cpath d='M52.666 105.333V52.666h52.667v52.667z' opacity='.8'%3E%3C/path%3E%3Cpath d='M105.333 105.333V52.666H158v52.667z' opacity='.4'%3E%3C/path%3E%3Cpath d='M52.667 52.667V0h52.667v52.667z' opacity='.4'%3E%3C/path%3E%3Cpath d='M0 52.667V0h52.667v52.667zM105.333 52.667V0H158v52.667z'%3E%3C/path%3E%3Cpath d='M105.333 158v-52.667H158V158z' opacity='.6'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: contain;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+input[type="checkbox"],
+input[type="color"],
+input[type="date"],
+input[type="datetime-local"],
+input[type="datetime"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="radio"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"],
+select,
+textarea {
+  &:focus {
+    border-color: $color1;
+    box-shadow: 0 0 0 1px $color1;
+  }
+}
+
+input[type="checkbox"]:checked::before {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M14.83 4.89l1.34.94-5.81 8.38H9.02L5.78 9.67l1.34-1.25 2.57 2.4z' fill='%230054a4'/%3E%3C/svg%3E");
+}
+
+a {
+  color: $color1;
+  text-decoration: none;
+
+  &:active,
+  &:hover {
+    color: $color1;
+    text-decoration: underline;
+  }
+}
+
+.login {
+  h1 a {
+    height: 65px;
+    width: 320px;
+    background-image: url("/wp-content/themes/beardbalm/assets/images/logo.svg");
+    background-size: contain;
+    // background-size: 320px 65px;
+    background-repeat: no-repeat;
+  }
+
+  form {
+    border: 0;
+    box-shadow: $box-shadow;
+  }
+
+  form .input,
+  form input[type="checkbox"],
+  input[type="text"] {
+    border: 0;
+    box-shadow: $box-shadow;
+  }
+
+  #backtoblog,
+  #nav,
+  h1 {
+    a:hover {
+      color: $color1;
+    }
+  }
+
+  // Message
+  #login_error,
+  .message,
+  .success {
+    background-color: $white;
+  }
+
+  #login_error {
+    border-color: $color-error;
+  }
+
+  .message {
+    border-color: $color1;
+  }
+}
+
+.wp-core-ui {
+  .button,
+  .button-secondary {
+    color: $color1;
+    border-color: $color1;
+  }
+
+  .button-secondary:hover,
+  .button.hover,
+  .button:hover {
+    color: $color1;
+    border-color: $color1;
+  }
+
+  .button-primary {
+    &,
+    &.focus,
+    &.hover,
+    &:focus,
+    &:hover {
+      background: $color1;
+      border-color: $color1;
+      color: $white;
+    }
+
+    &.hover,
+    &:hover {
+      background: $white;
+      border-color: $color1;
+      color: $color1;
+    }
+  }
+}

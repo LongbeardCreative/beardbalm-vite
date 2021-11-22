@@ -1,0 +1,224 @@
+{
+    "key": "group_5e9e0aa6b0da1",
+    "title": "General Site Settings",
+    "fields": [
+        {
+            "key": "field_5ebda2781b946",
+            "label": "Analytics",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5e9e0aad96075",
+            "label": "Google Analytics Code",
+            "name": "google_analytics_code",
+            "type": "text",
+            "instructions": "Typically begins with UA-",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5e9e0ad511979",
+            "label": "Facebook Pixel Code",
+            "name": "facebook_pixel_code",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5ebd9dd323796",
+            "label": "Special Features",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5ebd9df023797",
+            "label": "Light Galleries (lightgallery.js)",
+            "name": "lightgallery",
+            "type": "true_false",
+            "instructions": "For interactive popup lightgalleries, with slideshows.\r\nhttps:\/\/github.com\/sachinchoolur\/lightgallery.js",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "Enabled",
+            "ui_off_text": "Disabled"
+        },
+        {
+            "key": "field_5f063ba689d22",
+            "label": "Instant Page",
+            "name": "instant_page",
+            "type": "true_false",
+            "instructions": "For prefetching HTML pages on hover.\r\nhttps:\/\/instant.page\/",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "Enabled",
+            "ui_off_text": "Disabled"
+        },
+        {
+            "key": "field_5ebd9e5623799",
+            "label": "Slick Slider (slick.js)",
+            "name": "slick",
+            "type": "true_false",
+            "instructions": "For carousels and sliders. https:\/\/kenwheeler.github.io\/slick\/",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "Enabled",
+            "ui_off_text": "Disabled"
+        },
+        {
+            "key": "field_5ebd9e9e2379a",
+            "label": "Popups (Lity.js)",
+            "name": "lity",
+            "type": "true_false",
+            "instructions": "For popups (ie. videos). https:\/\/sorgalla.com\/lity\/",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "Enabled",
+            "ui_off_text": "Disabled"
+        },
+        {
+            "key": "field_5ebda031192cf",
+            "label": "Animate on Scroll (AOS.js)",
+            "name": "aos",
+            "type": "true_false",
+            "instructions": "For scroll animations. https:\/\/michalsnik.github.io\/aos\/",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "Enabled",
+            "ui_off_text": "Disabled"
+        },
+        {
+            "key": "field_5ecd8bd7ddff7",
+            "label": "Development Tools",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5ecd8befddff9",
+            "label": "Development Cron",
+            "name": "cron",
+            "type": "true_false",
+            "instructions": "Enables CSS auto-refresh. Only enable when website is in active development to avoid unnecessary server resource consumption.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "Enabled",
+            "ui_off_text": "Disabled"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "theme-general-settings"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1594244040
+}

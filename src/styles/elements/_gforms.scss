@@ -1,0 +1,383 @@
+////----- Variables
+
+$field-gap-h-xs: 10px;
+$field-gap-h-sm: 15px;
+$field-gap-h-md: 20px;
+$field-gap-h-lg: 20px;
+
+$field-gap-v-xs: 10px;
+$field-gap-v-sm: 15px;
+$field-gap-v-md: 20px;
+$field-gap-v-lg: 20px;
+
+$color-alert: #d44d5c;
+
+$collapse-bp-sm: min-width 0; // when 50% no longer collapses
+$collapse-bp-md: $laptop-sm; // when 33% fields no longer collapses
+$collapse-bp-lg: $laptop-lg; // when 25% fields no longer collapses
+
+////----- Core Containers
+.gform_heading,
+.gform_body {
+  margin-bottom: 20px;
+}
+
+////----- Fields Container
+.gform_fields {
+  display: flex;
+  flex-flow: wrap;
+  list-style: none;
+  padding: 0;
+  @include margin(
+    all,
+    (-$field-gap-v-xs * 0.5) (-$field-gap-h-xs * 0.5),
+    (-$field-gap-v-sm * 0.5) (-$field-gap-h-sm * 0.5),
+    (-$field-gap-v-md * 0.5) (-$field-gap-h-md * 0.5),
+    (-$field-gap-v-lg * 0.5) (-$field-gap-h-lg * 0.5)
+  );
+}
+
+////----- Field Containers and their Contents
+.gfield {
+  box-sizing: border-box;
+  overflow: hidden;
+  width: 100%;
+  @include padding(
+    all,
+    ($field-gap-v-xs * 0.5) ($field-gap-h-xs * 0.5),
+    ($field-gap-v-sm * 0.5) ($field-gap-h-sm * 0.5),
+    ($field-gap-v-md * 0.5) ($field-gap-h-md * 0.5),
+    ($field-gap-v-lg * 0.5) ($field-gap-h-lg * 0.5)
+  );
+
+  &.spacer {
+    padding: 0;
+  }
+
+  &.hidden_label {
+    .gfield_label {
+      @extend %screen-reader-text;
+    }
+  }
+}
+.ginput_container {
+  // span {
+  // 	margin-bottom: 10px;
+  // }
+  // textarea,
+  input,
+  select {
+    &.large {
+      width: 100%;
+    }
+    &.medium {
+      width: 66%;
+    }
+    &.small {
+      width: 33%;
+    }
+  }
+}
+label.gfield_label {
+  display: inline-block;
+  padding-bottom: 10px;
+  .left_label & {
+    float: left;
+    width: 25%;
+  }
+  .right_label & {
+    float: right;
+    width: 25%;
+  }
+}
+
+.gfield_required {
+  padding-left: 5px;
+}
+
+////----- Checkboxes and Radios
+.gfield_checkbox,
+.gfield_radio {
+  list-style: none;
+  padding: 0;
+  input {
+    margin-right: 10px;
+    position: relative;
+    top: -1px;
+  }
+}
+.gfield_radio {
+  input {
+    margin-left: 2px;
+  }
+}
+
+////----- Section Break
+.gsection {
+  h2 {
+    border-bottom: 3px solid black;
+    padding-bottom: 15px;
+  }
+}
+
+////----- Page Break
+.gf_progressbar_wrapper {
+  padding-bottom: 15px;
+}
+.gf_progressbar {
+  background: gray;
+}
+.gf_progressbar_percentage {
+  background: red;
+  padding: 5px 10px;
+  text-align: right;
+}
+
+////----- Time Field
+.gfield_time_hour,
+.gfield_time_minute,
+.gfield_time_ampm {
+  display: inline;
+  display: inline-block;
+}
+.gfield_time_hour,
+.gfield_time_minute {
+  label {
+    display: block;
+  }
+}
+.gfield_time_ampm {
+  vertical-align: top;
+}
+
+////----- Validation and Errors
+.validation_error {
+  font-size: 1.2em;
+  font-weight: bold;
+  padding-bottom: 15px;
+}
+
+.gfield {
+  &.gfield_error {
+    // background: transparentize($color-alert, 0.95);
+    // margin-bottom: 15px;
+    // padding-top: 15px;
+    label.gfield_label {
+      font-weight: bold;
+    }
+  }
+
+  .validation_message {
+    font-weight: bold;
+    margin-top: 0.25rem;
+  }
+}
+
+.gform_validation_container {
+  display: none;
+}
+
+////----- CSS Ready Classes
+.ginput_full {
+  display: block;
+  input,
+  select,
+  textarea {
+    // margin-bottom: 5px;
+    width: 100%;
+  }
+  label {
+    display: block;
+  }
+}
+.ginput_left {
+  padding-right: 10px;
+  width: 50%;
+  input,
+  select,
+  textarea {
+    // margin-bottom: 5px;
+    width: 100%;
+  }
+  label {
+    display: block;
+  }
+}
+.ginput_right {
+  width: 50%;
+  input,
+  select,
+  textarea {
+    // margin-bottom: 5px;
+    width: 100%;
+  }
+  label {
+    display: block;
+  }
+}
+.ginput_right {
+  width: 50%;
+}
+
+//----- Layout Columns
+.gfield {
+  &.gf_left_half,
+  &.gf_right_half,
+  &.gf_left_third,
+  &.gf_middle_third,
+  &.gf_right_third,
+  &.gf_first_quarter,
+  &.gf_second_quarter,
+  &.gf_third_quarter,
+  &.gf_fourth_quarter &.gfield--width-half {
+    width: 100%;
+  }
+}
+
+@include breakpoint($collapse-bp-sm) {
+  .gfield {
+    &.gf_left_half,
+    &.gf_right_half,
+    &--width-half {
+      width: 50%;
+    }
+  }
+}
+
+@include breakpoint($collapse-bp-md) {
+  .gfield {
+    &.gf_left_third,
+    &.gf_right_third {
+      width: 33.333%;
+    }
+
+    &.gf_middle_third {
+      width: 33.334%;
+    }
+  }
+}
+
+@include breakpoint($collapse-bp-lg) {
+  .gfield {
+    &.gf_first_quarter,
+    &.gf_second_quarter,
+    &.gf_third_quarter,
+    &.gf_fourth_quarter {
+      width: 25%;
+    }
+  }
+}
+
+//----- List Columns
+.gf_list_2col {
+  ul.gfield_checkbox,
+  ul.gfield_radio {
+    li {
+      float: left;
+      padding-bottom: 10px;
+      width: 50%;
+    }
+  }
+}
+.gf_list_3col {
+  .gfield_checkbox,
+  .gfield_radio {
+    .gchoice {
+      float: left;
+      padding-bottom: 10px;
+      width: 33%;
+    }
+  }
+}
+.gf_list_4col {
+  .gfield_checkbox,
+  .gfield_radio {
+    .gchoice {
+      float: left;
+      padding-bottom: 10px;
+      width: 25%;
+    }
+  }
+}
+.gf_list_5col {
+  .gfield_checkbox,
+  .gfield_radio {
+    .gchoice {
+      float: left;
+      padding-bottom: 10px;
+      width: 20%;
+    }
+  }
+}
+.gf_list_inline {
+  .gfield_checkbox,
+  .gfield_radio {
+    .gchoice {
+      display: inline-block;
+      padding-right: 10px;
+      padding-bottom: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .gf_list_2col,
+  .gf_list_3col,
+  .gf_list_4col,
+  .gf_list_5col {
+    ul.gfield_checkbox,
+    ul.gfield_radio {
+      li {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.ginput_complex {
+  display: flex;
+  flex-flow: wrap;
+  @include margin(
+    all,
+    (-$field-gap-v-xs * 0.5) (-$field-gap-h-xs * 0.5),
+    (-$field-gap-v-sm * 0.5) (-$field-gap-h-sm * 0.5),
+    (-$field-gap-v-md * 0.5) (-$field-gap-h-md * 0.5),
+    (-$field-gap-v-lg * 0.5) (-$field-gap-h-lg * 0.5)
+  );
+
+  > span {
+    flex: 1;
+    min-width: 100%;
+    box-sizing: border-box;
+    @include padding(
+      all,
+      ($field-gap-v-xs * 0.5) ($field-gap-h-xs * 0.5),
+      ($field-gap-v-sm * 0.5) ($field-gap-h-sm * 0.5),
+      ($field-gap-v-md * 0.5) ($field-gap-h-md * 0.5),
+      ($field-gap-v-lg * 0.5) ($field-gap-h-lg * 0.5)
+    );
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+    }
+
+    @include breakpoint($collapse-bp-sm) {
+      min-width: 50%;
+    }
+
+    @include breakpoint($collapse-bp-md) {
+      min-width: 33.333%;
+    }
+
+    @include breakpoint($collapse-bp-lg) {
+      min-width: 25%;
+    }
+  }
+}
+
+fieldset {
+  border: 0;
+  padding: inherit;
+}
