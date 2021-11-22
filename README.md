@@ -1,6 +1,6 @@
 # Beardbalm + Vite.js
 
-A boilerplate WordPress theme, powered by [Vite.js](https://vitejs.dev/) for lightning fast Developer Experience.
+A boilerplate WordPress theme, powered by [Vite.js](https://vitejs.dev/) for ⚡️ developer experience.
 
 ## Get Started
 
@@ -19,4 +19,4 @@ A boilerplate WordPress theme, powered by [Vite.js](https://vitejs.dev/) for lig
   npm run dev
   ```
 
-  Your Vite server will run at `https://localhost:3000/`, but feel free to change the port if needed.
+  Your Vite server will run at `http://localhost:3000/`, but feel free to change the port if needed.
