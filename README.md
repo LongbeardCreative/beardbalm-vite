@@ -36,7 +36,7 @@ Vite.js config is inspired by [vite-php-setup](https://github.com/andrefelipe/vi
 
 - Enjoy live reloading for PHP changes and hot module replacement for CSS and JS changes 😎.
 
-- Once finish developing, you can build production-ready assets by running:
+- Once you're finished developing, you can build production-ready assets by running:
 
   ```
   npm run build
