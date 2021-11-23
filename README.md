@@ -1,4 +1,4 @@
-# Beardbalm + Vite.js
+# Beardbalm &times; Vite.js
 
 A boilerplate WordPress theme, powered by [Vite.js](https://vitejs.dev/) for ⚡️ developer experience.
 
@@ -17,17 +17,22 @@ Vite.js config is inspired by [vite-php-setup](https://github.com/andrefelipe/vi
 
 - Ensure that `beardbalm` theme is activated on WordPress dashboard.
 
-- Install dependencies and start your local Vite server:
+- Install dependencies if needed:
 
   ```shell
   cd beardbalm
   npm i
+  ```
+
+- Start your local Vite server:
+
+  ```shell
   npm run dev
   ```
 
   Your Vite server will run at `http://localhost:3000/`, but feel free to change the port if needed.
 
-- Visit your WordPress local URL (e.g. `https://beardbalm.local/`), not Vite server (e.g. `http://localhost:3000`), which will be empty. Vite server will be used only to serve assets on dev mode.
+- Visit your WordPress local URL (e.g. `https://beardbalm.local/`), **not** your Vite server (e.g. `http://localhost:3000`), which will be empty. The Vite server will be used only to serve assets on dev mode.
 
 - Enjoy live reloading for PHP changes and hot module replacement for CSS and JS changes 😎.
 
