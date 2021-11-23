@@ -32,6 +32,6 @@ Vite.js config is inspired by [vite-php-setup](https://github.com/andrefelipe/vi
 
 - Once finish developing, you can build production-ready assets by running:
 
-```
-npm run build
-```
+  ```
+  npm run build
+  ```
