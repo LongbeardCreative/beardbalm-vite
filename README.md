@@ -26,4 +26,12 @@ Vite.js config is inspired by [vite-php-setup](https://github.com/andrefelipe/vi
 
   Your Vite server will run at `http://localhost:3000/`, but feel free to change the port if needed.
 
-- Enjoy live reloading for PHP changes and hot module replacement for CSS and JS changes 😎
+- Visit your WordPress local URL (e.g. `https://beardbalm.local/`), not Vite server (e.g. `http://localhost:3000`), which will be empty. Vite server will be used only to serve assets on dev mode.
+
+- Enjoy live reloading for PHP changes and hot module replacement for CSS and JS changes 😎.
+
+- Once finish developing, you can build production-ready assets by running:
+
+```
+npm run build
+```
