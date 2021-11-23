@@ -3,6 +3,7 @@
 /******************************************************************s
 Stylesheet: Main Stylesheet
 ******************************************************************/
+@import "normalize.css";
 
 /*********************
 IMPORT UTILITES
@@ -15,7 +16,6 @@ IMPORT UTILITES
 // /*********************
 // IMPORT ELEMENTS
 // *********************/
-@import "./elements/normalize";
 @import "./elements/a11y";
 @import "./elements/layout";
 @import "./elements/grid";

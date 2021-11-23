@@ -2,6 +2,8 @@
 
 A boilerplate WordPress theme, powered by [Vite.js](https://vitejs.dev/) for ⚡️ developer experience.
 
+Vite.js config is inspired by [vite-php-setup](https://github.com/andrefelipe/vite-php-setup) and [sage-vite](https://github.com/8bit-echo/sage-vite).
+
 ## Get Started
 
 - Clone this repository by running

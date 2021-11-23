@@ -12,7 +12,9 @@
     "url": "git+https://github.com/LongbeardCreative/beardbalm.git"
   },
   "author": "LB",
-  "dependencies": {},
+  "dependencies": {
+    "normalize.css": "^8.0.1"
+  },
   "devDependencies": {
     "@types/node": "^16.11.9",
     "sass": "^1.43.4",

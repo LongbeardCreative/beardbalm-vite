@@ -77,9 +77,9 @@ function register($entry) {
   });
 }
 
-function jsPreloadImports(string $entry): string {
+function jsPreloadImports(string $entry): void {
   if (isDev($entry)) {
-    return '';
+    return;
   }
 
   $res = '';
@@ -93,10 +93,10 @@ function jsPreloadImports(string $entry): string {
   // return $res;
 }
 
-function cssTag(string $entry): string {
+function cssTag(string $entry): void {
   // not needed on dev, it's injected by Vite
   if (isDev($entry)) {
-    return '';
+    return;
   }
 
   $tags = '';
@@ -110,7 +110,7 @@ function cssTag(string $entry): string {
 // Helpers to locate files
 
 function getManifest(): array {
-  $content = file_get_contents(get_theme_root() . '/beardbalm' . '/dist/manifest.json');
+  $content = file_get_contents(get_template_directory_uri() . '/dist/manifest.json');
 
   return json_decode($content, true);
 }
@@ -119,7 +119,7 @@ function assetUrl(string $entry): string {
   $manifest = getManifest();
 
   return isset($manifest[$entry])
-    ? '/dist/' . $manifest[$entry]['file']
+    ? get_template_directory_uri() . '/dist/' . $manifest[$entry]['file']
     : '';
 }
 
@@ -129,7 +129,7 @@ function importsUrls(string $entry): array {
 
   if (!empty($manifest[$entry]['imports'])) {
     foreach ($manifest[$entry]['imports'] as $imports) {
-      $urls[] = '/dist/' . $manifest[$imports]['file'];
+      $urls[] = get_template_directory_uri() . '/dist/' . $manifest[$imports]['file'];
     }
   }
   return $urls;
@@ -141,7 +141,7 @@ function cssUrls(string $entry): array {
 
   if (!empty($manifest[$entry]['css'])) {
     foreach ($manifest[$entry]['css'] as $file) {
-      $urls[] = '/dist/' . $file;
+      $urls[] = get_template_directory_uri() . '/dist/' . $file;
     }
   }
   return $urls;

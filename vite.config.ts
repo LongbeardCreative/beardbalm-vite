@@ -11,9 +11,9 @@
 // on production everything will work just fine
 
 import { defineConfig } from "vite";
-// import vue from "@vitejs/plugin-vue";
 import liveReload from "vite-plugin-live-reload";
 import path from "path";
+// import vue from "@vitejs/plugin-vue";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -22,7 +22,7 @@ export default defineConfig({
     liveReload([
       // edit live reload paths according to your source code
       // for example:
-      __dirname + "/(app|config|views)/**/*.php",
+      // __dirname + "/(app|config|views)/**/*.php",
       // using this for our example:
       __dirname + "/*.php",
     ]),
