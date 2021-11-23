@@ -6,14 +6,16 @@ Vite.js config is inspired by [vite-php-setup](https://github.com/andrefelipe/vi
 
 ## Get Started
 
-- Clone this repository by running
+- Set up and start your local WordPress server in whichever way you want, such as [Local](https://localwp.com/), [DevKinsta](https://kinsta.com/devkinsta/), [wp-env](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/), etc.
+
+- Clone this repository to WordPress' `themes` folder by running:
 
   ```shell
   cd /path/to/wp-content/themes
   git clone https://github.com/LongbeardCreative/beardbalm-vite.git
   ```
 
-- Start your local WordPress server in whichever way you want, such as [Local](https://localwp.com/), [DevKinsta](https://kinsta.com/devkinsta/), [wp-env](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/), etc.
+- Ensure that `beardbalm` theme is activated on WordPress dashboard.
 
 - Start your local Vite server:
 
@@ -23,3 +25,5 @@ Vite.js config is inspired by [vite-php-setup](https://github.com/andrefelipe/vi
   ```
 
   Your Vite server will run at `http://localhost:3000/`, but feel free to change the port if needed.
+
+- Enjoy live reloading for PHP changes and hot module replacement for CSS and JS changes 😎
