@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "aaron-bond.better-comments",
+    "dbaeumer.vscode-eslint",
+    "bmewburn.vscode-intelephense-client",
+    "stylelint.vscode-stylelint"
+  ]
+}

@@ -16,7 +16,6 @@ though, go for it.
   color: black !important;
   text-shadow: none !important;
   filter: none !important;
-  -ms-filter: none !important;
 }
 
 a,
@@ -25,20 +24,20 @@ a:visited {
   text-decoration: underline;
 
   // show links on printed pages
-  &:after {
-    content: " (" attr(href) ")";
+  &::after {
+    content: ' (' attr(href) ')';
   }
 
   // show title too
-  abbr[title]:after {
-    content: " (" attr(title) ")";
+  abbr[title]::after {
+    content: ' (' attr(title) ')';
   }
 }
 
-.ir a:after,
-a[href^="javascript:"]:after,
-a[href^="#"]:after {
-  content: "";
+.ir a::after,
+a[href^='javascript:']::after,
+a[href^='#']::after {
+  content: '';
 }
 
 pre,

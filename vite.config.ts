@@ -10,9 +10,9 @@
 // ln -s {path_to_vite}/src/assets {path_to_public_html}/assets
 // on production everything will work just fine
 
-import { defineConfig } from "vite";
-import liveReload from "vite-plugin-live-reload";
-import path from "path";
+import { defineConfig } from 'vite';
+import liveReload from 'vite-plugin-live-reload';
+import path from 'path';
 // import vue from "@vitejs/plugin-vue";
 
 // https://vitejs.dev/config/
@@ -24,17 +24,17 @@ export default defineConfig({
       // for example:
       // __dirname + "/(app|config|views)/**/*.php",
       // using this for our example:
-      __dirname + "/*.php",
+      `${__dirname}/*.php`,
     ]),
   ],
 
   // config
-  root: "./src/scripts",
-  base: process.env.APP_ENV === "development" ? "/" : "/dist/",
+  root: './src/scripts',
+  base: process.env.APP_ENV === 'development' ? '/' : '/dist/',
 
   build: {
     // output dir for production build
-    outDir: path.resolve(__dirname, "./dist"),
+    outDir: path.resolve(__dirname, './dist'),
     emptyOutDir: true,
 
     // emit manifest so PHP can find the hashed files
@@ -42,7 +42,7 @@ export default defineConfig({
 
     // our entry
     rollupOptions: {
-      input: path.resolve(__dirname, "./src/scripts/main.ts"),
+      input: path.resolve(__dirname, './src/scripts/main.ts'),
     },
   },
 
@@ -57,8 +57,8 @@ export default defineConfig({
 
     hmr: {
       port: 3000,
-      host: "localhost",
-      protocol: "ws",
+      host: 'localhost',
+      protocol: 'ws',
     },
   },
 

@@ -11,10 +11,9 @@ html {
 body {
   font: $body-font;
   font-size: 100%;
-  color: $color-p;
+  color: var(--color-p);
   color-adjust: economy;
   -webkit-print-color-adjust: economy;
-  background-color: $white;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -24,13 +23,13 @@ LINK STYLES
 *********************/
 a,
 a:visited {
-  color: $color-active;
-  transition: $transition;
+  color: var(--color-primary);
+  transition: var(--transition);
 
   /* on hover */
   &:focus,
   &:hover {
-    color: $color-hover;
+    color: var(--color-accent);
   }
 
   // hide outline for mouse users but preserves it for keyboard users.
@@ -166,6 +165,6 @@ p {
 }
 
 ::selection {
-  background: $color2;
-  color: $white;
+  background: var(--color-accent);
+  color: var(--white);
 }

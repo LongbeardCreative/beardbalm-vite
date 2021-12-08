@@ -1,28 +1,23 @@
-////----- Variables
-
+/* stylelint-disable selector-class-pattern */
 $field-gap-h-xs: 10px;
 $field-gap-h-sm: 15px;
 $field-gap-h-md: 20px;
 $field-gap-h-lg: 20px;
-
 $field-gap-v-xs: 10px;
 $field-gap-v-sm: 15px;
 $field-gap-v-md: 20px;
 $field-gap-v-lg: 20px;
-
-$color-alert: #d44d5c;
-
 $collapse-bp-sm: min-width 0; // when 50% no longer collapses
 $collapse-bp-md: $laptop-sm; // when 33% fields no longer collapses
 $collapse-bp-lg: $laptop-lg; // when 25% fields no longer collapses
 
-////----- Core Containers
+// Core Containers
 .gform_heading,
 .gform_body {
   margin-bottom: 20px;
 }
 
-////----- Fields Container
+// Fields Container
 .gform_fields {
   display: flex;
   flex-flow: wrap;
@@ -37,7 +32,7 @@ $collapse-bp-lg: $laptop-lg; // when 25% fields no longer collapses
   );
 }
 
-////----- Field Containers and their Contents
+// Field Containers and their Contents
 .gfield {
   box-sizing: border-box;
   overflow: hidden;
@@ -60,6 +55,7 @@ $collapse-bp-lg: $laptop-lg; // when 25% fields no longer collapses
     }
   }
 }
+
 .ginput_container {
   // span {
   // 	margin-bottom: 10px;
@@ -70,21 +66,26 @@ $collapse-bp-lg: $laptop-lg; // when 25% fields no longer collapses
     &.large {
       width: 100%;
     }
+
     &.medium {
       width: 66%;
     }
+
     &.small {
       width: 33%;
     }
   }
 }
+
 label.gfield_label {
   display: inline-block;
   padding-bottom: 10px;
+
   .left_label & {
     float: left;
     width: 25%;
   }
+
   .right_label & {
     float: right;
     width: 25%;
@@ -95,24 +96,26 @@ label.gfield_label {
   padding-left: 5px;
 }
 
-////----- Checkboxes and Radios
+// Checkboxes and Radios
 .gfield_checkbox,
 .gfield_radio {
   list-style: none;
   padding: 0;
+
   input {
     margin-right: 10px;
     position: relative;
     top: -1px;
   }
 }
+
 .gfield_radio {
   input {
     margin-left: 2px;
   }
 }
 
-////----- Section Break
+// Section Break
 .gsection {
   h2 {
     border-bottom: 3px solid black;
@@ -120,37 +123,41 @@ label.gfield_label {
   }
 }
 
-////----- Page Break
+// Page Break
 .gf_progressbar_wrapper {
   padding-bottom: 15px;
 }
+
 .gf_progressbar {
   background: gray;
 }
+
 .gf_progressbar_percentage {
   background: red;
   padding: 5px 10px;
   text-align: right;
 }
 
-////----- Time Field
+// Time Field
 .gfield_time_hour,
 .gfield_time_minute,
 .gfield_time_ampm {
   display: inline;
   display: inline-block;
 }
+
 .gfield_time_hour,
 .gfield_time_minute {
   label {
     display: block;
   }
 }
+
 .gfield_time_ampm {
   vertical-align: top;
 }
 
-////----- Validation and Errors
+// Validation and Errors
 .validation_error {
   font-size: 1.2em;
   font-weight: bold;
@@ -159,7 +166,7 @@ label.gfield_label {
 
 .gfield {
   &.gfield_error {
-    // background: transparentize($color-alert, 0.95);
+    // background: transparentize(var(--color-error), 0.95);
     // margin-bottom: 15px;
     // padding-top: 15px;
     label.gfield_label {
@@ -177,49 +184,58 @@ label.gfield_label {
   display: none;
 }
 
-////----- CSS Ready Classes
+// CSS Ready Classes
 .ginput_full {
   display: block;
+
   input,
   select,
   textarea {
     // margin-bottom: 5px;
     width: 100%;
   }
+
   label {
     display: block;
   }
 }
+
 .ginput_left {
   padding-right: 10px;
   width: 50%;
+
   input,
   select,
   textarea {
     // margin-bottom: 5px;
     width: 100%;
   }
+
   label {
     display: block;
   }
 }
+
 .ginput_right {
   width: 50%;
+
   input,
   select,
   textarea {
     // margin-bottom: 5px;
     width: 100%;
   }
+
   label {
     display: block;
   }
 }
+
 .ginput_right {
   width: 50%;
 }
 
-//----- Layout Columns
+// Layout Columns
 .gfield {
   &.gf_left_half,
   &.gf_right_half,
@@ -268,7 +284,7 @@ label.gfield_label {
   }
 }
 
-//----- List Columns
+// List Columns
 .gf_list_2col {
   ul.gfield_checkbox,
   ul.gfield_radio {
@@ -279,6 +295,7 @@ label.gfield_label {
     }
   }
 }
+
 .gf_list_3col {
   .gfield_checkbox,
   .gfield_radio {
@@ -289,6 +306,7 @@ label.gfield_label {
     }
   }
 }
+
 .gf_list_4col {
   .gfield_checkbox,
   .gfield_radio {
@@ -299,6 +317,7 @@ label.gfield_label {
     }
   }
 }
+
 .gf_list_5col {
   .gfield_checkbox,
   .gfield_radio {
@@ -309,6 +328,7 @@ label.gfield_label {
     }
   }
 }
+
 .gf_list_inline {
   .gfield_checkbox,
   .gfield_radio {

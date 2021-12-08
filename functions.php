@@ -65,8 +65,8 @@ function beardbalm_scripts() {
   );
 
   // Helper scripts from Underscores
-  wp_enqueue_script('beardbalm-navigation', get_template_directory_uri() . '/js/navigation.js', array(), LB_VERSION, true);
-  wp_enqueue_script('beardbalm-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), LB_VERSION, true);
+  // wp_enqueue_script('beardbalm-navigation', get_template_directory_uri() . '/js/navigation.js', array(), LB_VERSION, true);
+  // wp_enqueue_script('beardbalm-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), LB_VERSION, true);
 
   if (is_singular() && comments_open() && get_option('thread_comments')) {
     wp_enqueue_script('comment-reply');
@@ -82,12 +82,6 @@ add_action('wp_enqueue_scripts', 'beardbalm_scripts');
 
 
 require_once get_theme_file_path('inc/vite.php');
-// function beardbalm_vite() {
-//   echo '<!-- VITE -->';
-//   echo vite('main.ts');
-//   echo '<!-- VITE -->';
-// }
-// add_action('wp_head', 'beardbalm_vite');
 
 /**
  * Theme assets

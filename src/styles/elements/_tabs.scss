@@ -23,7 +23,7 @@
 
     > span {
       // @extend %link-underline;
-      color: $color1;
+      color: var(--color-primary);
       font-weight: 600;
       white-space: nowrap;
       height: auto;
@@ -90,12 +90,12 @@
   &--x {
     &::before,
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       top: 0;
       height: 100%;
       width: 2rem;
-      transition: $transition;
+      transition: var(--transition);
       opacity: 0;
       z-index: 1;
       pointer-events: none;
@@ -105,8 +105,8 @@
       left: -5rem;
       background: linear-gradient(
         90deg,
-        rgba($white, 1) 0%,
-        rgba($white, 0) 100%
+        rgba(var(--white), 1) 0%,
+        rgba(var(--white), 0) 100%
       );
     }
 
@@ -114,8 +114,8 @@
       right: -5rem;
       background: linear-gradient(
         270deg,
-        rgba($white, 1) 0%,
-        rgba($white, 0) 100%
+        rgba(var(--white), 1) 0%,
+        rgba(var(--white), 0) 100%
       );
     }
 
@@ -137,12 +137,12 @@
   &--y {
     &::before,
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       left: 0;
       height: 3rem;
       width: calc(100% - 5px); // space for scrollbar
-      transition: $transition;
+      transition: var(--transition);
       opacity: 0;
       z-index: 1;
       pointer-events: none;
@@ -152,8 +152,8 @@
       top: -5rem;
       background: linear-gradient(
         180deg,
-        rgba($color2, 1) 0%,
-        rgba($color2, 0) 100%
+        rgba(var(--color-primary), 1) 0%,
+        rgba(var(--color-primary), 0) 100%
       );
     }
 
@@ -161,8 +161,8 @@
       bottom: -5rem;
       background: linear-gradient(
         0deg,
-        rgba($color2, 1) 0%,
-        rgba($color2, 0) 100%
+        rgba(var(--color-primary), 1) 0%,
+        rgba(var(--color-primary), 0) 100%
       );
     }
 

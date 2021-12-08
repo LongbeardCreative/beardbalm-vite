@@ -8,11 +8,10 @@ Stylesheet: Typography
 FONT FACE
 *********************/
 // font stacks
-$sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
-$serif: "Georgia", Cambria, Times New Roman, Times, serif;
-
-$primary: Arial;
-$secondary: Times New Roman;
+$sans-serif: 'Helvetica Neue', helvetica, arial, sans-serif;
+$serif: 'Georgia', cambria, times new roman, times, serif;
+$primary: arial;
+$secondary: times new roman;
 
 // theme fonts
 $body-font: 500 1em / 1.5em $secondary, $sans-serif;
@@ -25,7 +24,6 @@ $h6: 500 1rem / 1.5em $secondary, $sans-serif;
 
 @mixin h1 {
   font: $h1;
-  color: $color1;
 
   @include breakpoint($tablet-sm) {
     font-size: 2.1875rem;
@@ -46,7 +44,6 @@ $h6: 500 1rem / 1.5em $secondary, $sans-serif;
 
 @mixin h2 {
   font: $h2;
-  color: $color1;
 
   @include breakpoint($tablet-sm) {
     font-size: 1.875rem;
@@ -68,7 +65,6 @@ $h6: 500 1rem / 1.5em $secondary, $sans-serif;
 @mixin h2-small {
   font: $h2;
   font-size: 1.375rem;
-  color: $color1;
 
   @include breakpoint($tablet-sm) {
     font-size: 1.5rem;
@@ -89,7 +85,6 @@ $h6: 500 1rem / 1.5em $secondary, $sans-serif;
 
 @mixin h3 {
   font: $h3;
-  color: $color1;
 
   @include breakpoint($tablet-sm) {
     font-size: 1.5rem;
@@ -106,7 +101,6 @@ $h6: 500 1rem / 1.5em $secondary, $sans-serif;
 
 @mixin h4 {
   font: $h4;
-  color: $color1;
 
   @include breakpoint($tablet-sm) {
     font-size: 1.25rem;
@@ -123,7 +117,6 @@ $h6: 500 1rem / 1.5em $secondary, $sans-serif;
 
 @mixin h5 {
   font: $h5;
-  color: $color1;
 
   @include breakpoint($laptop-sm) {
     font-size: 1.25rem;
@@ -132,7 +125,6 @@ $h6: 500 1rem / 1.5em $secondary, $sans-serif;
 
 @mixin h6 {
   font: $h6;
-  color: $color1;
 
   @include breakpoint($laptop-sm) {
     font-size: 1.125rem;

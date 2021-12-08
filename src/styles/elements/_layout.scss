@@ -29,3 +29,54 @@ main {
     display: inline;
   }
 }
+
+.page-m-t {
+  @include margin(top, 35px, 60px, 80px, 100px, 100px);
+}
+
+.page-p-t {
+  @include padding(top, 35px, 60px, 80px, 100px, 100px);
+}
+
+.page-m-b {
+  @include margin(bottom, 80px, 80px, 100px, 100px);
+}
+
+.page-p-b {
+  @include padding(bottom, 80px, 80px, 100px, 100px);
+}
+
+.section-m-t {
+  @include margin(top, 35px, 60px, 100px, 120px, 150px);
+
+  // &--sm {
+  //   @include margin(top, 40px, 40px, 50px, 75px);
+  // }
+
+  // &--lg {
+  //   @include margin(top, 60px, 80px, 80px, 100px);
+  // }
+}
+
+.section-p-t {
+  @include padding(top, 35px, 60px, 100px, 120px, 150px);
+}
+
+.section-m-b {
+  // @include margin-bottom;
+  @include margin(bottom, 35px, 60px, 100px, 120px, 150px);
+
+  // &--sm {
+  //   @include margin(bottom, 40px, 40px, 50px, 75px);
+  // }
+}
+
+.section-p-b {
+  @include padding(bottom, 35px, 60px, 100px, 120px, 150px);
+
+  // &--sm {
+  //   @include padding(bottom, 40px, 40px, 50px, 75px);
+  // }
+}
+
+@include push-responsive;

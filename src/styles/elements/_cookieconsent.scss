@@ -12,6 +12,6 @@ Stylesheet: cookieconsent.js Style
 
 .cc-window {
   font-family: inherit;
-  background: $white;
+  background: var(--white);
   @include box-shadow;
 }

@@ -13,28 +13,63 @@ Stylesheet: Accordions
   position: relative;
   margin-bottom: 1rem;
 
-  // @include breakpoint($tablet-sm) {
-  //   padding-top: 20px;
-  //   padding-bottom: 20px;
-  // }
-
   &:last-of-type {
-    // border-bottom: 0;
     margin-bottom: 0;
+  }
+
+  &__plus-minus {
+    display: flex;
+    height: 0.75em;
+    width: 0.75em;
+    min-width: 0.75em;
+    position: relative;
+    margin-top: 0.35em;
+    margin-left: auto;
+
+    &::before,
+    &::after {
+      content: '';
+      height: 2px;
+      width: 100%;
+      background: var(--color-accent);
+      transition: var(--transition);
+      position: absolute;
+      top: calc(50% - 1px);
+      border-radius: 1px;
+      left: 0;
+    }
+
+    &::after {
+      transform: rotate(-90deg);
+    }
   }
 
   &__head {
     width: 100%;
     display: flex;
-    // justify-content: space-between;
     justify-content: flex-start;
     align-items: flex-start;
-    // position: relative;
     cursor: pointer;
     transition: none;
     text-align: left;
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      border-bottom: 1px solid rgb(var(--color-primary) 0.5);
+    }
+
+    &::after {
+      width: 0;
+      border-color: var(--color-primary);
+      transition: width var(--transition);
+    }
 
     &:hover {
       // .accordion__title {
@@ -48,40 +83,24 @@ Stylesheet: Accordions
       .accordion__plus-minus {
         &::before,
         &::after {
-          background: $color1;
+          background: var(--color-primary);
         }
       }
-    }
-
-    &::before,
-    &::after {
-      content: "";
-      position: absolute;
-      width: 100%;
-      bottom: 0;
-      left: 0;
-      border-bottom: 1px solid rgba($color2, 0.5);
-    }
-
-    &::after {
-      width: 0;
-      border-color: $color1;
-      transition: width $transition;
     }
   }
 
   &__title {
-    transition: $transition;
+    transition: var(--transition);
     margin-bottom: 0 !important;
     margin-right: 1rem;
     font-weight: 600;
-    color: $color1;
+    color: var(--color-primary);
   }
 
   &__arrow {
     display: flex;
     height: 1rem;
-    transition: $transition;
+    transition: var(--transition);
 
     svg {
       height: 100%;
@@ -89,38 +108,11 @@ Stylesheet: Accordions
     }
   }
 
-  &__plus-minus {
-    display: flex;
-    height: 0.75em;
-    width: 0.75em;
-    min-width: 0.75em;
-    position: relative;
-    // margin-right: 0.75em;
-    margin-top: 0.35em;
-    margin-left: auto;
-
-    &::before,
-    &::after {
-      content: "";
-      height: 2px;
-      width: 100%;
-      background: $color4;
-      transition: $transition;
-      position: absolute;
-      top: calc(50% - 1px);
-      border-radius: 1px;
-      left: 0;
-    }
-
-    &::after {
-      transform: rotate(-90deg);
-    }
-  }
-
   &__body {
     display: none;
     overflow: hidden;
-    transition: $transition;
+    transition: var(--transition);
+
     // padding-top: 10px;
 
     @media print {
@@ -130,6 +122,7 @@ Stylesheet: Accordions
 
     &__inner {
       padding-bottom: 0.75rem;
+
       // padding-left: 1.5rem;
 
       // * {
@@ -153,6 +146,7 @@ Stylesheet: Accordions
         width: 100%;
       }
     }
+
     .accordion__arrow {
       transform: rotate(180deg);
     }

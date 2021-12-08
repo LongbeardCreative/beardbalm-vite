@@ -1,3 +1,5 @@
+@use 'sass:string';
+
 /******************************************************************
 
 Stylesheet: Mixins Stylesheet
@@ -8,10 +10,10 @@ Stylesheet: Mixins Stylesheet
 RESPONSIVE RATIO
 **************************/
 @mixin ratio($x, $y, $pseudo: false) {
-  $padding: unquote($y / $x * 100 + "%");
+  $padding: string.unquote($y / $x * 100 + '%');
 
   @if $pseudo {
-    &:before {
+    &::before {
       @include pseudo($pos: relative);
 
       width: 100%;
@@ -19,73 +21,6 @@ RESPONSIVE RATIO
     }
   } @else {
     padding-top: $padding;
-  }
-}
-
-/*************************
-COLORS
-*************************/
-@mixin colors {
-  .color1 {
-    color: $color1;
-  }
-
-  .color2 {
-    color: $color2;
-  }
-
-  .color3 {
-    color: $color3;
-  }
-
-  .color4 {
-    color: $color4;
-  }
-
-  .color5 {
-    color: $color5;
-  }
-
-  .color6 {
-    color: $color6;
-  }
-
-  .white {
-    color: $white;
-  }
-}
-
-@mixin background-colors {
-  .bg-color1 {
-    background-color: $color1;
-  }
-
-  .bg-color2 {
-    background-color: $color2;
-  }
-
-  .bg-color3 {
-    background-color: $color3;
-  }
-
-  .bg-color4 {
-    background-color: $color4;
-  }
-
-  .bg-color5 {
-    background-color: $color5;
-  }
-
-  .bg-color6 {
-    background-color: $color6;
-  }
-
-  .bg-color6 {
-    background-color: $color6;
-  }
-
-  .bg-white {
-    background-color: $white;
   }
 }
 
@@ -101,37 +36,37 @@ RESPONSIVE PADDING / MARGIN
   $lg-padding: false,
   $xl-padding: false
 ) {
-  $dir: "";
+  $dir: '';
   @if $direction != all {
     $dir: -#{$direction};
   }
 
   padding#{$dir}: $xs-padding;
-  @if ($sm-padding and $sm-padding != $xs-padding) {
+  @if $sm-padding and $sm-padding != $xs-padding {
     @include breakpoint($tablet-sm) {
       padding#{$dir}: $sm-padding;
     }
   }
-  @if ($md-padding and $md-padding != $sm-padding) {
+  @if $md-padding and $md-padding != $sm-padding {
     @include breakpoint($laptop-sm) {
       padding#{$dir}: $md-padding;
     }
   }
-  @if ($xl-padding) {
+  @if $xl-padding {
     // 5 viewports system
-    @if ($lg-padding and $lg-padding != $md-padding) {
+    @if $lg-padding and $lg-padding != $md-padding {
       @include breakpoint($laptop-lg) {
         padding#{$dir}: $lg-padding;
       }
     }
-    @if ($xl-padding and $xl-padding != $lg-padding) {
+    @if $xl-padding and $xl-padding != $lg-padding {
       @include breakpoint($desktop) {
         padding#{$dir}: $xl-padding;
       }
     }
   } @else {
     // 4 viewports system
-    @if ($lg-padding and $lg-padding != $md-padding) {
+    @if $lg-padding and $lg-padding != $md-padding {
       @include breakpoint($desktop) {
         padding#{$dir}: $lg-padding;
       }
@@ -147,60 +82,42 @@ RESPONSIVE PADDING / MARGIN
   $lg-margin: false,
   $xl-margin: false
 ) {
-  $dir: "";
+  $dir: '';
   @if $direction != all {
     $dir: -#{$direction};
   }
 
   margin#{$dir}: $xs-margin;
-  @if ($sm-margin and $sm-margin != $xs-margin) {
+  @if $sm-margin and $sm-margin != $xs-margin {
     @include breakpoint($tablet-sm) {
       margin#{$dir}: $sm-margin;
     }
   }
-  @if ($md-margin and $md-margin != $sm-margin) {
+  @if $md-margin and $md-margin != $sm-margin {
     @include breakpoint($laptop-sm) {
       margin#{$dir}: $md-margin;
     }
   }
-  @if ($xl-margin) {
+  @if $xl-margin {
     // 5 viewports system
-    @if ($lg-margin and $lg-margin != $md-margin) {
+    @if $lg-margin and $lg-margin != $md-margin {
       @include breakpoint($laptop-lg) {
         margin#{$dir}: $lg-margin;
       }
     }
-    @if ($xl-margin and $xl-margin != $lg-margin) {
+    @if $xl-margin and $xl-margin != $lg-margin {
       @include breakpoint($desktop) {
         margin#{$dir}: $xl-margin;
       }
     }
   } @else {
     // 4 viewports system
-    @if ($lg-margin and $lg-margin != $md-margin) {
+    @if $lg-margin and $lg-margin != $md-margin {
       @include breakpoint($desktop) {
         margin#{$dir}: $lg-margin;
       }
     }
   }
-}
-
-// Section Spacing
-
-@mixin margin-top {
-  @include margin(top, 40px, 60px, 80px, 100px);
-}
-
-@mixin margin-bottom {
-  @include margin(bottom, 40px, 60px, 80px, 100px);
-}
-
-@mixin padding-top {
-  @include padding(top, 40px, 60px, 80px, 100px);
-}
-
-@mixin padding-bottom {
-  @include padding(bottom, 40px, 60px, 80px, 100px);
 }
 
 /*********************************
@@ -219,19 +136,19 @@ GUTTERS
 @mixin font-size($mobile, $tablet: false, $laptop: false, $desktop: false) {
   font-size: $mobile;
 
-  @if ($tablet and $tablet != $mobile) {
+  @if $tablet and $tablet != $mobile {
     @include breakpoint($tablet-sm) {
       font-size: $tablet;
     }
   }
 
-  @if ($laptop and $laptop != $tablet) {
+  @if $laptop and $laptop != $tablet {
     @include breakpoint($laptop-sm) {
       font-size: $laptop;
     }
   }
 
-  @if ($desktop and $desktop != $laptop) {
+  @if $desktop and $desktop != $laptop {
     @include breakpoint($laptop-lg) {
       font-size: $desktop;
     }
@@ -241,97 +158,51 @@ GUTTERS
 @mixin line-height($mobile, $tablet: false, $laptop: false, $desktop: false) {
   line-height: $mobile;
 
-  @if ($tablet and $tablet != $mobile) {
+  @if $tablet and $tablet != $mobile {
     @include breakpoint($tablet-sm) {
       line-height: $tablet;
     }
   }
 
-  @if ($laptop and $laptop != $tablet) {
+  @if $laptop and $laptop != $tablet {
     @include breakpoint($laptop-sm) {
       line-height: $laptop;
     }
   }
 
-  @if ($desktop and $desktop != $laptop) {
+  @if $desktop and $desktop != $laptop {
     @include breakpoint($laptop-lg) {
       line-height: $desktop;
     }
   }
 }
 
-@mixin backdrop-filter-blur($bg-fb: $bg-fallback, $bg: false, $blur: "10px") {
-  @if $bg-fb {
-    background: $bg-fb;
-  }
-  @supports (backdrop-filter: none) or (-webkit-backdrop-filter: none) {
-    @if $bg {
-      background: $bg;
-    } @else if $bg-fb {
-      background: transparent;
-    }
-    -webkit-backdrop-filter: blur(#{$blur});
-    backdrop-filter: blur(#{$blur});
-    // transform: translateZ(0);
-    // -webkit-transform: translateZ(0);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    // -webkit-perspective: 1000;
-  }
-  @media print {
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-  }
-}
+// @mixin backdrop-filter-blur($bg-fb: $bg-fallback, $bg: false, $blur: '10px') {
+//   @if $bg-fb {
+//     background: $bg-fb;
+//   }
+//   @supports (backdrop-filter: none) or (-webkit-backdrop-filter: none) {
+//     @if $bg {
+//       background: $bg;
+//     } @else if $bg-fb {
+//       background: transparent;
+//     }
+//     -webkit-backdrop-filter: blur(#{$blur});
+//     backdrop-filter: blur(#{$blur});
+//     // transform: translateZ(0);
+//     // -webkit-transform: translateZ(0);
+//     backface-visibility: hidden;
+//     -webkit-backface-visibility: hidden;
+//     // -webkit-perspective: 1000;
+//   }
+//   @media print {
+//     -webkit-backdrop-filter: none;
+//     backdrop-filter: none;
+//   }
+// }
 
-/*********************************
-BACKGROUND IMAGES
-*********************************/
-@mixin bg-cc {
-  background-size: cover !important;
-  background-position: center !important;
-}
-
-/*********************************
-SVG BACKGROUND IMAGE WITH FALLBACK
-*********************************/
-$image-path: "../img" !default;
-$fallback-extension: "png" !default;
-$retina-suffix: "@2x";
-
-@mixin background-image($name, $size: false) {
-  background-image: url("#{$image-path}/#{$name}.svg");
-
-  @if $size {
-    background-size: $size;
-  }
-
-  .no-svg & {
-    background-image: url("#{$image-path}/#{$name}.#{$fallback-extension}");
-
-    @media only screen and (-moz-min-device-pixel-ratio: 1.5),
-      only screen and (-o-min-device-pixel-ratio: 3 * 0.5),
-      only screen and (-webkit-min-device-pixel-ratio: 1.5),
-      only screen and (min-device-pixel-ratio: 1.5) {
-      background-image: url("#{$image-path}/#{$name}#{$retina-suffix}.#{$fallback-extension}");
-    }
-  }
-}
-
-/* USAGE
-.lb_div {
-    @include background-image('bg');
-}
-** must have bg.svg, bg.png & bg@2x.png
-*/
-
-@mixin box-shadow {
-  box-shadow: 0px 3px 6px rgba($black, 0.16);
-  -webkit-appearance: none;
-}
-
-@mixin page-margins($viewport: "all") {
-  @if $viewport == "xs" {
+@mixin page-margins($viewport: 'all') {
+  @if $viewport == 'xs' {
     padding-left: $min-margin;
     padding-right: $min-margin;
 
@@ -339,17 +210,17 @@ $retina-suffix: "@2x";
       padding-left: $xs-margin;
       padding-right: $xs-margin;
     }
-  } @else if $viewport == "sm" {
+  } @else if $viewport == 'sm' {
     @include breakpoint($tablet-sm) {
       padding-left: $sm-margin;
       padding-right: $sm-margin;
     }
-  } @else if $viewport == "md" {
+  } @else if $viewport == 'md' {
     @include breakpoint($laptop-sm) {
       padding-left: $md-margin;
       padding-right: $md-margin;
     }
-  } @else if $viewport == "lg" {
+  } @else if $viewport == 'lg' {
     @include breakpoint($laptop-lg) {
       padding-left: $lg-margin;
       padding-right: $lg-margin;
@@ -390,25 +261,25 @@ If the element where push is applied has "width" defined,
 You'll need to add box-sizing: content-box;
 */
 
-@mixin push($dir: "right", $initMargin: "", $initPadding: "", $cancel: false) {
-  @if ($cancel == false) {
-    @if ($initMargin != "") {
+@mixin push($dir: 'right', $initMargin: '', $initPadding: '', $cancel: false) {
+  @if $cancel == false {
+    @if $initMargin != '' {
       margin-#{$dir}: calc(-300% + #{$initMargin});
     } @else {
       margin-#{$dir}: -300%;
     }
-    @if ($initPadding != "") {
+    @if $initPadding != '' {
       padding-#{$dir}: calc(300% + #{$initMargin});
     } @else {
       padding-#{$dir}: 300%;
     }
   } @else {
-    @if ($initMargin != "") {
+    @if $initMargin != '' {
       margin-#{$dir}: $initMargin;
     } @else {
       margin-#{$dir}: 0;
     }
-    @if ($initPadding != "") {
+    @if $initPadding != '' {
       padding-#{$dir}: $initPadding;
     } @else {
       padding-#{$dir}: 0;
@@ -416,18 +287,18 @@ You'll need to add box-sizing: content-box;
   }
 }
 
-@mixin push-responsive($initMargin: "", $initPadding: "") {
+@mixin push-responsive($initMargin: '', $initPadding: '') {
   $dirs: right, left;
   @each $dir in $dirs {
     $sizes: (
-      "xs": "",
-      "sm": $tablet-sm,
-      "md": $laptop-sm,
-      "lg": $laptop-lg,
+      'xs': '',
+      'sm': $tablet-sm,
+      'md': $laptop-sm,
+      'lg': $laptop-lg,
     );
     @each $size, $breakpoint in $sizes {
       .push-#{$dir} {
-        @if ($breakpoint == "") {
+        @if $breakpoint == '' {
           &,
           &-#{$size} {
             @include push($dir, $initMargin, $initPadding);
@@ -437,6 +308,7 @@ You'll need to add box-sizing: content-box;
             @include breakpoint($breakpoint) {
               @include push($dir, $initMargin, $initPadding);
             }
+
             &-0 {
               @include breakpoint($breakpoint) {
                 @include push($dir, $initMargin, $initPadding, true);
@@ -453,14 +325,14 @@ You'll need to add box-sizing: content-box;
   $dirs: right, left;
   @each $dir in $dirs {
     $sizes: (
-      "xs": "",
-      "sm": $tablet-sm,
-      "md": $laptop-sm,
-      "lg": $laptop-lg,
+      'xs': '',
+      'sm': $tablet-sm,
+      'md': $laptop-sm,
+      'lg': $laptop-lg,
     );
     @each $size, $breakpoint in $sizes {
       .row.push-#{$dir} {
-        @if ($breakpoint == "") {
+        @if $breakpoint == '' {
           & {
             @include push($dir, -$gutter);
             @include breakpoint($laptop-sm) {
@@ -473,19 +345,20 @@ You'll need to add box-sizing: content-box;
         } @else {
           &-#{$size} {
             @include breakpoint($breakpoint) {
-              @if ($size == "xs" or $size == "sm") {
+              @if $size == 'xs' or $size == 'sm' {
                 @include push($dir, -$gutter);
               } @else {
                 @include push($dir, -$gutter-md);
               }
             }
+
             &-0 {
               @include breakpoint($breakpoint) {
-                @include push($dir, -$gutter, "", true);
-                @if ($size == "xs" or $size == "sm") {
-                  @include push($dir, -$gutter, "", true);
+                @include push($dir, -$gutter, '', true);
+                @if $size == 'xs' or $size == 'sm' {
+                  @include push($dir, -$gutter, '', true);
                 } @else {
-                  @include push($dir, -$gutter-md, "", true);
+                  @include push($dir, -$gutter-md, '', true);
                 }
               }
             }
@@ -493,7 +366,7 @@ You'll need to add box-sizing: content-box;
         }
       }
       .row.inner.push-#{$dir} {
-        @if ($breakpoint == "") {
+        @if $breakpoint == '' {
           & {
             @include push($dir, -$gutter * 0.5);
             @include breakpoint($laptop-sm) {
@@ -506,19 +379,20 @@ You'll need to add box-sizing: content-box;
         } @else {
           &-#{$size} {
             @include breakpoint($breakpoint) {
-              @if ($size == "xs" or $size == "sm") {
+              @if $size == 'xs' or $size == 'sm' {
                 @include push($dir, -$gutter * 0.5);
               } @else {
                 @include push($dir, -$gutter-md * 0.5);
               }
             }
+
             &-0 {
               @include breakpoint($breakpoint) {
-                @include push($dir, -$gutter * 0.5, "", true);
-                @if ($size == "xs" or $size == "sm") {
-                  @include push($dir, -$gutter * 0.5, "", true);
+                @include push($dir, -$gutter * 0.5, '', true);
+                @if $size == 'xs' or $size == 'sm' {
+                  @include push($dir, -$gutter * 0.5, '', true);
                 } @else {
-                  @include push($dir, -$gutter-md * 0.5, "", true);
+                  @include push($dir, -$gutter-md * 0.5, '', true);
                 }
               }
             }
@@ -533,9 +407,9 @@ You'll need to add box-sizing: content-box;
   $dir,
   $currentColWidth: 12,
   $pushColWidth: 1,
-  $viewport: "all"
+  $viewport: 'all'
 ) {
-  @if $viewport == "all" {
+  @if $viewport == 'all' {
     margin-#{$dir}: calc(
       #{-12 / $currentColWidth * $col * $pushColWidth} - #{$gutter * 0.5}
     );
@@ -551,7 +425,7 @@ You'll need to add box-sizing: content-box;
         #{12 / $currentColWidth * $col * $pushColWidth} + #{$gutter-md * 0.5}
       );
     }
-  } @else if ($viewport == "md") or ($viewport == "xl") {
+  } @else if $viewport == 'md' or $viewport == 'xl' {
     margin-#{$dir}: calc(
       #{-12 / $currentColWidth * $col * $pushColWidth} - #{$gutter-md * 0.5}
     );

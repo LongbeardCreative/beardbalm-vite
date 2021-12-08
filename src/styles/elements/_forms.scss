@@ -15,37 +15,39 @@ For other GF CSS classes, go here: https://www.gravityhelp.com/documentation/art
   padding-left: 1.25em;
   margin-right: 0;
   cursor: pointer;
-  // color: $color1;
+
+  // color: var(--color-primary);
 
   &::before {
     width: 0.65em;
     height: 0.65em;
-    content: "";
+    content: '';
     position: absolute;
     top: 0.425em;
     left: 0;
-    border: 1px solid $color-p;
+    border: 1px solid var(--color-p);
   }
 
   &::after {
     width: 0.55em;
     height: 0.55em;
-    content: "";
+    content: '';
     position: absolute;
-    background: url(#{$icons_dir}checkmark.svg) transparent no-repeat center
+    background: url(#{$icons-dir}checkmark.svg) transparent no-repeat center
       center;
     background-size: contain;
     top: 0.5em;
     left: 0.15rem;
     opacity: 0;
-    transition: $transition;
+    transition: var(--transition);
   }
 }
 
 %checkbox-custom-input-checked {
   &::before {
-    background-color: $color2;
+    background-color: var(--color-primary);
   }
+
   &::after {
     opacity: 1;
   }
@@ -62,28 +64,28 @@ For other GF CSS classes, go here: https://www.gravityhelp.com/documentation/art
     box-sizing: border-box;
     width: 1em;
     height: 1em;
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
-    background: $color2;
+    background: var(--color-primary);
     border: 0;
     border-radius: 50%;
-    transition: $transition;
+    transition: var(--transition);
   }
 
   &::after {
     width: 0.6em;
     height: 0.6em;
-    content: "";
+    content: '';
     position: absolute;
-    background: $color1;
+    background: var(--color-primary);
     background-size: cover !important;
     background-position: center !important;
     top: 0.2em;
     left: 0.2em;
     opacity: 0;
-    transition: $transition;
+    transition: var(--transition);
     border-radius: 100%;
   }
 
@@ -97,6 +99,24 @@ For other GF CSS classes, go here: https://www.gravityhelp.com/documentation/art
 %radio-custom-input-checked {
   &::after {
     opacity: 1;
+  }
+}
+
+input {
+  &[type='search'] {
+    &::-webkit-search-cancel-button {
+      position: relative;
+      right: 10px;
+      appearance: none;
+      height: 10px;
+      width: 10px;
+      background-image: url("data:image/svg+xml,%3Csvg width='19' height='16' viewBox='0 0 19 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.838235 16C0.598739 16 0.39916 15.9385 0.239496 15.8154C0.079832 15.6923 0 15.5385 0 15.3538C0 15.1692 0.0931372 14.9744 0.279412 14.7692L7.22479 7.81538L0.718487 1.2C0.505602 0.974359 0.39916 0.789744 0.39916 0.646154C0.39916 0.461539 0.478992 0.307693 0.638655 0.184617C0.82493 0.0615389 1.02451 0 1.23739 0H3.15336C3.55252 0 3.89846 0.164103 4.19118 0.492309L9.57983 5.87692L14.9685 0.492309C15.1281 0.328206 15.2745 0.205128 15.4076 0.123077C15.5672 0.0410255 15.7668 0 16.0063 0H17.8424C18.0553 0 18.2416 0.0615389 18.4013 0.184617C18.5609 0.307693 18.6408 0.451283 18.6408 0.615386C18.6408 0.820514 18.5476 1.01538 18.3613 1.2L11.7752 7.87692L18.7206 14.7692C18.9069 14.9744 19 15.1692 19 15.3538C19 15.5385 18.9202 15.6923 18.7605 15.8154C18.6008 15.9385 18.4013 16 18.1618 16H16.2059C15.8067 16 15.4608 15.8462 15.1681 15.5385L9.46008 9.84615L3.7521 15.5385C3.59244 15.6821 3.43277 15.7949 3.27311 15.8769C3.14006 15.959 2.95378 16 2.71429 16H0.838235Z' fill='%2338455b'/%3E%3C/svg%3E");
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center center;
+
+      // opacity: 0.75;
+    }
   }
 }
 
@@ -123,7 +143,19 @@ For other GF CSS classes, go here: https://www.gravityhelp.com/documentation/art
         padding: 0.5625rem 1rem;
       }
 
-      input[type="radio"] {
+      label {
+        @extend %radio-custom-input;
+
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--color-primary);
+
+        @include breakpoint($laptop-sm) {
+          font-size: 1.125rem;
+        }
+      }
+
+      input[type='radio'] {
         border: 0;
         clip: rect(1px, 1px, 1px, 1px);
         clip-path: inset(50%);
@@ -147,18 +179,7 @@ For other GF CSS classes, go here: https://www.gravityhelp.com/documentation/art
         }
       }
 
-      label {
-        @extend %radio-custom-input;
-        font-size: 1rem;
-        font-weight: 600;
-        color: $color1;
-
-        @include breakpoint($laptop-sm) {
-          font-size: 1.125rem;
-        }
-      }
-
-      input[id*="other"] {
+      input[id*='other'] {
         width: 100%;
         margin-right: 0;
         margin-top: calc((-30px + 1em) * 0.5);
@@ -175,7 +196,7 @@ For other GF CSS classes, go here: https://www.gravityhelp.com/documentation/art
     @extend %screen-reader-text;
 
     &:focus-visible + label::before {
-      box-shadow: 0 0 0 3px $color1;
+      box-shadow: 0 0 0 3px var(--color-primary);
       outline: 3px solid transparent; /* For Windows high contrast mode. */
     }
 
@@ -183,8 +204,10 @@ For other GF CSS classes, go here: https://www.gravityhelp.com/documentation/art
       @extend %checkbox-custom-input-checked;
     }
   }
+
   label {
     @extend %checkbox-custom-input;
+
     font-size: 0.875rem;
     line-height: 1.5;
 
@@ -214,6 +237,7 @@ For other GF CSS classes, go here: https://www.gravityhelp.com/documentation/art
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(359deg);
   }
@@ -226,30 +250,31 @@ For other GF CSS classes, go here: https://www.gravityhelp.com/documentation/art
   display: none;
 }
 
-input:not([type="submit"]),
+input:not([type='submit']),
 select,
 textarea {
   font: $body-font;
   border: 0;
-  color: $color-p;
+  color: var(--color-p);
   padding: 0.5rem 0.75rem;
-  transition: background $transition;
+  transition: background var(--transition);
   display: block;
-  background: $white;
-  box-shadow: $box-shadow;
+  background: var(--white);
+  box-shadow: var(--shadow-1);
 
   &::placeholder {
-    color: rgba($color-p, 0.7);
-    // transition: color $transition;
+    color: rgb(var(--color-p) 0.7);
+
+    // transition: color var(--transition);
   }
 
   // &:focus {
   //   // background: rgba($color7, 0.5);
-  //   // box-shadow: inset 0px 1px 5px rgba($white, 0.8),
-  //   //   inset 0px 1px 5px -18px rgba($color1, 0.8);
+  //   // box-shadow: inset 0px 1px 5px rgba(var(--white), 0.8),
+  //   //   inset 0px 1px 5px -18px rgba(var(--color-primary), 0.8);
 
   //   &::placeholder {
-  //     color: rgba($color-p, 0.65);
+  //     color: rgba(var(--color-p), 0.65);
   //   }
   // }
 }
@@ -272,23 +297,6 @@ textarea {
   }
 }
 
-input {
-  &[type="search"] {
-    &::-webkit-search-cancel-button {
-      position: relative;
-      right: 10px;
-      -webkit-appearance: none;
-      height: 10px;
-      width: 10px;
-      background-image: url("data:image/svg+xml,%3Csvg width='19' height='16' viewBox='0 0 19 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.838235 16C0.598739 16 0.39916 15.9385 0.239496 15.8154C0.079832 15.6923 0 15.5385 0 15.3538C0 15.1692 0.0931372 14.9744 0.279412 14.7692L7.22479 7.81538L0.718487 1.2C0.505602 0.974359 0.39916 0.789744 0.39916 0.646154C0.39916 0.461539 0.478992 0.307693 0.638655 0.184617C0.82493 0.0615389 1.02451 0 1.23739 0H3.15336C3.55252 0 3.89846 0.164103 4.19118 0.492309L9.57983 5.87692L14.9685 0.492309C15.1281 0.328206 15.2745 0.205128 15.4076 0.123077C15.5672 0.0410255 15.7668 0 16.0063 0H17.8424C18.0553 0 18.2416 0.0615389 18.4013 0.184617C18.5609 0.307693 18.6408 0.451283 18.6408 0.615386C18.6408 0.820514 18.5476 1.01538 18.3613 1.2L11.7752 7.87692L18.7206 14.7692C18.9069 14.9744 19 15.1692 19 15.3538C19 15.5385 18.9202 15.6923 18.7605 15.8154C18.6008 15.9385 18.4013 16 18.1618 16H16.2059C15.8067 16 15.4608 15.8462 15.1681 15.5385L9.46008 9.84615L3.7521 15.5385C3.59244 15.6821 3.43277 15.7949 3.27311 15.8769C3.14006 15.959 2.95378 16 2.71429 16H0.838235Z' fill='%2338455b'/%3E%3C/svg%3E");
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center center;
-      // opacity: 0.75;
-    }
-  }
-}
-
 .gform_wrapper {
   position: relative;
 
@@ -301,9 +309,9 @@ input {
 
 // Errors
 .gform_validation_errors {
-  color: $color-alert;
+  color: var(--color-error);
   padding: 1rem;
-  background-color: rgba($color-alert, 0.15);
+  background-color: rgb(var(--color-error) 0.15);
   margin-bottom: 1.5rem;
 }
 
@@ -311,7 +319,7 @@ input {
   // @include h6;
   font-size: 1rem;
   font-weight: 500;
-  color: $color-alert;
+  color: var(--color-error);
 }
 
 .gfield_description {
@@ -319,7 +327,8 @@ input {
     font-size: 0.75rem;
     line-height: 1.25;
     font-weight: 400;
-    color: $color-alert;
+    color: var(--color-error);
+
     // position: absolute;
     // right: 15px;
     // bottom: 15px;
@@ -335,17 +344,19 @@ input {
   position: relative;
 
   .ginput_container_consent {
-    input[type="checkbox"]:not(:checked) {
+    input[type='checkbox']:not(:checked) {
       + .gfield_consent_label {
-        color: $color-alert;
+        color: var(--color-error);
 
         a {
-          color: $color-alert;
+          color: var(--color-error);
         }
       }
     }
+
     + .gfield_description.validation_message {
-      @extend .screen-reader-text;
+      @extend %screen-reader-text;
+      @extend %screen-reader-text-focus;
     }
   }
 }
@@ -353,6 +364,6 @@ input {
 .gfield_label {
   font-weight: 500;
   font-size: 1rem;
-  color: $color1;
+  color: var(--color-primary);
   margin-bottom: 0.5rem;
 }
