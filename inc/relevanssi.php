@@ -1,5 +1,9 @@
 <?php
 
+if (!function_exists('relevanssi_do_query')) {
+  return;
+}
+
 /**
  * RELEVANSSI HELPER FUNCTIONS
  */

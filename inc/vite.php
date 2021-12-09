@@ -72,6 +72,13 @@ function register($entry) {
   // wp_register_script("module/beardbalm/$entry", $url, false, true);
   // wp_enqueue_script("module/beardbalm/$entry");
 
+  if ($entry == 'login.ts') {
+    // Special treatment for login
+    add_action('login_head', function () use (&$url) {
+      echo '<script type="module" crossorigin src="' . $url . '"></script>';
+    });
+  }
+
   add_action('wp_head', function () use (&$url) {
     echo '<script type="module" crossorigin src="' . $url . '"></script>';
   });

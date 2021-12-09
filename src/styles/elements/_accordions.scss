@@ -62,7 +62,7 @@ Stylesheet: Accordions
       width: 100%;
       bottom: 0;
       left: 0;
-      border-bottom: 1px solid rgb(var(--color-primary) 0.5);
+      border-bottom: 1px solid hsl(var(--color-primary-hsl) / 50%);
     }
 
     &::after {

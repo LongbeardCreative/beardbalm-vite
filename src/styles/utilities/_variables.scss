@@ -39,8 +39,8 @@ $icons-dir: '/wp-content/themes/beardbalm/assets/icons/';
 
 :root {
   // Colors
-  --red-hsl: 0, 100%, 40%;
-  --gold-hsl: 51, 100%, 50%;
+  --red-hsl: 0deg 100% 40%;
+  --gold-hsl: 51deg 100% 50%;
   --red: hsl(var(--red-hsl));
   --gold: hsl(var(--gold-hsl));
 
@@ -50,10 +50,14 @@ $icons-dir: '/wp-content/themes/beardbalm/assets/icons/';
     --gray-#{$i}: hsl(210deg, 11%, #{98% - $i * 9%});
   }
 
-  --black: hsl(0deg 0% 0%);
-  --white: hsl(0deg 0% 100%);
-  --color-primary: var(--red);
-  --color-accent: var(--gold);
+  --black-hsl: 0deg 0% 0%;
+  --black: hsl(var(--black-hsl));
+  --white-hsl: 0deg 0% 100%;
+  --white: hsl(var(--white-hsl));
+  --color-primary-hsl: var(--red-hsl);
+  --color-primary: hsl(var(--color-primary-hsl));
+  --color-accent-hsl: var(--gold-hsl);
+  --color-accent: hsl(var(--color-accent-hsl));
   --color-p: var(--gray-9);
   --color-error: #ff1654;
   --color-success: #70c1b3;
@@ -63,18 +67,18 @@ $icons-dir: '/wp-content/themes/beardbalm/assets/icons/';
   --transition-2: 0.5s cubic-bezier(0.07, 0.75, 0.66, 0.9);
 
   // Shadows
-  --shadow-strength: 1%;
-  --shadow-color: 220 3% 15%; // HSL
+  // --shadow-strength: 1%;
+  // --shadow-color: 220deg 3% 15%; // HSL
   // @media (prefers-color-scheme: dark) {
-  //   --shadow-strength: 25%;
-  //   --shadow-color: 220 40% 2%; // HSL
+  --shadow-strength: 25%;
+  --shadow-color: 220deg 40% 2%; // HSL
   // }
   @for $i from 1 through 3 {
     /* stylelint-disable-next-line custom-property-pattern */
     --shadow-#{$i}: 0
-      #{(1px + (($i - 1) * 1px))}
-      #{(2px + (($i - 1) * 2px))}
-      #{(-1px - (($i - 1) * 1px))}
+      #{(3px + (($i - 1) * 1px))}
+      #{(8px + (($i - 1) * 2px))}
+      #{(-3px - (($i - 1) * 1px))}
       hsl(var(--shadow-color) / calc(var(--shadow-strength) + 9%));
   }
 

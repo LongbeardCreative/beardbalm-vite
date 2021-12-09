@@ -42,7 +42,10 @@ export default defineConfig({
 
     // our entry
     rollupOptions: {
-      input: path.resolve(__dirname, './src/scripts/main.ts'),
+      input: [
+        path.resolve(__dirname, './src/scripts/main.ts'),
+        path.resolve(__dirname, './src/scripts/login.ts'),
+      ],
     },
   },
 

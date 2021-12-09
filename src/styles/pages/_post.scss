@@ -6,10 +6,3 @@ Styles for post templates ONLY. If the styles will be used across the site,
 use the _base.scss file.
 
 ******************************************************************/
-
-// Prevent embedded content from extending width of page
-.ct-text-block,
-.ct-span,
-iframe {
-  max-width: 100%;
-}

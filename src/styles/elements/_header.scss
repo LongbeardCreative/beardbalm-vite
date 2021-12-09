@@ -51,8 +51,8 @@ Header
   }
 
   // Main Navigation
-  &__nav {
-  }
+  // &__nav {
+  // }
 
   // Mobile Navigation
   &__nav-mobile {
@@ -63,13 +63,14 @@ Header
     flex-direction: column;
     transition: var(--transition);
     transform: translateY(-10px);
-    height: calc(100vh + 40px);
+    background: hsl(var(--white-hsl) / 80%);
+    backdrop-filter: blur(1rem);
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
     width: 100%;
-    @include padding(top, 6rem, 7rem);
-    @include padding(bottom, 175px, 120px);
+    padding-top: 6rem;
+    padding-bottom: 10rem;
 
     &.toggled {
       transform: translateY(0);
@@ -260,15 +261,9 @@ $bar-color-hover: var(--color-primary);
 
     &:nth-child(2) {
       transform: rotate(45deg);
-      transform: rotate(45deg);
-      transform: rotate(45deg);
-      transform: rotate(45deg);
     }
 
     &:nth-child(3) {
-      transform: rotate(-45deg);
-      transform: rotate(-45deg);
-      transform: rotate(-45deg);
       transform: rotate(-45deg);
     }
 

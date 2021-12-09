@@ -12,5 +12,22 @@
  */
 import '../styles/style.scss';
 
-// JS/TS
-import './theme.ts';
+// Scripts
+import accessibility from './lib/accessibility';
+import accordions from './lib/accordions';
+import navigation from './lib/navigation';
+import readMore from './lib/readMore';
+import smoothScroll from './lib/smoothScroll';
+import tabs from './lib/tabs';
+
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('JMJ');
+  navigation();
+  accessibility();
+  smoothScroll();
+  accordions();
+  tabs();
+  readMore();
+  // horizontalScroll('.lb-tabs .tabs');
+  // slickSlider('.some-slider');
+});

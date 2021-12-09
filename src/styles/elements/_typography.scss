@@ -21,24 +21,11 @@ body {
 /*********************
 LINK STYLES
 *********************/
-a,
-a:visited {
-  color: var(--color-primary);
-  transition: var(--transition);
-
-  /* on hover */
-  &:focus,
-  &:hover {
-    color: var(--color-accent);
-  }
-
-  // hide outline for mouse users but preserves it for keyboard users.
-  &:focus:not(:focus-visible) {
-    outline: none;
-  }
-
-  /* on click */
-  &:active {
+a {
+  &,
+  &:visited {
+    color: var(--color-primary);
+    transition: color var(--transition);
   }
 
   /* mobile tap color */
@@ -48,7 +35,24 @@ a:visited {
         so it basically works like the :hover selector
         for mobile devices.
         */
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.3);
+    -webkit-tap-highlight-color: rgb(0 0 0 / 30%);
+  }
+
+  /* on hover */
+  &:focus,
+  &:hover,
+  &:visited:focus,
+  &:visited:hover {
+    color: var(--color-accent);
+  }
+
+  /* on click */
+  // &:active {
+  // }
+
+  // hide outline for mouse users but preserves it for keyboard users.
+  &:focus:not(:focus-visible) {
+    outline: none;
   }
 }
 
@@ -62,7 +66,7 @@ WP STANDARD POST IMAGE & ALIGNMENTS
   height: auto;
 
   @include breakpoint($mobile-lg) {
-    padding: 10px 10px 10px 0px;
+    padding: 10px 10px 10px 0;
   }
 }
 
@@ -93,11 +97,7 @@ h2,
 h3,
 h4,
 h5 {
-  text-rendering: optimizelegibility;
-
-  a {
-    text-decoration: none;
-  }
+  text-rendering: optimizeLegibility;
 }
 
 h1,
@@ -147,14 +147,11 @@ p {
   word-wrap: break-word;
 
   // cleaning up the ragged lines and breaks
-  -webkit-hyphens: auto;
-  -moz-hyphens: auto;
   hyphens: auto;
 
   // sets a minimum number of characters before and after the break
   -webkit-hyphenate-before: 2;
   -webkit-hyphenate-after: 3;
-  hyphenate-lines: 3;
 
   // enabling fancy ligatures when available
   //   -webkit-font-feature-settings: 'liga', 'dlig';

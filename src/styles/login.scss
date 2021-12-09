@@ -1,5 +1,12 @@
 /* stylelint-disable selector-id-pattern */
-@import 'utilities/variables';
+@use 'sass:math';
+@use 'sass:list';
+
+// Utilities
+@import './utilities/breakpoint';
+@import './utilities/variables';
+@import './utilities/type-stack';
+@import './utilities/mixins';
 
 body {
   position: relative;

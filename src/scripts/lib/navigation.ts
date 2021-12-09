@@ -1,4 +1,4 @@
-export function initNavigation() {
+export default function navigation() {
   const html = document.documentElement;
   const container = document.querySelector('#mobile-navigation') as HTMLElement;
   const button = document.querySelector('#mobile-menu-toggle') as HTMLElement;
