@@ -12,6 +12,7 @@
   },
   "author": "LB",
   "dependencies": {
+    "just-debounce-it": "^3.0.1",
     "normalize.css": "^8.0.1"
   },
   "devDependencies": {

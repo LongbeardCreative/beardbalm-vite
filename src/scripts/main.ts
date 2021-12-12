@@ -15,8 +15,10 @@ import '../styles/style.scss';
 // Scripts
 import accessibility from './lib/accessibility';
 import accordions from './lib/accordions';
+import modal from './lib/modal';
 import navigation from './lib/navigation';
 import readMore from './lib/readMore';
+import slider from './lib/slider';
 import smoothScroll from './lib/smoothScroll';
 import tabs from './lib/tabs';
 
@@ -30,4 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
   readMore();
   // horizontalScroll('.lb-tabs .tabs');
   // slickSlider('.some-slider');
+  modal();
+  slider();
 });

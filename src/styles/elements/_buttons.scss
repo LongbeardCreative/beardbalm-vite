@@ -5,8 +5,7 @@ Stylesheet: Buttons
 ******************************************************************/
 
 @mixin btn {
-  @include h6;
-
+  font: $body-font;
   border-width: 0;
   border-radius: 0;
   padding: 0;

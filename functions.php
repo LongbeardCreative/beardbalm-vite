@@ -64,7 +64,7 @@ function beardbalm_scripts() {
   // Load the webfont.
   wp_enqueue_style(
     'google-fonts',
-    wptt_get_webfont_url('https://fonts.googleapis.com/css2?family=Asul:wght@400;700&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap'),
+    wptt_get_webfont_url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Poppins:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap'),
     array(),
     '1.0'
   );

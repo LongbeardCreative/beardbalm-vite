@@ -1,0 +1,78 @@
+:root {
+  --modal-overlay-background: hsl(0deg 0% 0% / 85%);
+  --modal-overlay-background-blur: 1rem;
+  --modal-container-padding: 2rem 5rem;
+  --modal-background: hsl(0deg 0% 100%);
+  --modal-padding: 2rem 3rem;
+  --modal-max-width: 37.5rem;
+  --modal-video-padding: 0;
+  --modal-video-max-width: 60rem;
+}
+
+.modal {
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: var(--modal-overlay-background);
+  backdrop-filter: blur(var(--modal-overlay-background-blur));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--modal-container-padding);
+
+  &__inner {
+    background: var(--modal-background);
+    padding: var(--modal-padding);
+    max-width: var(--modal-max-width);
+    position: relative;
+    flex: 0 0 100%;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &--video {
+      padding: var(--modal-video-padding);
+      max-width: var(--modal-video-max-width);
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+
+    &__inner {
+      width: 100%;
+      overflow: hidden auto;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    font-size: 3rem;
+    z-index: 1;
+    line-height: 1;
+  }
+
+  &__video {
+    width: 100%;
+    height: 0;
+    position: relative;
+    padding-bottom: 56.25%;
+    background-color: hsl(0deg 0% 0%);
+
+    iframe {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      object-fit: cover;
+    }
+  }
+}

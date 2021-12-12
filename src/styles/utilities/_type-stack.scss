@@ -14,7 +14,7 @@ $primary: arial;
 $secondary: times new roman;
 
 // theme fonts
-$body-font: 500 1em / 1.5em $secondary, $sans-serif;
+$body-font: 400 1rem / 1.5em var(--font-secondary);
 $h1: 700 1.75rem / 1em $primary, $sans-serif;
 $h2: 700 1.625rem / 1.25em $primary, $sans-serif;
 $h3: 600 1.5rem / 1.25em $primary, $sans-serif;
@@ -23,64 +23,15 @@ $h5: 600 1.125rem / 1.4em $secondary, $sans-serif;
 $h6: 500 1rem / 1.5em $secondary, $sans-serif;
 
 @mixin h1 {
-  font: $h1;
-
-  @include breakpoint($tablet-sm) {
-    font-size: 2.1875rem;
-  }
-
-  @include breakpoint($laptop-sm) {
-    font-size: 2.8125rem;
-  }
-
-  @include breakpoint($laptop-lg) {
-    font-size: 3.125rem;
-  }
-
-  @include breakpoint($desktop) {
-    font-size: 4.0625rem;
-  }
+  font-size: var(--font-size-5);
+  font-family: var(--font-primary);
+  line-height: 1.25;
 }
 
 @mixin h2 {
-  font: $h2;
-
-  @include breakpoint($tablet-sm) {
-    font-size: 1.875rem;
-  }
-
-  @include breakpoint($laptop-sm) {
-    font-size: 2.5rem;
-  }
-
-  @include breakpoint($laptop-lg) {
-    font-size: 2.8125rem;
-  }
-
-  @include breakpoint($desktop) {
-    font-size: 3.75rem;
-  }
-}
-
-@mixin h2-small {
-  font: $h2;
-  font-size: 1.375rem;
-
-  @include breakpoint($tablet-sm) {
-    font-size: 1.5rem;
-  }
-
-  @include breakpoint($laptop-sm) {
-    font-size: 1.75rem;
-  }
-
-  @include breakpoint($laptop-lg) {
-    font-size: 1.875rem;
-  }
-
-  @include breakpoint($desktop) {
-    font-size: 2.8125rem;
-  }
+  font-size: var(--font-size-4);
+  font-family: var(--font-primary);
+  line-height: 1.25;
 }
 
 @mixin h3 {

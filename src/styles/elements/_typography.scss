@@ -56,6 +56,13 @@ a {
   }
 }
 
+code {
+  background-color: var(--gray-1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-family: var(--font-mono);
+}
+
 /*********************
 WP STANDARD POST IMAGE & ALIGNMENTS
 *********************/
@@ -106,7 +113,7 @@ h1,
 
   &:not(:last-child),
   &.m-b {
-    margin-bottom: 0.875em;
+    margin-bottom: 0.5em;
   }
 }
 
@@ -116,7 +123,7 @@ h2,
 
   &:not(:last-child),
   &.m-b {
-    margin-bottom: 0.875em;
+    margin-bottom: 0.5em;
   }
 }
 
@@ -142,23 +149,18 @@ h6,
 
 p {
   font: $body-font;
-  -ms-word-wrap: break-word;
-  word-break: break-word;
-  word-wrap: break-word;
 
-  // cleaning up the ragged lines and breaks
-  hyphens: auto;
+  // -ms-word-wrap: break-word;
+  // word-break: break-word;
+  // word-wrap: break-word;
 
-  // sets a minimum number of characters before and after the break
-  -webkit-hyphenate-before: 2;
-  -webkit-hyphenate-after: 3;
+  &:not(:last-child) {
+    margin-bottom: 1.5rem;
+  }
+}
 
-  // enabling fancy ligatures when available
-  //   -webkit-font-feature-settings: 'liga', 'dlig';
-  //    -moz-font-feature-settings: 'liga=1, dlig=1';
-  //       -ms-font-feature-settings: 'liga', 'dlig';
-  //        -o-font-feature-settings: 'liga', 'dlig';
-  //           font-feature-settings: 'kern' 1, 'dlig' 1;
+.narrow {
+  max-inline-size: var(--size-content-3);
 }
 
 ::selection {

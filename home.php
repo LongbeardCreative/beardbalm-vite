@@ -53,6 +53,32 @@ get_header();
 				</div>
 			</div>
 		</section>
+		<section class="container row section-m-b">
+			<div class="col-xs-12 col-lg-10 col-lg-offset-1">
+				<h2>Modal</h2>
+				<ul>
+					<li>With function call: <button type="button" onclick="modal({ youtube: { videoID: 'HM9r6Q_jFCE' } })">Open Modal</button></li>
+					<li>With HTML API: <a href="http://www.youtube.com/watch?v=HM9r6Q_jFCE" data-modal>Open</a></li>
+				</ul>
+			</div>
+		</section>
+		<section class="container row section-m-b">
+			<div class="col-xs-12 col-lg-10 col-lg-offset-1">
+				<h2>Minimal Slider</h2>
+				<p class="narrow">This uses very minimal JS for the arrow navigation and CSS <code>scroll-snap</code> feature for easy snapping. The rest is good ol' <code>overflow</code>!</p>
+				<div class="slider" data-slider>
+					<button class="slider__arrow slider__arrow--prev" data-slider-prev>‹</button>
+					<ul class="slider__inner" data-slider-inner>
+						<?php for ($i = 0; $i < 10; $i++) { ?>
+							<li class="slider__slide">
+								<div style="background-color: var(--gray-1); width: 20rem; height: 20rem; padding: 1rem;">Slide <?php echo $i; ?></div>
+							</li>
+						<?php } ?>
+					</ul>
+					<button class="slider__arrow slider__arrow--next" data-slider-next>›</button>
+				</div>
+			</div>
+		</section>
 	</main><!-- #main -->
 </div><!-- #primary -->
 

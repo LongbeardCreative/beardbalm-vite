@@ -94,6 +94,20 @@ $icons-dir: '/wp-content/themes/beardbalm/assets/icons/';
     --font-size-#{$i}: #{math.pow(1.333, $i) * 1rem};
   }
 
+  // Font Families
+  --font-sans: system-ui, -apple-system, segoe ui, roboto, ubuntu, cantarell,
+    noto sans, sans-serif;
+  --font-serif: ui-serif, serif;
+  --font-mono: dank mono, operator mono, inconsolata, fira mono, ui-monospace,
+    sf mono, monaco, droid sans mono, source code pro, monospace;
+  --font-primary: 'Bree Serif', var(--font-serif);
+  --font-secondary: 'Poppins', var(--font-sans);
+
+  // Reading content sizes
+  --size-content-1: 20ch;
+  --size-content-2: 45ch;
+  --size-content-3: 60ch;
+
   // Spacings
   --container-margin: 1rem;
 
