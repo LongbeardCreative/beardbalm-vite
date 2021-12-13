@@ -19,28 +19,7 @@ export default function navigation() {
     menu.classList.add('nav-menu');
   }
 
-  function openMenu() {
-    container.classList.add('toggled');
-    button.setAttribute('aria-expanded', 'true');
-    html.classList.add('no-scroll');
-  }
-
-  function closeMenu() {
-    container.classList.remove('toggled');
-    button.setAttribute('aria-expanded', 'false');
-    html.classList.remove('no-scroll');
-  }
-
-  button.onclick = function () {
-    if (container.classList.contains('toggled')) {
-      closeMenu();
-    } else {
-      openMenu();
-    }
-  };
-
-  // Close mobile menu when user clicks outside
-  document.addEventListener('click', function (e) {
+  function handleClickOutside(e: MouseEvent) {
     const target = e.target as Node;
 
     if (!target) {
@@ -52,14 +31,39 @@ export default function navigation() {
     if (!isClickInside) {
       closeMenu();
     }
-  });
+  }
 
-  // Close mobile menu when use presses Escape
-  document.body.addEventListener('keyup', function (e) {
+  function handleKeyPress(e: KeyboardEvent) {
     if (e.key === 'Escape') {
       closeMenu();
     }
-  });
+  }
+
+  function openMenu() {
+    container.classList.add('toggled');
+    button.setAttribute('aria-expanded', 'true');
+    html.classList.add('no-scroll');
+
+    document.addEventListener('click', handleClickOutside);
+    document.body.addEventListener('keyup', handleKeyPress);
+  }
+
+  function closeMenu() {
+    container.classList.remove('toggled');
+    button.setAttribute('aria-expanded', 'false');
+    html.classList.remove('no-scroll');
+
+    document.removeEventListener('click', handleClickOutside);
+    document.body.removeEventListener('keyup', handleKeyPress);
+  }
+
+  button.onclick = function () {
+    if (container.classList.contains('toggled')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  };
 
   function mobileMenuResponsive() {
     if (window.innerWidth > 1024) {

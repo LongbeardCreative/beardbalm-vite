@@ -55,10 +55,11 @@ get_header();
 		</section>
 		<section class="container row section-m-b">
 			<div class="col-xs-12 col-lg-10 col-lg-offset-1">
-				<h2>Modal</h2>
+				<h2 id="modal-title">Modal</h2>
 				<ul>
 					<li>With function call: <button type="button" onclick="modal({ youtube: { videoID: 'HM9r6Q_jFCE' } })">Open Modal</button></li>
 					<li>With HTML API: <a href="http://www.youtube.com/watch?v=HM9r6Q_jFCE" data-modal>Open</a></li>
+					<li>Custom HTML content: <button type="button" onclick="modal({ html: document.querySelector('#modal-title') })">Open Modal (HTML)</button></li>
 				</ul>
 			</div>
 		</section>
@@ -77,6 +78,24 @@ get_header();
 					</ul>
 					<button class="slider__arrow slider__arrow--next" data-slider-next>›</button>
 				</div>
+			</div>
+		</section>
+		<section class="container row section-m-b">
+			<div class="col-xs-12 col-lg-10 col-lg-offset-1">
+				<h2>Tabs</h2>
+				<?php
+				$data = array(
+					array(
+						'title' => 'Lorem ipsum',
+						'content'	=> '<p>Dolor sit amet consectetur adipiscing elit</p>'
+					),
+					array(
+						'title' => 'Dolor sit',
+						'content'	=> '<p>Amet consectetur adipiscing elit</p>'
+					),
+				);
+				get_template_part('template-parts/tabs/tabs', '', array('data' => $data));
+				?>
 			</div>
 		</section>
 	</main><!-- #main -->

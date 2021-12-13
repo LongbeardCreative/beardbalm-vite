@@ -33,17 +33,13 @@
       @include margin(right, 1.875rem, 1.875rem, 1.875rem, 2.375rem);
     }
 
-    &:hover,
-    &:focus {
-      > span {
-        @extend %link-underline-hover;
-      }
-    }
+    // &:hover,
+    // &:focus {
+    //   color: var(--color-accent);
+    // }
 
-    &.active {
-      > span {
-        @extend %link-underline-active;
-      }
+    &--active {
+      font-weight: 700;
     }
 
     // &.slick-slide {
@@ -56,10 +52,10 @@
   }
 }
 
-.tab-panels {
+.tabpanels {
   margin: 1.25rem 0 0;
 
-  .tab-panel {
+  .tabpanel {
     &:not(.tab-default) {
       // prevent animation on load
       animation: fade-up 0.25s;
@@ -67,7 +63,7 @@
       animation-timing-function: ease-in-out;
     }
 
-    &:not(.active) {
+    &:not(.tabpanel--active) {
       // inactive style
       display: none;
     }
@@ -105,8 +101,8 @@
       left: -5rem;
       background: linear-gradient(
         90deg,
-        rgba(var(--white), 1) 0%,
-        rgba(var(--white), 0) 100%
+        rgb(var(--white) 1) 0%,
+        rgb(var(--white) 0) 100%
       );
     }
 
@@ -114,8 +110,8 @@
       right: -5rem;
       background: linear-gradient(
         270deg,
-        rgba(var(--white), 1) 0%,
-        rgba(var(--white), 0) 100%
+        rgb(var(--white) 1) 0%,
+        rgb(var(--white) 0) 100%
       );
     }
 
@@ -152,8 +148,8 @@
       top: -5rem;
       background: linear-gradient(
         180deg,
-        rgba(var(--color-primary), 1) 0%,
-        rgba(var(--color-primary), 0) 100%
+        rgb(var(--color-primary) 1) 0%,
+        rgb(var(--color-primary) 0) 100%
       );
     }
 
@@ -161,8 +157,8 @@
       bottom: -5rem;
       background: linear-gradient(
         0deg,
-        rgba(var(--color-primary), 1) 0%,
-        rgba(var(--color-primary), 0) 100%
+        rgb(var(--color-primary) 1) 0%,
+        rgb(var(--color-primary) 0) 100%
       );
     }
 
@@ -193,6 +189,7 @@
   &--x {
     overflow-x: auto;
   }
+
   &--y {
     overflow-y: auto;
   }

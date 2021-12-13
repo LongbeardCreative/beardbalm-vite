@@ -26,13 +26,13 @@ export default function tabs() {
     function setActiveTab(id: string, focus: boolean = true) {
       tabs.forEach(function (tab) {
         if (tab.getAttribute('aria-controls') === id) {
-          tab.classList.add(activeClass);
+          tab.classList.add(`tab--${activeClass}`);
           tab.setAttribute('aria-selected', 'true');
           if (focus) {
             (tab as HTMLElement).focus();
           }
         } else {
-          tab.classList.remove(activeClass);
+          tab.classList.remove(`tab--${activeClass}`);
           tab.setAttribute('aria-selected', 'false');
           (tab as HTMLElement).blur();
         }
@@ -40,10 +40,10 @@ export default function tabs() {
 
       tabPanels.forEach(function (tabPanel) {
         if (tabPanel.getAttribute('id') === id) {
-          tabPanel.classList.add(activeClass);
+          tabPanel.classList.add(`tabpanel--${activeClass}`);
           tabPanel.setAttribute('aria-expanded', 'true');
         } else {
-          tabPanel.classList.remove(activeClass);
+          tabPanel.classList.remove(`tabpanel--${activeClass}`);
           tabPanel.setAttribute('aria-expanded', 'false');
         }
       });
@@ -80,8 +80,8 @@ export default function tabs() {
 
       // 1. Remove pre-selected default tabs classes
       [...tabs, ...tabPanels].forEach((el) => {
-        if (el.classList.contains('tab-default')) {
-          el.classList.remove('tab-default');
+        if (el.classList.contains('tab--default')) {
+          el.classList.remove('tab--default');
         }
       });
 
@@ -142,8 +142,8 @@ export default function tabs() {
       });
 
       switch (e.key) {
-        case 'ArrowLeft': // left arrow
-        case 'ArrowUp': // up arrow
+        case 'ArrowRight':
+        case 'ArrowDown':
           e.preventDefault();
           const prev = activeTab?.previousElementSibling
             ? activeTab?.previousElementSibling.getAttribute('aria-controls')
@@ -152,8 +152,8 @@ export default function tabs() {
             setActiveTab(prev);
           }
           break;
-        case 'ArrowRight': // right arrow
-        case 'ArrowDown': // down arrow
+        case 'ArrowLeft':
+        case 'ArrowUp':
           e.preventDefault();
           const next = activeTab?.nextElementSibling
             ? activeTab?.nextElementSibling.getAttribute('aria-controls')

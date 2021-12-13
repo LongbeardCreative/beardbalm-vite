@@ -25,6 +25,7 @@ Stylesheet: Main Stylesheet
 @import './elements/forms';
 @import './elements/footer';
 @import './elements/accordions';
+@import './elements/tabs';
 
 // @import "./elements/cookieconsent";
 
@@ -65,10 +66,7 @@ Stylesheet: Main Stylesheet
 //   @import "pages/404";
 // }
 
-// /*********************
-// PRINT STYLESHEET
-// *********************/
-// @media print {
-//   // styles in print.scss
-//   @import "utilities/print";
-// }
+// Print
+@media print {
+  @import 'utilities/print';
+}

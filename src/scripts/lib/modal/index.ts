@@ -12,6 +12,7 @@ interface Props {
   youtube?: {
     videoID: string;
   };
+  html?: string | HTMLElement;
 }
 
 declare global {
@@ -54,7 +55,7 @@ function animateModal({ node, innerNode }: NodesProps) {
 }
 
 function createModal(props: Props): NodesProps {
-  const { youtube } = props;
+  const { youtube, html } = props;
 
   const node = document.createElement('div');
 
@@ -64,7 +65,12 @@ function createModal(props: Props): NodesProps {
 
   const innerNode = document.createElement('div');
   innerNode.classList.add('modal__inner');
-  innerNode.classList.add(youtube ? 'modal__inner--video' : '');
+  if (youtube) {
+    innerNode.classList.add('modal__inner--video');
+  }
+  if (html) {
+    innerNode.classList.add('modal__inner--html');
+  }
 
   const headNode = document.createElement('div');
   headNode.classList.add('modal__head');
@@ -96,6 +102,19 @@ function createModal(props: Props): NodesProps {
     bodyInnerNode.appendChild(iframeWrapperNode);
   }
 
+  if (html) {
+    const htmlWrapperNode = document.createElement('div');
+    htmlWrapperNode.classList.add('modal__html');
+    if (typeof html === 'string') {
+      htmlWrapperNode.insertAdjacentHTML('beforeend', html);
+    } else {
+      const htmlNode = html.cloneNode(true) as HTMLElement;
+      htmlNode.removeAttribute('id'); // Remove id to prevent duplicates within the document
+      htmlWrapperNode.appendChild(htmlNode);
+    }
+    bodyInnerNode.appendChild(htmlWrapperNode);
+  }
+
   bodyNode.appendChild(bodyInnerNode);
 
   innerNode.appendChild(closeNode);
@@ -107,6 +126,8 @@ function createModal(props: Props): NodesProps {
 }
 
 async function removeModal({ node }: NodesProps) {
+  document.documentElement.classList.remove('no-scroll');
+
   node.animate([{ opacity: 1 }, { opacity: 0 }], {
     duration: 150,
     easing: 'ease-out',

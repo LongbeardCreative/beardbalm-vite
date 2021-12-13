@@ -3,8 +3,8 @@ import { slideToggle, unwrap, wrapAll } from '../utils/helpers';
 function readMoreInit(
   eleWrapper: HTMLElement,
   options: { numberToShow: number; viewportSize: number }[],
-  readMore?: string,
-  readLess?: string
+  readMore: string = 'Read More',
+  readLess: string = 'View Less'
 ) {
   // sort from smallest to largest
   const sortedSizes = options.sort((a, b) =>
@@ -129,10 +129,10 @@ function readMoreInit(
 
     readMoreContainer.insertAdjacentHTML(
       'beforeend',
-      `<div class="view-more-container end-xs">
-        <button type="button" class="button button--icon button--icon--after m-t read-more">
+      `<div class="view-more-toggle end-xs">
+        <button type="button" class="button button--icon button--icon--after m-t view-more-toggle__button">
           <span>${readMoreLabelInactive}</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="13.707" height="7.561" viewBox="0 0 13.707 7.561" aria-hidden="true" role="presentation"><path d="M133.08,255.5l6.5,6.5,6.5-6.5" transform="translate(-132.726 -255.146)" fill="none" stroke="#f8bc2b" stroke-width="1"></path></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" class="view-more-toggle__icon arrow" width="13.707" height="7.561" viewBox="0 0 13.707 7.561" aria-hidden="true" role="presentation" style="transition: transform var(--transition)"><path d="M133.08,255.5l6.5,6.5,6.5-6.5" transform="translate(-132.726 -255.146)" fill="none" stroke="currentColor" stroke-width="1"></path></svg>
         </button>
       </div>`
     );
@@ -147,6 +147,9 @@ function readMoreInit(
       }
 
       const textWrapper = currentTarget.querySelector('span') || currentTarget;
+      const arrow = currentTarget.querySelector(
+        'svg.arrow'
+      ) as HTMLOrSVGImageElement | null;
 
       readMoreContainer.classList.toggle('active');
       slideToggle(hiddenElementsWrapper);
@@ -154,14 +157,18 @@ function readMoreInit(
 
       if (currentTarget.classList.contains('active')) {
         textWrapper.innerText = readMoreLabelActive || 'Read More';
+        if (arrow) {
+          arrow.style.transform = 'rotate(180deg)';
+        }
       } else {
         textWrapper.innerText = readMoreLabelInactive || 'View Less';
+        if (arrow) {
+          arrow.style.transform = 'rotate(0)';
+        }
       }
     }
 
-    const viewMoreButton = eleWrapper.querySelector(
-      '.view-more-container button'
-    );
+    const viewMoreButton = eleWrapper.querySelector('.view-more-toggle button');
 
     if (!viewMoreButton) {
       return;
@@ -176,7 +183,7 @@ function readMoreInit(
     unwrap(eleWrapper.querySelector('.shown-elements'));
     unwrap(eleWrapper.querySelector('.read-more-container'));
 
-    const viewMoreContainer = eleWrapper.querySelector('.view-more-container');
+    const viewMoreContainer = eleWrapper.querySelector('.view-more-toggle');
     if (viewMoreContainer) {
       viewMoreContainer.parentNode?.removeChild(viewMoreContainer);
     }
@@ -192,13 +199,14 @@ export default function readMore() {
   const elements = document.querySelectorAll(
     '[data-rm]'
   ) as NodeListOf<HTMLElement>;
+
   elements.forEach((el) => {
     const xs = el.getAttribute('data-rm-xs');
     const sm = el.getAttribute('data-rm-sm');
     const md = el.getAttribute('data-rm-md');
     const lg = el.getAttribute('data-rm-lg');
-    const moreText = el.getAttribute('data-rm-more') || 'Read More';
-    const lessText = el.getAttribute('data-rm-less') || 'View Less';
+    const moreText = el.getAttribute('data-rm-more') || undefined;
+    const lessText = el.getAttribute('data-rm-less') || undefined;
 
     const options = [];
 
