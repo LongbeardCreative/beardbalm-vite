@@ -26,7 +26,7 @@ export default function navigation() {
       return;
     }
 
-    var isClickInside = container.contains(target) || button.contains(target);
+    const isClickInside = container.contains(target) || button.contains(target);
 
     if (!isClickInside) {
       closeMenu();
