@@ -31,3 +31,31 @@ function load_template_part($template_name, $part_name = null, $args) {
   ob_end_clean();
   return $var;
 }
+
+/**
+ * Prevent WordPress from scaling extremely large images
+ * Large images often used as background on VO's website
+ */
+function lb_big_image_size_threshold($threshold) {
+  $current_user = wp_get_current_user();
+
+  if (is_user_logged_in() && ($current_user->user_login === 'kevin-lb' || $current_user->user_login === 'patrick-lb' || $current_user->user_login === 'lbadmin')) {
+    return false;
+  } else {
+    return $threshold;
+  }
+}
+add_filter('big_image_size_threshold', 'lb_big_image_size_threshold');
+
+/**
+ * Body Class
+ */
+
+// function lb_body_classes($classes) {
+//   if (is_date()) {
+//     $classes[] = 'page-template-media';
+//   }
+
+//   return $classes;
+// }
+// add_filter('body_class', 'lb_body_classes');
