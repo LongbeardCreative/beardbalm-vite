@@ -19,6 +19,7 @@ if (!defined('LB_VERSION')) {
 
 
 
+require_once get_template_directory() . '/inc/utils.php';
 require_once get_template_directory() . '/inc/vite.php';
 require_once get_template_directory() . '/inc/wptt-webfont-loader.php';
 require_once get_template_directory() . '/inc/cpt.php';
@@ -27,6 +28,7 @@ require_once get_template_directory() . '/inc/cpt.php';
 require_once get_template_directory() . '/inc/template-functions.php';
 // require get_template_directory() . '/inc/customizer.php';
 require_once get_template_directory() . '/inc/relevanssi.php';
+require_once get_template_directory() . '/inc/login.php';
 
 /**
  * Change the base path. This is by default WP_CONTENT_DIR.
@@ -68,10 +70,6 @@ function beardbalm_scripts() {
     array(),
     '1.0'
   );
-
-  // Helper scripts from Underscores
-  // wp_enqueue_script('beardbalm-navigation', get_template_directory_uri() . '/js/navigation.js', array(), LB_VERSION, true);
-  // wp_enqueue_script('beardbalm-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), LB_VERSION, true);
 
   // Main Scripts & Styles
   vite('main.ts');
@@ -237,33 +235,7 @@ function lb_acf_init() {
 
 add_action('acf/init', 'lb_acf_init');
 
-/**
- * Change Login URL from WP URl to this site's url
- */
-function lb_login_logo_url() {
-  return home_url('/');
-}
-add_filter('login_headerurl', 'lb_login_logo_url');
 
-/**
- * Change Login URL from WP URl to this site's url
- */
-function lb_login_logo_url_title() {
-  return 'Longbeard';
-}
-add_filter('login_headertext', 'lb_login_logo_url_title');
-
-/**
- * Enqueue Login CSS
- */
-function lb_login_stylesheet() {
-  // $filetime = filemtime(__DIR__ . '/login.css');
-  // wp_enqueue_style('lb-login', get_template_directory_uri() . '/login.css', array(), $filetime);
-  require_once get_theme_file_path('inc/vite.php');
-  vite('login.ts');
-  print_r(vite('login.ts'));
-}
-add_action('login_enqueue_scripts', 'lb_login_stylesheet');
 
 /**
  * Filters WordPress' get_search_form()

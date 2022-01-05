@@ -53,8 +53,11 @@ module.exports = {
     'max-len': 0,
     'import/extensions': 0,
     'import/resolver': {
-      alias: {
-        map: [['@', './src']],
+      // alias: {
+      //   map: [['@', './src']],
+      // },
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
     },
     'no-underscore-dangle': 0,

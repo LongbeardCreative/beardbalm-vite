@@ -74,6 +74,10 @@ export default function navigation() {
     }
   }
 
+  if (typeof window !== 'undefined') {
+    mobileMenuResponsive();
+  }
+
   window.addEventListener('load', mobileMenuResponsive);
   window.addEventListener('resize', mobileMenuResponsive);
 }

@@ -13,7 +13,26 @@
 import { defineConfig } from 'vite';
 import liveReload from 'vite-plugin-live-reload';
 import path from 'path';
-// import vue from "@vitejs/plugin-vue";
+import fs from 'fs';
+
+const root = './src/scripts';
+
+function getTopLevelFiles(): Record<string, string> {
+  let topLevelFiles = fs.readdirSync(path.resolve(__dirname, root));
+  let files: { [key: string]: string } = {};
+  topLevelFiles.forEach((file) => {
+    const isFile = fs.lstatSync(path.resolve(root, file)).isFile();
+    if (
+      isFile &&
+      !file.includes('.d.ts') &&
+      (path.extname(file) === '.ts' || path.extname(file) === '.js')
+    ) {
+      const chunkName = file.slice(0, file.lastIndexOf('.'));
+      files[chunkName] = path.resolve(root, file);
+    }
+  });
+  return files;
+}
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -29,7 +48,7 @@ export default defineConfig({
   ],
 
   // config
-  root: './src/scripts',
+  root,
   base: process.env.APP_ENV === 'development' ? '/' : '/dist/',
 
   build: {
@@ -42,10 +61,11 @@ export default defineConfig({
 
     // our entry
     rollupOptions: {
-      input: [
-        path.resolve(__dirname, './src/scripts/main.ts'),
-        path.resolve(__dirname, './src/scripts/login.ts'),
-      ],
+      // input: [
+      //   path.resolve(__dirname, `${root}/main.ts`),
+      //   path.resolve(__dirname, `${root}/login.ts`),
+      // ],
+      input: getTopLevelFiles(),
     },
   },
 
