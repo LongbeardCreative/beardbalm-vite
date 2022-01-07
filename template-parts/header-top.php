@@ -16,7 +16,7 @@
           <?php wp_nav_menu([
             'theme_location' => 'menu-1',
             'menu_id'        => 'primary-menu',
-            'menu_class'     => 'header__menu menu col-xs-hide col-md-show',
+            'menu_class'     => 'header__menu menu hide-xs show-md--flex',
             'link_before'    => '<span>',
             'link_after'     => '</span>',
           ]); ?>
@@ -30,7 +30,7 @@
               <div id="site-search-results" class="header__search-box__results"></div>
             </div>
           </div> -->
-          <button id="mobile-menu-toggle" class="menu-toggle col-xs-show col-md-hide" aria-controls="primary-menu" aria-expanded="false">
+          <button id="mobile-menu-toggle" class="menu-toggle show-xs--flex hide-md" aria-controls="primary-menu" aria-expanded="false">
             <span class="menu-toggle__label menu-toggle__label--close" style="display:none;"><?php esc_html_e('Close', 'beardbalm'); ?></span>
             <span class="menu-hamburger">
               <span></span>

@@ -21,6 +21,7 @@ Commons
 }
 
 ul.menu {
+  // display: flex;
   flex-flow: wrap;
   list-style: none;
   padding: 0;
@@ -51,8 +52,9 @@ Header
   }
 
   // Main Navigation
-  // &__nav {
-  // }
+  &__nav {
+    padding: 2rem 0;
+  }
 
   // Mobile Navigation
   &__nav-mobile {

@@ -48,6 +48,19 @@ function lb_big_image_size_threshold($threshold) {
 add_filter('big_image_size_threshold', 'lb_big_image_size_threshold');
 
 /**
+ * Checks for the presence of WooCommerce in a page
+ */
+function is_woocommerce_url() {
+  if (class_exists('woocommerce')) {
+    if (is_woocommerce() || is_cart() || is_checkout() || is_account_page() || is_wc_endpoint_url()) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+/**
  * Body Class
  */
 

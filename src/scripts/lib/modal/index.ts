@@ -110,6 +110,9 @@ function createModal(props: Props): NodesProps {
     } else {
       const htmlNode = html.cloneNode(true) as HTMLElement;
       htmlNode.removeAttribute('id'); // Remove id to prevent duplicates within the document
+      if (htmlNode.style.display === 'none') {
+        htmlNode.style.display = '';
+      }
       htmlWrapperNode.appendChild(htmlNode);
     }
     bodyInnerNode.appendChild(htmlWrapperNode);

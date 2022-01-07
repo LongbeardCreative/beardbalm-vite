@@ -17,16 +17,13 @@ if (!defined('LB_VERSION')) {
   define('LB_VERSION', '1.1');
 }
 
-
-
 require_once get_template_directory() . '/inc/utils.php';
 require_once get_template_directory() . '/inc/vite.php';
 require_once get_template_directory() . '/inc/wptt-webfont-loader.php';
 require_once get_template_directory() . '/inc/cpt.php';
-// require_once get_template_directory() . '/inc/widgets.php';
-// require_once get_template_directory() . '/inc/template-tags.php';
+require_once get_template_directory() . '/inc/widgets.php';
+require_once get_template_directory() . '/inc/template-tags.php';
 require_once get_template_directory() . '/inc/template-functions.php';
-// require get_template_directory() . '/inc/customizer.php';
 require_once get_template_directory() . '/inc/relevanssi.php';
 require_once get_template_directory() . '/inc/login.php';
 
@@ -48,19 +45,6 @@ add_filter('wptt_get_local_fonts_base_url', function ($url) {
 
 // Enqueue essential scripts
 function beardbalm_scripts() {
-  // Cookie Consent
-  // wp_enqueue_style( 'cookieconsent', get_template_directory_uri() . '/vendor/cookieconsent/cookieconsent.min.css', array(), '' );
-  // wp_enqueue_script( 'cookieconsent', get_template_directory_uri() . '/vendor/cookieconsent/cookieconsent.min.js', array(), '', true );
-  // wp_enqueue_script( 'beardbalm-cookieconsent', get_template_directory_uri() . '/js/cookieconsent.js', array(), LB_VERSION, true );
-
-  // Theme styles and JS
-  // $stylePath = __DIR__ . '/style.css';
-  // $filetime = filemtime($stylePath);
-  // wp_enqueue_style('beardbalm-style', get_stylesheet_uri(), array(), $filetime);
-
-  // $jsPath = __DIR__ . '/src/js/main.js';
-  // $filetimeJS = filemtime($jsPath);
-  // wp_enqueue_script('beardbalm-js', get_template_directory_uri() . '/src/js/main.js', array('jquery'), $filetimeJS, true);
 
   // Web font
   // Load the webfont.
@@ -86,6 +70,25 @@ function beardbalm_scripts() {
 }
 add_action('wp_enqueue_scripts', 'beardbalm_scripts');
 
+/**
+ * Handle jQuery loads
+ */
+
+// Dequeue jQuery by default
+add_action('wp_enqueue_scripts', function () {
+  if (
+    !is_admin() &&
+    !is_woocommerce_url()
+  ) {
+    wp_dequeue_script('jquery');
+    wp_deregister_script('jquery');
+  }
+});
+
+// Load jQuery whenever there's Gravity Forms
+add_action('gform_enqueue_scripts', function () {
+  wp_enqueue_script('jquery', includes_url('/js/jquery/jquery.min.js'));
+});
 
 /**
  * Remove the migrate script from the list of jQuery dependencies.

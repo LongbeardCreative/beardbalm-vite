@@ -44,22 +44,6 @@ function isDev(string $entry): bool {
   return $exists = !$error;
 }
 
-
-// Helpers to print tags
-
-// function jsTag(string $entry): string {
-//   $url = isDev($entry)
-//     ? 'http://localhost:3000/' . $entry
-//     : assetUrl($entry);
-
-//   if (!$url) {
-//     return '';
-//   }
-return '<script type="module" crossorigin src="'
-  . $url
-  . '"></script>';
-// }
-
 function register($entry) {
   $url = isDev($entry)
     ? 'http://localhost:3000/' . $entry
@@ -72,7 +56,7 @@ function register($entry) {
   // wp_register_script("module/beardbalm/$entry", $url, false, true);
   // wp_enqueue_script("module/beardbalm/$entry");
 
-  if ($entry == 'login.ts') {
+  if ($entry == 'login.ts' || $entry == 'login.js') {
     // Special treatment for login
     add_action('login_head', function () use (&$url) {
       echo '<script type="module" crossorigin src="' . $url . '"></script>';

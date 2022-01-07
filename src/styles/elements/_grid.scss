@@ -12,8 +12,8 @@ $flexboxgrid-outer-margin: var(--container-margin) !default;
 // Create or remove breakpoints for your project
 // Syntax:
 // name SIZErem CONTAINERrem,
-$flexboxgrid-breakpoints: sm $tablet-sm 100%, md $laptop-sm 100%,
-  lg $laptop-lg 100% !default;
+$flexboxgrid-breakpoints: sm list.nth($tablet-sm, 2) 100%,
+  md list.nth($laptop-sm, 2) 100%, lg list.nth($laptop-lg, 2) 100% !default; // using list.nth ($var, 2) to strip min-width
 $flexboxgrid-max-width: 1200px !default;
 
 // -- Stop editing -- //
@@ -141,6 +141,18 @@ $name: xs;
   order: 1;
 }
 
+.hide-#{$name} {
+  display: none;
+}
+
+.show-#{$name} {
+  display: block;
+
+  &--flex {
+    display: flex;
+  }
+}
+
 @each $breakpoint in $flexboxgrid-breakpoints {
   $name: list.nth($breakpoint, 1);
   $size: list.nth($breakpoint, 2);
@@ -216,6 +228,18 @@ $name: xs;
 
     .last-#{$name} {
       order: 1;
+    }
+
+    .hide-#{$name} {
+      display: none;
+    }
+
+    .show-#{$name} {
+      display: block;
+
+      &--flex {
+        display: flex;
+      }
     }
   }
 }

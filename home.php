@@ -41,7 +41,7 @@ get_header();
 		<section class="container row section-m-b">
 			<div class="col-xs-12 col-lg-10 col-lg-offset-1">
 				<h2>Gravity Forms</h2>
-				<?php echo do_shortcode('[gravityform id="2" ajax="true" title="false" description="false"]'); ?>
+				<?php echo do_shortcode('[gravityform id="1" ajax="true" title="false" description="false"]'); ?>
 			</div>
 		</section>
 		<section class="container row section-m-b">
@@ -55,12 +55,16 @@ get_header();
 		</section>
 		<section class="container row section-m-b">
 			<div class="col-xs-12 col-lg-10 col-lg-offset-1">
-				<h2 id="modal-title">Modal</h2>
+				<h2>Modal</h2>
 				<ul>
 					<li>With function call: <button type="button" onclick="modal({ youtube: { videoID: 'HM9r6Q_jFCE' } })">Open Modal</button></li>
 					<li>With HTML API: <a href="http://www.youtube.com/watch?v=HM9r6Q_jFCE" data-modal>Open</a></li>
-					<li>Custom HTML content: <button type="button" onclick="modal({ html: document.querySelector('#modal-title') })">Open Modal (HTML)</button></li>
+					<li>Custom HTML content: <button type="button" onclick="modal({ html: document.querySelector('#modal-html') })">Open Modal (HTML)</button></li>
 				</ul>
+				<div id="modal-html" style="display: none">
+					<h2>Modal HTML</h2>
+					<p>Lorem ipsum dolor sit amet consectetur adipiscing elit</p>
+				</div>
 			</div>
 		</section>
 		<section class="container row section-m-b">
@@ -94,7 +98,7 @@ get_header();
 						'content'	=> '<p>Amet consectetur adipiscing elit</p>'
 					),
 				);
-				get_template_part('template-parts/tabs/tabs', '', array('data' => $data));
+				get_template_part('template-parts/tabs', '', array('data' => $data));
 				?>
 			</div>
 		</section>
