@@ -15,6 +15,7 @@ import '../styles/style.scss';
 // Scripts
 import accessibility from './lib/accessibility';
 import accordions from './lib/accordions';
+import horizontalScroll from './lib/horizontalScroll';
 import modal from './lib/modal';
 import navigation from './lib/navigation';
 import readMore from './lib/readMore';
@@ -30,8 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
   accordions();
   tabs();
   readMore();
-  // horizontalScroll('.lb-tabs .tabs');
-  // slickSlider('.some-slider');
+  horizontalScroll('.lb-tabs .tabs');
   modal();
   slider();
 });
