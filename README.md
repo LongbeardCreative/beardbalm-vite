@@ -42,10 +42,70 @@ Vite.js config is inspired by [vite-php-setup](https://github.com/andrefelipe/vi
   npm run build
   ```
 
-## Features
+## JS / TS
 
-(Work in progress)
+JS / TS files are found under `/src/scripts` folder. All direct children of this folder will become "entrypoints" when bundled by vite, i.e. become separate files. Only `login.ts` and `main.ts` are by default enqueued on WordPress. If you create another entrypoint, you're responsible to enqueue that file via `functions.php` under `beardbalm_scripts()` function.
 
-## Know Issues
+For instance, if you have a new entrypoint called `home.ts`, which you'd like to load only on the homepage, simply use the `vite()` utility function, like the following:
+
+```php
+// functions.php
+
+function beardbalm_scripts() {
+  // ... other enqueues
+
+  if (is_home()) {
+    vite('home.ts');
+  }
+}
+add_action('wp_enqueue_scripts', 'beardbalm_scripts');
+```
+
+### The `lib` folder
+
+Most scripts under the `lib` folder (except for project-specific scripts) are not intended to be edited directly, although at this early stage, it might be necessary. The goal is to turn those scripts into NPM packages in the future, so that it's easier to test, make updates / patches across projects.
+
+### jQuery
+
+The use of jQuery is discouraged by many in the recent years. Vanilla JS is progressing quickly and becomes more performant over the years, while being able to achieve most things jQuery can with ease.
+
+See the following blog for reference:
+
+- [The performance impact of using jQuery in WordPress themes](https://make.wordpress.org/themes/2021/10/04/the-performance-impact-of-using-jquery-in-wordpress-themes/)
+
+Handy reference to convert a jQuery function into a Vanilla one:
+
+- [youmightnotneedjquery.com](https://youmightnotneedjquery.com/)
+
+By default, jQuery is _dequeued_ on the frontend of this theme, with some exceptions (e.g. WooCommerce Pages, Gravity Forms usage). If you need to use jQuery on a certain page, you will need to specify that intentionally by adding a condition onto the dequeue function:
+
+```php
+// functions.php
+
+add_action('wp_enqueue_scripts', function () {
+  if (
+    !is_admin() &&
+    !is_woocommerce_url() &&
+    // Add more conditions here,
+    // e.g. if you want to load jQuery on a certain page template,
+    // tell this conditional to not dequeue jQuery on that template
+    !is_page_template('page-templates/some-template.php')
+  ) {
+    wp_dequeue_script('jquery');
+    wp_deregister_script('jquery');
+  }
+});
+```
+
+## CSS / SCSS
+
+CSS / SCSS files are found under `/src/styles`. All entrypoints must be imported into a JS / TS entrypoint, as otherwise Vite won't work correctly. For instance, `style.scss` is imported into `main.ts` like so:
+
+```ts
+import '../styles/style.scss';
+// ... other imports
+```
+
+## Known Issues
 
 (Work in progress)
