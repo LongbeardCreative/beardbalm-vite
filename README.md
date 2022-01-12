@@ -97,11 +97,35 @@ add_action('wp_enqueue_scripts', function () {
 });
 ```
 
+### Third-party packages
+
+It's recommended to use third-party packages that don't depend on jQuery. If they support installation via NPM, that's also the recommended way as usually tree-shaking is available on bigger libraries.
+
+For example, to install [lightGallery](https://github.com/sachinchoolur/lightGallery), install via NPM as follows:
+
+```shell
+npm install --save lightgallery
+```
+
+And import the package into an entrypoint:
+
+```ts
+// main.ts
+
+import lightGallery from 'lightgallery';
+
+// Plugins
+import lgThumbnail from 'lightgallery/plugins/thumbnail';
+import lgZoom from 'lightgallery/plugins/zoom';
+```
+
 ## CSS / SCSS
 
 CSS / SCSS files are found under `/src/styles`. All entrypoints must be imported into a JS / TS entrypoint, as otherwise Vite won't work correctly. For instance, `style.scss` is imported into `main.ts` like so:
 
 ```ts
+// main.ts
+
 import '../styles/style.scss';
 // ... other imports
 ```
