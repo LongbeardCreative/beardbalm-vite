@@ -358,11 +358,11 @@ function lb_custom_excerpt_length($length) {
  */
 
 function get_the_svg($icon, $title = '', $title_id = '', $desc = '') {
-  if (!file_exists(get_template_directory() . '/assets/icons/' . $icon . '.svg')) {
+  if (!file_exists(get_template_directory() . '/src/assets/icons/' . $icon . '.svg')) {
     return false;
   }
 
-  $icon_folder = get_template_directory_uri() . '/assets/icons/';
+  $icon_folder = get_template_directory_uri() . '/src/assets/icons/';
   $icon_path = $icon_folder . $icon . '.svg';
 
   if (strpos(get_site_url(), 'longbeardco.com') !== false) {
@@ -450,7 +450,7 @@ function the_svg($icon, $title = '', $titleId = '', $desc = '') {
  * @return string Absolute path to image file
  */
 function get_the_theme_image_src($filename) {
-  return get_template_directory_uri() . '/assets/images/' . $filename;
+  return get_template_directory_uri() . '/src/assets/images/' . $filename;
 }
 
 /**
