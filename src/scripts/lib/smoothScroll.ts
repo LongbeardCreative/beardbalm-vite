@@ -1,9 +1,9 @@
 function handleClick(e: Event) {
   const currentTarget = e.currentTarget as HTMLAnchorElement;
   const isSameUrl =
-    location.pathname.replace(/^\//, '') ===
+    window.location.pathname.replace(/^\//, '') ===
       currentTarget.pathname.replace(/^\//, '') &&
-    location.hostname == currentTarget.hostname;
+    window.location.hostname === currentTarget.hostname;
 
   if (!isSameUrl) {
     return;
@@ -13,7 +13,7 @@ function handleClick(e: Event) {
   const { hash } = currentTarget;
 
   // Target can have the specified ID or name attribute
-  let target =
+  const target =
     (document.querySelector(hash) as HTMLElement) ||
     (document.querySelector(`[name=${hash.slice(1)}]`) as HTMLElement);
 

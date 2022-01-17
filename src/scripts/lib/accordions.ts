@@ -1,10 +1,10 @@
 import { slideDown, slideUp } from '../utils/helpers';
 
-export default function accordions(el: string = '.accordions') {
+export default function accordionsInit(el: string = '.accordions') {
   const elements = document.querySelectorAll(el);
 
   // 1. Loop through all accordion sets (accordions)
-  for (let i = 0; i < elements.length; i++) {
+  for (let i = 0; i < elements.length; i += 1) {
     const accordionGroup = elements[i];
 
     if (accordionGroup.classList.contains('accordions-initialized')) return;
@@ -13,7 +13,7 @@ export default function accordions(el: string = '.accordions') {
     const accordions = accordionGroup.querySelectorAll('.accordion');
 
     // 2. Loop through all accordion within the set
-    for (let j = 0; j < accordions.length; j++) {
+    for (let j = 0; j < accordions.length; j += 1) {
       const accordion = accordions[j];
       const trigger = accordion.querySelector('[aria-controls]');
 
@@ -43,7 +43,7 @@ export default function accordions(el: string = '.accordions') {
 
         if (!allowMultiple) {
           // 4. Close all other accordions if necessary
-          for (let k = 0; k < accordions.length; k++) {
+          for (let k = 0; k < accordions.length; k += 1) {
             if (
               accordions[k] !== target.closest('.accordion') &&
               accordions[k].classList.contains('active')

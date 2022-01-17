@@ -106,7 +106,7 @@ function initSlider(slider: HTMLElement, options: InitProps) {
   window.addEventListener('resize', handleWindowResize);
 }
 
-export default function slider(props?: Props) {
+export default function sliderInit(props?: Props) {
   // 1. Merge passed props with default props
   const options = {
     ...defaultProps,

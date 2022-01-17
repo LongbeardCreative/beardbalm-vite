@@ -148,20 +148,20 @@ function setModalCloseListeners({ node, innerNode, closeNode }: NodesProps) {
     const { target } = e;
     if (!innerNode.contains(target as Node)) {
       removeModal({ node, innerNode });
-      return cleanupListeners();
+      return cleanupListeners(); // eslint-disable-line no-use-before-define
     }
   };
 
   const handleKeyup = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
       removeModal({ node, innerNode });
-      return cleanupListeners();
+      return cleanupListeners(); // eslint-disable-line no-use-before-define
     }
   };
 
   const handleCloseButtonClick = () => {
     removeModal({ node, innerNode });
-    return cleanupListeners();
+    return cleanupListeners(); // eslint-disable-line no-use-before-define
   };
 
   const cleanupListeners = () => {
@@ -201,10 +201,18 @@ async function addModal({ node, innerNode, closeNode }: NodesProps) {
   return node;
 }
 
+function init(props: Props) {
+  // const modalProps = props || inferProps
+  const { node, innerNode, closeNode } = createModal(props);
+  addModal({ node, innerNode, closeNode });
+
+  return node;
+}
+
 function initHTMLApi() {
   const elements = document.querySelectorAll('[data-modal]');
   elements.forEach((el) => {
-    el.addEventListener('click', function (e) {
+    el.addEventListener('click', (e) => {
       const currentTarget = e.currentTarget as HTMLAnchorElement;
       const href =
         currentTarget.href || currentTarget.getAttribute('data-href');
@@ -222,18 +230,8 @@ function initHTMLApi() {
           init({ youtube: { videoID } });
         }
       }
-
-      return;
     });
   });
-}
-
-function init(props: Props) {
-  // const modalProps = props || inferProps
-  const { node, innerNode, closeNode } = createModal(props);
-  addModal({ node, innerNode, closeNode });
-
-  return node;
 }
 
 export default function modal() {

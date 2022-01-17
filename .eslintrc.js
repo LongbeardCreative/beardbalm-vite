@@ -52,15 +52,9 @@ module.exports = {
     'comma-dangle': 0,
     'max-len': 0,
     'import/extensions': 0,
-    'import/resolver': {
-      // alias: {
-      //   map: [['@', './src']],
-      // },
-      node: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
-      },
-    },
+
     'no-underscore-dangle': 0,
+    'no-undef': 0,
     'consistent-return': 0,
     radix: 0,
     'no-shadow': [
@@ -92,5 +86,15 @@ module.exports = {
     '@typescript-eslint/comma-dangle': ['off'],
     'prettier/prettier': 'error',
   },
-  plugins: ['html', 'prettier'],
+  settings: {
+    'import/resolver': {
+      // alias: {
+      //   map: [['@', './src']],
+      // },
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
+    },
+  },
+  plugins: ['html', 'import', 'prettier'],
 };

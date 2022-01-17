@@ -1,8 +1,8 @@
-export default function tabs() {
+export default function tabsInit() {
   const tabContainers = document.querySelectorAll('.lb-tabs'); // tabs container class
   const activeClass = 'active';
 
-  tabContainers.forEach(function (container) {
+  tabContainers.forEach((container) => {
     const tablist = container.querySelector('[role="tablist"]'); // Select the first one to avoid subtabs
 
     if (!tablist) {
@@ -24,7 +24,7 @@ export default function tabs() {
     }
 
     function setActiveTab(id: string, focus: boolean = true) {
-      tabs.forEach(function (tab) {
+      tabs.forEach((tab) => {
         if (tab.getAttribute('aria-controls') === id) {
           tab.classList.add(`tab--${activeClass}`);
           tab.setAttribute('aria-selected', 'true');
@@ -38,7 +38,7 @@ export default function tabs() {
         }
       });
 
-      tabPanels.forEach(function (tabPanel) {
+      tabPanels.forEach((tabPanel) => {
         if (tabPanel.getAttribute('id') === id) {
           tabPanel.classList.add(`tabpanel--${activeClass}`);
           tabPanel.setAttribute('aria-expanded', 'true');
@@ -137,13 +137,13 @@ export default function tabs() {
 
     function handleKeyboardNavigation(e: KeyboardEvent) {
       // 1. Get active tab
-      const activeTab = [...tabs].find((tab) => {
-        return tab.classList.contains(activeClass);
-      });
+      const activeTab = [...tabs].find((tab) =>
+        tab.classList.contains(activeClass)
+      );
 
       switch (e.key) {
         case 'ArrowRight':
-        case 'ArrowDown':
+        case 'ArrowDown': {
           e.preventDefault();
           const prev = activeTab?.previousElementSibling
             ? activeTab?.previousElementSibling.getAttribute('aria-controls')
@@ -152,8 +152,9 @@ export default function tabs() {
             setActiveTab(prev);
           }
           break;
+        }
         case 'ArrowLeft':
-        case 'ArrowUp':
+        case 'ArrowUp': {
           e.preventDefault();
           const next = activeTab?.nextElementSibling
             ? activeTab?.nextElementSibling.getAttribute('aria-controls')
@@ -161,6 +162,9 @@ export default function tabs() {
           if (next) {
             setActiveTab(next);
           }
+          break;
+        }
+        default:
           break;
       }
     }

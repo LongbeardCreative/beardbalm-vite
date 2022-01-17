@@ -3,16 +3,16 @@ import { slideToggle, unwrap, wrapAll } from '../utils/helpers';
 function readMoreInit(
   eleWrapper: HTMLElement,
   options: { numberToShow: number; viewportSize: number }[],
-  readMore: string = 'Read More',
-  readLess: string = 'View Less'
+  readMoreString: string = 'Read More',
+  readLessString: string = 'View Less'
 ) {
   // sort from smallest to largest
   const sortedSizes = options.sort((a, b) =>
     a.viewportSize < b.viewportSize ? -1 : 1
   );
 
-  const readMoreLabelInactive = readMore;
-  const readMoreLabelActive = readLess;
+  const readMoreLabelInactive = readMoreString;
+  const readMoreLabelActive = readLessString;
 
   // get all the sizes from the object
   const sizes: number[] = [];
@@ -22,60 +22,7 @@ function readMoreInit(
     sizes.push(viewportSize);
   });
 
-  // each ele so everything is relative to each item we call this on
-  window.addEventListener('load', () => readMoreInit(eleWrapper));
-  window.addEventListener('resize', () => readMoreInit(eleWrapper));
-
-  function readMoreInit(eleWrapper: HTMLElement) {
-    const sizeToUse = sizes.filter((num) => window.innerWidth <= num)[0];
-
-    // get the viewport size needed
-    if (sizeToUse !== undefined) {
-      var numberOfElementsToShow = sortedSizes.find(
-        (item) => item.viewportSize == sizeToUse
-      );
-    }
-
-    // if out of size range and read more is active
-    if (!sizeToUse && eleWrapper.classList.contains('active')) {
-      deconstructReadMore(eleWrapper);
-    }
-
-    // if inside of size range and read more is active
-    if (!sizeToUse && eleWrapper.classList.contains('active')) {
-      // check to see if current size is same as before or if changed sizes
-      if (
-        !eleWrapper.classList.contains(sizeToUse.toString()) &&
-        numberOfElementsToShow
-      ) {
-        deconstructReadMore(eleWrapper);
-        constructReadMore(
-          eleWrapper,
-          numberOfElementsToShow.numberToShow,
-          sizeToUse.toString()
-        );
-      }
-    }
-
-    // if size is in range and read more isn't active
-    if (
-      sizeToUse !== undefined &&
-      !eleWrapper.classList.contains('active') &&
-      numberOfElementsToShow
-    ) {
-      constructReadMore(
-        eleWrapper,
-        numberOfElementsToShow.numberToShow,
-        sizeToUse.toString()
-      );
-    }
-  }
-
-  function constructReadMore(
-    eleWrapper: HTMLElement,
-    num: number,
-    className: string
-  ) {
+  function constructReadMore(num: number, className: string) {
     eleWrapper.classList.add('active');
     eleWrapper.classList.add(className);
 
@@ -177,7 +124,7 @@ function readMoreInit(
     viewMoreButton.addEventListener('click', handleButtonClick);
   }
 
-  function deconstructReadMore(eleWrapper: HTMLElement) {
+  function deconstructReadMore() {
     unwrap(eleWrapper.querySelector('.hidden-elements-wrapper'));
     unwrap(eleWrapper.querySelector('.hidden-elements'));
     unwrap(eleWrapper.querySelector('.shown-elements'));
@@ -193,6 +140,55 @@ function readMoreInit(
     });
     eleWrapper.classList.remove('active');
   }
+
+  function init() {
+    const sizeToUse = sizes.filter((num) => window.innerWidth <= num)[0];
+
+    // get the viewport size needed
+    let numberOfElementsToShow;
+
+    if (sizeToUse !== undefined) {
+      numberOfElementsToShow = sortedSizes.find(
+        (item) => item.viewportSize === sizeToUse
+      );
+    }
+
+    // if out of size range and read more is active
+    if (!sizeToUse && eleWrapper.classList.contains('active')) {
+      deconstructReadMore();
+    }
+
+    // if inside of size range and read more is active
+    if (!sizeToUse && eleWrapper.classList.contains('active')) {
+      // check to see if current size is same as before or if changed sizes
+      if (
+        !eleWrapper.classList.contains(sizeToUse.toString()) &&
+        numberOfElementsToShow
+      ) {
+        deconstructReadMore();
+        constructReadMore(
+          numberOfElementsToShow.numberToShow,
+          sizeToUse.toString()
+        );
+      }
+    }
+
+    // if size is in range and read more isn't active
+    if (
+      sizeToUse !== undefined &&
+      !eleWrapper.classList.contains('active') &&
+      numberOfElementsToShow
+    ) {
+      constructReadMore(
+        numberOfElementsToShow.numberToShow,
+        sizeToUse.toString()
+      );
+    }
+  }
+
+  // each ele so everything is relative to each item we call this on
+  window.addEventListener('load', init);
+  window.addEventListener('resize', init);
 }
 
 export default function readMore() {

@@ -29,13 +29,13 @@ export default function navigation() {
     const isClickInside = container.contains(target) || button.contains(target);
 
     if (!isClickInside) {
-      closeMenu();
+      closeMenu(); // eslint-disable-line no-use-before-define
     }
   }
 
   function handleKeyPress(e: KeyboardEvent) {
     if (e.key === 'Escape') {
-      closeMenu();
+      closeMenu(); // eslint-disable-line no-use-before-define
     }
   }
 
