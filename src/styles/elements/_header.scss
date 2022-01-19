@@ -18,12 +18,64 @@ Commons
 
 .menu-item {
   font-weight: bold;
+  list-style: none;
+
+  &-has-children {
+    --arrow-rotate: 0deg;
+
+    position: relative;
+
+    > a {
+      display: inline-flex;
+      position: relative;
+      padding-right: 1.75rem;
+
+      &::after {
+        content: '';
+        background: url(#{$icons-dir}angle-down.svg) no-repeat center center;
+        background-size: contain;
+        height: 1rem;
+        width: 1rem;
+        display: block;
+        position: absolute;
+        z-index: 1;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%) rotate(var(--arrow-rotate));
+        transition: var(--transition);
+      }
+    }
+
+    > .sub-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      box-shadow: var(--shadow-1);
+      padding: var(--size-1);
+      transform: scale(0.9);
+      transform-origin: right top;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition);
+    }
+
+    &.focus,
+    &:hover,
+    &:focus-within {
+      --arrow-rotate: 180deg;
+
+      > .sub-menu {
+        opacity: 1;
+        pointer-events: initial;
+        transform: scale(1);
+      }
+    }
+  }
 }
 
 ul.menu {
   // display: flex;
   flex-flow: wrap;
-  list-style: none;
   padding: 0;
   margin: calc(var(--menu-spacing) * -1);
 
@@ -108,79 +160,6 @@ Header
         > a {
           display: inline-flex;
         }
-
-        &-has-children {
-          display: inline-block;
-
-          // width: 100%;
-
-          > a {
-            display: inline-flex;
-            position: relative;
-            padding-right: 1.75rem;
-
-            &::after {
-              content: '';
-              background: url(#{$icons-dir}angle-down.svg) no-repeat center
-                center;
-              background-size: contain;
-              height: 14px;
-              width: 14px;
-              display: block;
-              position: absolute;
-              z-index: 1;
-              right: 0;
-              top: 50%;
-              transform: translateY(-50%);
-              transition: var(--transition);
-            }
-          }
-
-          &.focus > a::after {
-            transform: translateY(-50%) rotate(180deg);
-          }
-        }
-      }
-
-      .sub-menu {
-        list-style: none;
-
-        // display: none;
-        left: 0;
-        padding-top: 0.5rem;
-
-        // @include breakpoint($tablet-sm) {
-        //   display: block !important;
-        // }
-
-        // > .menu-item {
-        //   padding: 5px 0;
-
-        //   > a {
-        //     font-weight: normal;
-        //     color: rgba(var(--white), 0.7);
-
-        //     > span {
-        //       color: inherit;
-        //     }
-        //   }
-
-        //   &-has-children {
-        //     > a {
-        //       padding-right: 0;
-
-        //       &::after {
-        //         content: none;
-        //       }
-        //     }
-        //   }
-        // }
-
-        // .sub-menu {
-        //   display: block !important;
-        //   padding-left: 1rem;
-        //   padding-top: 0;
-        // }
       }
     }
   }
