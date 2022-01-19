@@ -18,7 +18,7 @@ add_filter('login_headertext', function (): string {
  * Enqueue Login CSS
  */
 function lb_login_stylesheet() {
-  require_once get_theme_file_path('inc/vite.php');
+  require_once get_theme_file_path('includes/vite.php');
   Vite::load('login.ts');
 }
 add_action('login_enqueue_scripts', 'lb_login_stylesheet');
