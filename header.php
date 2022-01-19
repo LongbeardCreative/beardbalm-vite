@@ -59,10 +59,6 @@
 		echo "\n" . $pixel;
 	}
 	?>
-
-	<?php if (get_field('cron', 'option') && !is_admin() && is_admin_bar_showing()) {
-		wp_enqueue_script('dev-cron', get_template_directory_uri() . '/js/admin/dev-cron.js', array(), LB_VERSION, true);
-	} ?>
 </head>
 
 <body <?php body_class(); ?>>
