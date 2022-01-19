@@ -20,10 +20,7 @@ add_filter('login_headertext', 'lb_login_logo_url_title');
  * Enqueue Login CSS
  */
 function lb_login_stylesheet() {
-  // $filetime = filemtime(__DIR__ . '/login.css');
-  // wp_enqueue_style('lb-login', get_template_directory_uri() . '/login.css', array(), $filetime);
   require_once get_theme_file_path('inc/vite.php');
-  vite('login.ts');
-  print_r(vite('login.ts'));
+  Vite::load('login.ts');
 }
 add_action('login_enqueue_scripts', 'lb_login_stylesheet');

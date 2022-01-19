@@ -1,29 +1,8 @@
 <?php
-// Helpers here serve as example. Change to suit your needs.
 
-// For a real-world example check here:
-// https://github.com/wp-bond/bond/blob/master/src/Tooling/Vite.php
-// https://github.com/wp-bond/boilerplate/tree/master/app/themes/boilerplate
+define('IS_DEVELOPMENT', is_dev());
 
-// on the links above there is also example for @vitejs/plugin-legacy
-
-
-
-// Prints all the html entries needed for Vite
-
-function vite(string $entry): void {
-  // return "\n" . jsTag($entry)
-  //   . "\n" . jsPreloadImports($entry)
-  //   . "\n" . cssTag($entry);
-  jsPreloadImports($entry);
-  cssTag($entry);
-  register($entry);
-}
-
-
-// Some dev/prod mechanism would exist in your project
-
-function isDev(string $entry): bool {
+function is_dev(string $entry = 'main.ts'): bool {
   // This method is very useful for the local server
   // if we try to access it, and by any means, didn't started Vite yet
   // it will fallback to load the production files from manifest
@@ -44,96 +23,120 @@ function isDev(string $entry): bool {
   return $exists = !$error;
 }
 
-function register($entry) {
-  $url = isDev($entry)
-    ? 'http://localhost:3000/' . $entry
-    : assetUrl($entry);
-
-  if (!$url) {
-    return '';
+add_filter('script_loader_tag', function ($tag, $handle) {
+  // Check if $handle starts with module/
+  if (explode('/', $handle)[0] != 'module') {
+    return $tag;
   }
 
-  // wp_register_script("module/beardbalm/$entry", $url, false, true);
-  // wp_enqueue_script("module/beardbalm/$entry");
+  // change the script tag by adding type="module" and return it.
+  $tag = str_replace('<script ', '<script type="module" crossorigin ', $tag);
+  return $tag;
+}, 10, 2);
 
-  if ($entry == 'login.ts' || $entry == 'login.js') {
-    // Special treatment for login
-    add_action('login_head', function () use (&$url) {
-      echo '<script type="module" crossorigin src="' . $url . '"></script>';
+class Vite {
+
+  public static function base_path(): string {
+    return get_template_directory_uri() . '/dist/';
+  }
+
+  public static function load(string $entry = 'main.ts'): void {
+    self::js_preload_imports($entry);
+    self::css_tag($entry);
+    self::register($entry);
+  }
+
+  public static function register(string $entry): void {
+    $url = IS_DEVELOPMENT
+      ? 'http://localhost:3000/' . $entry
+      : self::asset_url($entry);
+
+    if (!$url) {
+      return;
+    }
+
+    if ($entry == 'login.ts' || $entry == 'login.js') {
+      // Special treatment for login
+      add_action('login_head', function () use (&$url) {
+        echo '<script type="module" crossorigin src="' . $url . '"></script>';
+      });
+    } else {
+      wp_register_script("module/beardbalm/$entry", $url, false, true);
+      wp_enqueue_script("module/beardbalm/$entry");
+    }
+  }
+
+  private static function js_preload_imports(string $entry): void {
+    if (IS_DEVELOPMENT) {
+      return;
+    }
+
+    $res = '';
+
+    foreach (self::imports_urls($entry) as $url) {
+      $res .= '<link rel="modulepreload" href="' . $url . '">';
+    }
+
+    add_action('wp_head', function () use (&$res) {
+      echo $res;
     });
   }
 
-  add_action('wp_head', function () use (&$url) {
-    echo '<script type="module" crossorigin src="' . $url . '"></script>';
-  });
-}
+  private static function css_tag(string $entry): void {
+    if (IS_DEVELOPMENT) {
+      return;
+    }
 
-function jsPreloadImports(string $entry): void {
-  if (isDev($entry)) {
-    return;
-  }
-
-  $res = '';
-  foreach (importsUrls($entry) as $url) {
-    $res .= '<link rel="modulepreload" href="' . $url . '">';
-  }
-
-  add_action('wp_head', function () use (&$res) {
-    echo $res;
-  });
-  // return $res;
-}
-
-function cssTag(string $entry): void {
-  // not needed on dev, it's injected by Vite
-  if (isDev($entry)) {
-    return;
-  }
-
-  $tags = '';
-  foreach (cssUrls($entry) as $url) {
-    wp_register_style("beardbalm/$entry", $url);
-    wp_enqueue_style("beardbalm/$entry", $url);
-  }
-}
-
-
-// Helpers to locate files
-
-function getManifest(): array {
-  $content = file_get_contents(get_template_directory_uri() . '/dist/manifest.json');
-
-  return json_decode($content, true);
-}
-
-function assetUrl(string $entry): string {
-  $manifest = getManifest();
-
-  return isset($manifest[$entry])
-    ? get_template_directory_uri() . '/dist/' . $manifest[$entry]['file']
-    : '';
-}
-
-function importsUrls(string $entry): array {
-  $urls = [];
-  $manifest = getManifest();
-
-  if (!empty($manifest[$entry]['imports'])) {
-    foreach ($manifest[$entry]['imports'] as $imports) {
-      $urls[] = get_template_directory_uri() . '/dist/' . $manifest[$imports]['file'];
+    foreach (self::css_urls($entry) as $url) {
+      wp_register_style("beardbalm/$entry", $url);
+      wp_enqueue_style("beardbalm/$entry", $url);
     }
   }
-  return $urls;
-}
 
-function cssUrls(string $entry): array {
-  $urls = [];
-  $manifest = getManifest();
+  private static function get_manifest(): array {
+    // $context_opts = array(
+    //   "ssl" => array(
+    //     "verify_peer" => false,
+    //     "verify_peer_name" => false,
+    //   ),
+    // );
+    $content = file_get_contents(
+      self::base_path() . 'manifest.json'
+      // , false, stream_context_create($context_opts)
+    );
 
-  if (!empty($manifest[$entry]['css'])) {
-    foreach ($manifest[$entry]['css'] as $file) {
-      $urls[] = get_template_directory_uri() . '/dist/' . $file;
-    }
+    return json_decode($content, true);
   }
-  return $urls;
+
+  private static function asset_url(string $entry): string {
+    $manifest = self::get_manifest();
+
+    return isset($manifest[$entry])
+      ? self::base_path() . $manifest[$entry]['file']
+      : '';
+  }
+
+  private static function imports_urls(string $entry): array {
+    $urls = [];
+    $manifest = self::get_manifest();
+
+    if (!empty($manifest[$entry]['imports'])) {
+      foreach ($manifest[$entry]['imports'] as $imports) {
+        $urls[] = self::base_path() . $manifest[$imports]['file'];
+      }
+    }
+    return $urls;
+  }
+
+  private static function css_urls(string $entry): array {
+    $urls = [];
+    $manifest = self::get_manifest();
+
+    if (!empty($manifest[$entry]['css'])) {
+      foreach ($manifest[$entry]['css'] as $file) {
+        $urls[] = self::base_path() . $file;
+      }
+    }
+    return $urls;
+  }
 }

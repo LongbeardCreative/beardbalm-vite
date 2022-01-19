@@ -11,6 +11,8 @@
  * @url https://www.longbeard.com/
  */
 
+$root_dir = get_template_directory();
+
 // Define Theme Version
 if (!defined('LB_VERSION')) {
   // Replace the version number of the theme on each release.
@@ -56,7 +58,7 @@ function beardbalm_scripts() {
   );
 
   // Main Scripts & Styles
-  vite('main.ts');
+  Vite::load('main.ts');
 
   if (is_singular() && comments_open() && get_option('thread_comments')) {
     wp_enqueue_script('comment-reply');
