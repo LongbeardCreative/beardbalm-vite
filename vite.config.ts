@@ -43,7 +43,7 @@ export default defineConfig({
       // for example:
       // __dirname + "/(app|config|views)/**/*.php",
       // using this for our example:
-      `${__dirname}/*.php`,
+      `${__dirname}/**/*.php`,
     ]),
   ],
 
