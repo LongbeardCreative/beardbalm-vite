@@ -18,8 +18,8 @@ import fs from 'fs';
 const root = './src/scripts';
 
 function getTopLevelFiles(): Record<string, string> {
-  let topLevelFiles = fs.readdirSync(path.resolve(__dirname, root));
-  let files: { [key: string]: string } = {};
+  const topLevelFiles = fs.readdirSync(path.resolve(__dirname, root));
+  const files: { [key: string]: string } = {};
   topLevelFiles.forEach((file) => {
     const isFile = fs.lstatSync(path.resolve(root, file)).isFile();
     if (
@@ -84,12 +84,4 @@ export default defineConfig({
       protocol: 'ws',
     },
   },
-
-  // required for in-browser template compilation
-  // https://v3.vuejs.org/guide/installation.html#with-a-bundler
-  // resolve: {
-  //   alias: {
-  //     vue: "vue/dist/vue.esm-bundler.js",
-  //   },
-  // },
 });

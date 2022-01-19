@@ -12,13 +12,13 @@ function is_dev(string $entry = 'main.ts'): bool {
   if ($exists !== null) {
     return $exists;
   }
-  $handle = curl_init('http://localhost:3000/' . $entry);
-  curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-  curl_setopt($handle, CURLOPT_NOBODY, true);
 
-  curl_exec($handle);
-  $error = curl_errno($handle);
-  curl_close($handle);
+  $ch = curl_init('http://localhost:3000/' . $entry);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($ch, CURLOPT_NOBODY, true);
+  curl_exec($ch);
+  $error = curl_errno($ch);
+  curl_close($ch);
 
   return $exists = !$error;
 }
@@ -29,8 +29,10 @@ add_filter('script_loader_tag', function ($tag, $handle) {
     return $tag;
   }
 
-  // change the script tag by adding type="module" and return it.
-  $tag = str_replace('<script ', '<script type="module" crossorigin ', $tag);
+  $attrs = 'type="module"';
+  $attrs .= IS_DEVELOPMENT ? ' crossorigin' : '';
+
+  $tag = str_replace("<script ", "<script $attrs ", $tag);
   return $tag;
 }, 10, 2);
 
@@ -94,18 +96,21 @@ class Vite {
   }
 
   private static function get_manifest(): array {
-    // $context_opts = array(
-    //   "ssl" => array(
-    //     "verify_peer" => false,
-    //     "verify_peer_name" => false,
-    //   ),
-    // );
-    $content = file_get_contents(
-      self::base_path() . 'manifest.json'
-      // , false, stream_context_create($context_opts)
-    );
+    $url = self::base_path() . 'manifest.json';
 
-    return json_decode($content, true);
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($ch, CURLOPT_HEADER, false);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_REFERER, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3000); // 3 sec.
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10000); // 10 sec.
+    $data = curl_exec($ch);
+    curl_close($ch);
+
+    return json_decode($data, true);
   }
 
   private static function asset_url(string $entry): string {
