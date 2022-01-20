@@ -1,5 +1,22 @@
 <?php
 
+function file_get_contents_ssl(string $url) {
+  $ch = curl_init();
+  curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+  curl_setopt($ch, CURLOPT_HEADER, false);
+  curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+  curl_setopt($ch, CURLOPT_URL, $url);
+  curl_setopt($ch, CURLOPT_REFERER, $url);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+  curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3000); // 3 sec.
+  curl_setopt($ch, CURLOPT_TIMEOUT, 10000); // 10 sec.
+  $data = curl_exec($ch);
+  curl_close($ch);
+
+  return $data;
+}
+
+
 /**
  * Phone to URL helper
  */
@@ -64,7 +81,7 @@ function get_the_svg($icon, $title = '', $title_id = '', $desc = '') {
     ]);
     $svg = file_get_contents($icon_path, false, $context);
   } else {
-    $svg = file_get_contents($icon_path);
+    $svg = file_get_contents_ssl($icon_path);
   }
 
   if (!$svg) :
