@@ -39,7 +39,7 @@ add_filter('body_class', function (array $classes): array {
 function lb_search_form(string $form): string {
   $form = '<form role="search" method="get" id="searchform" class="searchform" action="' . home_url('/') . '" >
     <div><label class="screen-reader-text" for="s">' . __('Search for:') . '</label>
-    <input type="text" value="" placeholder="Search..." name="s" id="s" />
+    <input type="search" value="" placeholder="Search..." name="s" id="s" />
     <button class="button" type="submit" id="searchsubmit" value="Search">Search</button>
     </div>
   </form>';
