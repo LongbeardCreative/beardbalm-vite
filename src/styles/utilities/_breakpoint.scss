@@ -20,9 +20,16 @@ $mobile-only: max-width 767px;
   $key: list.nth($breakpoint, 1);
   $value: list.nth($breakpoint, 2);
 
-  @if $key == 'min-width' or $key == 'max-width' {
+  @if $key == 'min-width' {
     // Prints a media query based on the value
     @media (min-width: $value) {
+      @content;
+    }
+  }
+
+  // Try max-width media query set
+  @else if $key == 'max-width' {
+    @media (max-width: $value) {
       @content;
     }
   }
