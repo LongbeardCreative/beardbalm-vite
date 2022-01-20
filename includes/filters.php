@@ -4,7 +4,7 @@
  * Prevent WordPress from scaling extremely large images
  * Large images often used as background on VO's website
  */
-add_filter('big_image_size_threshold', function (int $threshold): mixed {
+add_filter('big_image_size_threshold', function (int $threshold) {
   $current_user = wp_get_current_user();
   $allowed_users = array('kevin-lb', 'patrick-lb', 'lbadmin');
 
