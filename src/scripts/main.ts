@@ -4,14 +4,6 @@
 //   import("vite/modulepreload-polyfill");
 // }
 
-/**
- * Styles
- *
- * It is necessary to import styles to "link" a PHP page with Vite.js client
- * Without this, liveReload will not work
- */
-import '../styles/style.scss';
-
 // Scripts
 import accessibility from './lib/accessibility';
 import accordions from './lib/accordions';
@@ -22,6 +14,14 @@ import readMore from './lib/readMore';
 import slider from './lib/slider';
 import smoothScroll from './lib/smoothScroll';
 import tabs from './lib/tabs';
+
+/**
+ * Styles
+ *
+ * It is necessary to import styles to "link" a PHP page with Vite.js client
+ * Without this, liveReload will not work
+ */
+import '../styles/style.scss';
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log('JMJ');
