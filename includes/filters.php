@@ -51,6 +51,13 @@ add_filter('get_search_form', 'lb_search_form');
 /**
  * Custom excerpt length
  */
-// add_filter('excerpt_length', function () {
-//   return 20;
-// });
+add_filter('excerpt_length', function () {
+  return 20;
+});
+
+/**
+ * Custom excerpt more
+ */
+add_filter('excerpt_more', function () {
+  return ' ... ';
+});
