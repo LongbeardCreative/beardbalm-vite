@@ -36,6 +36,8 @@ export function wrapAll(
   //    after each loop.
   //  - If nodes is a NodeList, each node is automatically removed from
   //    the NodeList when it is removed from its parent with appendChild.
+
+  // eslint-disable-next-line no-plusplus
   for (let i = 0; nodes.length - i; wrapper.firstChild === nodes[0] && i++) {
     wrapper.appendChild(nodes[i]);
   }
@@ -60,6 +62,7 @@ export function formatCurrency(number: number) {
       currency: 'USD',
     }).format(number);
   }
+  return null;
 }
 
 // Vanilla JS slide up animation
@@ -68,14 +71,15 @@ export function slideUp(target: HTMLElement, duration: number = 250) {
   target.style.transitionDuration = `${duration}ms`;
   target.style.boxSizing = 'border-box';
   target.style.height = `${target.offsetHeight}px`;
-  target.offsetHeight;
-  target.style.overflow = 'hidden';
-  target.style.height = 0;
-  target.style.paddingTop = 0;
-  target.style.paddingBottom = 0;
-  target.style.marginTop = 0;
-  target.style.marginBottom = 0;
-  window.setTimeout(() => {
+  setTimeout(() => {
+    target.style.overflow = 'hidden';
+    target.style.height = '0';
+    target.style.paddingTop = '0';
+    target.style.paddingBottom = '0';
+    target.style.marginTop = '0';
+    target.style.marginBottom = '0';
+  }, 0);
+  setTimeout(() => {
     target.style.display = 'none';
     target.style.removeProperty('height');
     target.style.removeProperty('padding-top');
@@ -96,21 +100,22 @@ export function slideDown(target: HTMLElement, duration: number = 250) {
   target.style.display = display;
   const height = target.offsetHeight;
   target.style.overflow = 'hidden';
-  target.style.height = 0;
-  target.style.paddingTop = 0;
-  target.style.paddingBottom = 0;
-  target.style.marginTop = 0;
-  target.style.marginBottom = 0;
-  target.offsetHeight;
+  target.style.height = '0px';
+  target.style.paddingTop = '0px';
+  target.style.paddingBottom = '0px';
+  target.style.marginTop = '0px';
+  target.style.marginBottom = '0px';
   target.style.boxSizing = 'border-box';
   target.style.transitionProperty = 'height, margin, padding';
   target.style.transitionDuration = `${duration}ms`;
-  target.style.height = `${height}px`;
-  target.style.removeProperty('padding-top');
-  target.style.removeProperty('padding-bottom');
-  target.style.removeProperty('margin-top');
-  target.style.removeProperty('margin-bottom');
-  window.setTimeout(() => {
+  setTimeout(() => {
+    target.style.height = `${height}px`;
+    target.style.removeProperty('padding-top');
+    target.style.removeProperty('padding-bottom');
+    target.style.removeProperty('margin-top');
+    target.style.removeProperty('margin-bottom');
+  }, 0);
+  setTimeout(() => {
     target.style.removeProperty('height');
     target.style.removeProperty('overflow');
     target.style.removeProperty('transition-duration');
@@ -133,9 +138,12 @@ export function deviceHasTouchScreen(): boolean {
     if ('maxTouchPoints' in navigator) {
       hasTouchScreen = navigator.maxTouchPoints > 0;
     } else if ('msMaxTouchPoints' in navigator) {
+      // @ts-expect-error
       hasTouchScreen = navigator.msMaxTouchPoints > 0;
     } else {
-      const mQ = window.matchMedia && matchMedia('(pointer:coarse)');
+      const mQ =
+        typeof window.matchMedia !== 'undefined' &&
+        window.matchMedia('(pointer:coarse)');
       if (mQ && mQ.media === '(pointer:coarse)') {
         hasTouchScreen = !!mQ.matches;
       } else if ('orientation' in window) {
@@ -154,11 +162,12 @@ export function deviceHasTouchScreen(): boolean {
 
 /**
  * Efficiently removes children of a parent element
- * @param {Element} el Parent element whose children will be removed
  */
-export function removeChildren(el) {
+export function removeChildren(el: HTMLElement) {
   while (el.firstChild) {
-    el.removeChild(el.lastChild);
+    if (el.lastChild) {
+      el.removeChild(el.lastChild);
+    }
   }
 }
 
@@ -185,7 +194,10 @@ export function hideOnClickOutside(
       return;
     }
 
-    if (!elWrapper.contains(event.target) && isVisible(elWrapper)) {
+    if (
+      !elWrapper.contains(event.target as HTMLElement) &&
+      isVisible(elWrapper)
+    ) {
       // or use: event.target.closest(selector) === null
       // element.style.display = "none";
       element.classList.remove('active');
