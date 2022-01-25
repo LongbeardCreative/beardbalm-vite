@@ -21,11 +21,15 @@
       display: none;
     }
 
-    @media (hover: hover) {
-      &:hover {
-        .slider__arrow {
-          opacity: 1;
-          pointer-events: auto;
+    // Disables scroll snap on Safari 10.1+ when arrow is clicked, so that the smoothscroll polyfill works
+    @media not all and (min-resolution: 0.001dpcm) {
+      @supports (-webkit-appearance: none) {
+        &.is-scrolling-by-click {
+          scroll-snap-type: none;
+
+          .slider__slide {
+            scroll-snap-align: none;
+          }
         }
       }
     }
@@ -59,16 +63,28 @@
     &--next {
       right: 0;
     }
-
-    @media (hover: none) and (pointer: coarse) {
-      display: none;
-    }
   }
 
   &:hover,
   &:focus-within {
     .slider__arrow:not([disabled]) {
       opacity: 1;
+    }
+  }
+
+  &:not([data-slider-always-show-arrows]) {
+    @media (hover: hover) {
+      .slider__inner:hover {
+        .slider__arrow {
+          opacity: 1;
+          pointer-events: auto;
+        }
+      }
+    }
+    @media (hover: none) and (pointer: coarse) {
+      .slider__arrow {
+        display: none;
+      }
     }
   }
 }

@@ -1,5 +1,9 @@
+import smoothscroll from 'smoothscroll-polyfill';
 import debounce from 'just-debounce-it';
 import './style.scss';
+
+// Polyfills Safari
+smoothscroll.polyfill();
 
 interface InitProps {
   sliderSelector: string;
@@ -61,12 +65,16 @@ function initSlider(slider: HTMLElement, options: InitProps) {
         el.setAttribute('disabled', '');
       }
     });
+
+    sliderInner.classList.remove('is-scrolling-by-click');
   }
 
   function handleArrowClick(direction: 'next' | 'prev') {
     if (!sliderInner) {
       return;
     }
+
+    sliderInner.classList.add('is-scrolling-by-click');
 
     const allSlides = sliderInner.children;
 
