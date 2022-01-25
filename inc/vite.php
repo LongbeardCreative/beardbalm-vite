@@ -1,4 +1,6 @@
 <?php
+require_once ABSPATH . "/wp-admin/includes/file.php";
+WP_Filesystem();
 
 define('IS_DEVELOPMENT', is_dev());
 
