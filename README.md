@@ -47,7 +47,7 @@ Vite.js config is inspired by [vite-php-setup](https://github.com/andrefelipe/vi
   cd /www/kinsta/public/beardbalm
 
   # run WP-CLI command
-  # ...
+  wp config set WP_ENVIRONMENT_TYPE development --raw
   ```
 
 - Visit your WordPress local URL (e.g. `https://beardbalm.local/`), **not** your Vite server (e.g. `http://localhost:3000`), which will be empty. The Vite server will be used only to serve assets on dev mode.
