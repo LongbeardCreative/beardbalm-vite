@@ -32,6 +32,24 @@ Vite.js config is inspired by [vite-php-setup](https://github.com/andrefelipe/vi
 
   Your Vite server will run at `http://localhost:3000/`, but feel free to change the port if needed.
 
+- Define a `wp-config.php` constant `WP_ENVIRONMENT_TYPE` to `development`. You can do so by using `WP-CLI`:
+
+  ```shell
+  wp config set WP_ENVIRONMENT_TYPE development --raw
+  ```
+
+  Note that if you're using DevKinsta, you will need to enter into it's Docker container first:
+
+  ```shell
+  docker exec -u www-data -it devkinsta_fpm bash
+
+  # Go to your site folder (you need to change "beardbalm")
+  cd /www/kinsta/public/beardbalm
+
+  # run WP-CLI command
+  # ...
+  ```
+
 - Visit your WordPress local URL (e.g. `https://beardbalm.local/`), **not** your Vite server (e.g. `http://localhost:3000`), which will be empty. The Vite server will be used only to serve assets on dev mode.
 
 - Enjoy live reloading for PHP changes and hot module replacement for CSS and JS changes 😎.
