@@ -44,12 +44,12 @@ Vite.js config is inspired by [vite-php-setup](https://github.com/andrefelipe/vi
 
 ## JS / TS
 
-JS / TS files are found under `/src/scripts` folder. All direct children of this folder will become "entrypoints" when bundled by vite, i.e. become separate files. Only `login.ts` and `main.ts` are by default enqueued on WordPress. If you create another entrypoint, you're responsible to enqueue that file via `/includes/setup.php` under `wp_enqueue_scripts` action hook.
+JS / TS files are found under `/src/scripts` folder. All direct children of this folder will become "entrypoints" when bundled by vite, i.e. become separate files. Only `login.ts` and `main.ts` are by default enqueued on WordPress. If you create another entrypoint, you're responsible to enqueue that file via `/inc/setup.php` under `wp_enqueue_scripts` action hook.
 
 For instance, if you have a new entrypoint called `home.ts`, which you'd like to load only on the homepage, simply use the `Vite::load()` utility function, like the following:
 
 ```php
-// /includes/setup.php
+// /inc/setup.php
 
 add_action('wp_enqueue_scripts', function () {
   // ... other enqueues

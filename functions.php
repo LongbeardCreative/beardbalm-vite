@@ -19,17 +19,17 @@ if (!defined('LB_VERSION')) {
   define('LB_VERSION', '1.1');
 }
 
-require_once get_template_directory() . '/includes/helpers.php';
-require_once get_template_directory() . '/includes/setup.php';
-require_once get_template_directory() . '/includes/filters.php';
-require_once get_template_directory() . '/includes/vite.php';
-require_once get_template_directory() . '/includes/wptt-webfont-loader.php';
-require_once get_template_directory() . '/includes/cpt.php';
-require_once get_template_directory() . '/includes/widgets.php';
-require_once get_template_directory() . '/includes/template-tags.php';
-require_once get_template_directory() . '/includes/template-functions.php';
-require_once get_template_directory() . '/includes/relevanssi.php';
-require_once get_template_directory() . '/includes/login.php';
+require_once get_template_directory() . '/inc/helpers.php';
+require_once get_template_directory() . '/inc/setup.php';
+require_once get_template_directory() . '/inc/filters.php';
+require_once get_template_directory() . '/inc/vite.php';
+require_once get_template_directory() . '/inc/wptt-webfont-loader.php';
+require_once get_template_directory() . '/inc/cpt.php';
+require_once get_template_directory() . '/inc/widgets.php';
+require_once get_template_directory() . '/inc/template-tags.php';
+require_once get_template_directory() . '/inc/template-functions.php';
+require_once get_template_directory() . '/inc/relevanssi.php';
+require_once get_template_directory() . '/inc/login.php';
 
 
 /**
