@@ -2,25 +2,12 @@
 
 define('IS_DEVELOPMENT', is_dev());
 
-function is_dev(string $entry = 'main.ts'): bool {
-  // This method is very useful for the local server
-  // if we try to access it, and by any means, didn't started Vite yet
-  // it will fallback to load the production files from manifest
-  // so you still navigate your site as you intended!
-
-  static $exists = null;
-  if ($exists !== null) {
-    return $exists;
+function is_dev() {
+  if (isset($_COOKIE['prod'])) {
+    return false;
   }
 
-  $ch = curl_init('http://localhost:3000/' . $entry);
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-  curl_setopt($ch, CURLOPT_NOBODY, true);
-  curl_exec($ch);
-  $error = curl_errno($ch);
-  curl_close($ch);
-
-  return $exists = !$error;
+  return wp_get_environment_type() == 'development' ? true : false;
 }
 
 add_filter('script_loader_tag', function ($tag, $handle) {
@@ -38,18 +25,22 @@ add_filter('script_loader_tag', function ($tag, $handle) {
 
 class Vite {
 
-  public static function base_path(): string {
-    return get_template_directory_uri() . '/dist/';
+  public static function base_path(?bool $public = true): string {
+    if ($public) {
+      return get_template_directory_uri() . '/dist/';
+    }
+
+    return get_template_directory() . '/dist/';
   }
 
-  public static function load(string $entry = 'main.ts'): void {
+  public static function load(string $entry = 'main.ts', ?bool $load_from_manifest = false): void {
     self::js_preload_imports($entry);
     self::css_tag($entry);
-    self::register($entry);
+    self::register($entry, $load_from_manifest);
   }
 
-  public static function register(string $entry): void {
-    $url = IS_DEVELOPMENT
+  public static function register(string $entry, ?bool $load_from_manifest = false): void {
+    $url = IS_DEVELOPMENT && !$load_from_manifest
       ? 'http://localhost:3000/' . $entry
       : self::asset_url($entry);
 
@@ -96,10 +87,10 @@ class Vite {
   }
 
   private static function get_manifest(): array {
-    $url = self::base_path() . 'manifest.json';
+    global $wp_filesystem;
 
-    $data = file_get_contents_ssl($url);
-
+    $url = self::base_path(false) . 'manifest.json';
+    $data = $wp_filesystem->get_contents($url);
     return json_decode($data ?: "{}", true);
   }
 

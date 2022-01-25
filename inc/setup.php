@@ -141,6 +141,10 @@ add_action('wp_enqueue_scripts', function () {
   // Main Scripts & Styles
   Vite::load('main.ts');
 
+  if (wp_get_environment_type() == 'development') {
+    Vite::load('development.ts', true);
+  }
+
   if (is_singular() && comments_open() && get_option('thread_comments')) {
     wp_enqueue_script('comment-reply');
   }

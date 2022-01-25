@@ -83,5 +83,7 @@ export default defineConfig({
       host: 'localhost',
       protocol: 'ws',
     },
+
+    // host: true,
   },
 });
