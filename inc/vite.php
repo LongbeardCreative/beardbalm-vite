@@ -100,7 +100,7 @@ class Vite {
 
     $data = file_get_contents_ssl($url);
 
-    return json_decode($data, true);
+    return json_decode($data ?: "{}", true);
   }
 
   private static function asset_url(string $entry): string {
