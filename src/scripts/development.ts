@@ -49,6 +49,25 @@ const styles = `
     #vite-alert button:hover {
       background: #D0EBEF;
     }
+
+    #vite-badge {
+      position: fixed; 
+      bottom: 1rem; 
+      right: 1rem; 
+      background: #FFF9DB; 
+      width: 2.5rem; 
+      height: 2.5rem; 
+      display: none; 
+      align-items: center; 
+      justify-content: center; 
+      border: 1px solid #FFEC99; 
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+
+    #vite-badge:hover {
+      background: #FFF3BF;
+    }
   </style>
 `;
 
@@ -58,14 +77,18 @@ function showConsoleOverlay({ text, actions }: AlertProps) {
     `
     ${styles}
     <div id="vite-alert" role="alert" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
-      <div style="position: absolute; z-index: -1; top: 0; left: 0; width: 100%; height: 100%; background: hsl(0 0% 0% / 0.32); backdrop-filter: blur(1rem);" onclick="document.getElementById('vite-alert').style.display = 'none'"></div>
+      <div style="position: absolute; z-index: -1; top: 0; left: 0; width: 100%; height: 100%; background: hsl(0 0% 0% / 0.32); backdrop-filter: blur(1rem);" onclick="document.getElementById('vite-alert').style.display = 'none'; document.getElementById('vite-badge').style.display = 'flex'"></div>
       <div style="width: 400px; max-width: 80%; background-color: hsl(0 0% 20%); color: hsl(0 0% 100%); padding: 2rem; border-radius: 1rem;">
         <p>${text}</p>
-        <p>
+        <p style="text-align: right;">
           <button onclick="${actions.onclick}">${actions.text}</button>
         </p>
       </div>
-    </div>`
+    </div>
+    <button id="vite-badge" onclick="document.getElementById('vite-alert').style.display = 'flex'; document.getElementById('vite-badge').style.display = 'none'">
+      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FAB005" style="height: 1.5rem; width: 1.5rem;"><path d="M0 0h24v24H0z" fill="none"/><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+    </button>
+    `
   );
 }
 
