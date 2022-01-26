@@ -26,7 +26,8 @@ if (!defined('WP_ENVIRONMENT_TYPE')) {
     $http_host = $_SERVER['HTTP_HOST'];
 
     if (strpos($http_host, '.local') !== false) {
-      return 'development';
+      $is_devkinsta_preview = strpos($_SERVER['HTTP_USER_AGENT'], 'DevKinsta') !== false;
+      return $is_devkinsta_preview ? 'production' : 'development';
     } elseif (strpos($http_host, 'staging-') !== false) {
       return 'staging';
     }
