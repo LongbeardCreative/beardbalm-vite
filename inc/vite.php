@@ -37,7 +37,7 @@ class Vite {
 
   public static function load(string $entry = 'main.ts', ?bool $load_from_manifest = false): void {
     self::js_preload_imports($entry);
-    self::css_tag($entry);
+    self::css_tag($entry, $load_from_manifest);
     self::register($entry, $load_from_manifest);
   }
 
@@ -61,8 +61,8 @@ class Vite {
     }
   }
 
-  private static function js_preload_imports(string $entry): void {
-    if (IS_DEVELOPMENT) {
+  private static function js_preload_imports(string $entry, ?bool $load_from_manifest = false): void {
+    if (IS_DEVELOPMENT && !$load_from_manifest) {
       return;
     }
 
@@ -77,8 +77,8 @@ class Vite {
     });
   }
 
-  private static function css_tag(string $entry): void {
-    if (IS_DEVELOPMENT) {
+  private static function css_tag(string $entry, ?bool $load_from_manifest = false): void {
+    if (IS_DEVELOPMENT && !$load_from_manifest) {
       return;
     }
 
@@ -93,6 +93,7 @@ class Vite {
 
     $url = self::base_path(false) . 'manifest.json';
     $data = $wp_filesystem->get_contents($url);
+
     return json_decode($data ?: "{}", true);
   }
 
