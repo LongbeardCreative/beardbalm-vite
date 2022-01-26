@@ -10,12 +10,16 @@ function file_get_contents_ssl(string $url) {
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
   curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3000); // 3 sec.
   curl_setopt($ch, CURLOPT_TIMEOUT, 10000); // 10 sec.
+
+  // Local
+  curl_setopt($ch, CURLOPT_USERPWD, 'souffle' . ":" . 'agreeable');
+
+
   $data = curl_exec($ch);
   curl_close($ch);
 
   return $data;
 }
-
 
 /**
  * Phone to URL helper
@@ -65,24 +69,15 @@ function is_woocommerce_url(): bool {
  */
 
 function get_the_svg($icon, $title = '', $title_id = '', $desc = '') {
+  global $wp_filesystem;
+
   if (!file_exists(get_template_directory() . '/src/assets/icons/' . $icon . '.svg')) {
     return false;
   }
 
-  $icon_folder = get_template_directory_uri() . '/src/assets/icons/';
+  $icon_folder = get_template_directory() . '/src/assets/icons/';
   $icon_path = $icon_folder . $icon . '.svg';
-
-  if (strpos(get_site_url(), 'longbeardco.com') !== false) {
-    $auth = base64_encode("long:beard");
-    $context = stream_context_create([
-      "http" => [
-        "header" => "Authorization: Basic $auth"
-      ]
-    ]);
-    $svg = file_get_contents($icon_path, false, $context);
-  } else {
-    $svg = file_get_contents_ssl($icon_path);
-  }
+  $svg = $wp_filesystem->get_contents($icon_path);
 
   if (!$svg) :
     return false;
