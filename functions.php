@@ -19,6 +19,25 @@ if (!defined('LB_VERSION')) {
   define('LB_VERSION', '1.1');
 }
 
+// Define WP Environment
+if (!defined('WP_ENVIRONMENT_TYPE')) {
+
+  function get_environment_by_url(): string {
+    $http_host = $_SERVER['HTTP_HOST'];
+
+    if (strpos($http_host, '.local') !== false) {
+      return 'development';
+    } elseif (strpos($http_host, 'staging-') !== false) {
+      return 'staging';
+    }
+    return 'production';
+  }
+
+  define('WP_ENVIRONMENT_TYPE', get_environment_by_url());
+}
+
+
+
 require_once get_template_directory() . '/inc/helpers.php';
 require_once get_template_directory() . '/inc/setup.php';
 require_once get_template_directory() . '/inc/filters.php';
