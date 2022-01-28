@@ -149,11 +149,15 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_script('comment-reply');
   }
 
-  wp_localize_script('beardbalm-js', 'siteData', array(
-    'nonce'   => wp_create_nonce('lb-nonce'),
-    'siteUrl' => get_site_url(),
-    'ajaxUrl' => admin_url('admin-ajax.php'),
-  ));
+  // wp_localize_script('beardbalm-js', 'siteData', array(
+  //   'nonce'   => wp_create_nonce('lb-nonce'),
+  //   'siteUrl' => get_site_url(),
+  //   'ajaxUrl' => admin_url('admin-ajax.php'),
+  // ));
+
+  if (!is_singular(array('post'))) {
+    wp_dequeue_style('wp-block-library');
+  }
 });
 
 /**
