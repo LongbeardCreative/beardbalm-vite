@@ -149,12 +149,6 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_script('comment-reply');
   }
 
-  // wp_localize_script('beardbalm-js', 'siteData', array(
-  //   'nonce'   => wp_create_nonce('lb-nonce'),
-  //   'siteUrl' => get_site_url(),
-  //   'ajaxUrl' => admin_url('admin-ajax.php'),
-  // ));
-
   if (!is_singular(array('post'))) {
     wp_dequeue_style('wp-block-library');
   }
@@ -173,6 +167,19 @@ add_action('wp_enqueue_scripts', function () {
     wp_dequeue_script('jquery');
     wp_deregister_script('jquery');
   }
+});
+
+// Add global variables
+add_action('wp_head', function () {
+?>
+  <script>
+    window.siteData = {
+      nonce: '<?php echo wp_create_nonce('lb-nonce'); ?>',
+      siteUrl: '<?php echo get_site_url(); ?>',
+      ajaxUrl: '<?php echo admin_url('admin-ajax.php'); ?>',
+    }
+  </script>
+<?php
 });
 
 // Load jQuery whenever there's Gravity Forms
