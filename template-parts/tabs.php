@@ -23,7 +23,7 @@ foreach ($data as $t) {
   $tabs .= $title;
   $tabs .= '</button>';
 
-  $tabpanels .= "<div id='$key' class='tabpanel $is_tabpanel_active' role='tabpanel' aria-labelledby='tab-$key' aria-expanded='$is_selected' tabindex='0' >";
+  $tabpanels .= "<div id='$key' class='tabpanel $is_tabpanel_active' role='tabpanel' aria-labelledby='tab-$key' aria-expanded='$is_selected' >";
   $tabpanels .= $content;
   $tabpanels .= '</div>';
 
