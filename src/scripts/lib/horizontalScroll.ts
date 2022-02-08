@@ -35,6 +35,10 @@ export default function horizontalScroll(selector: string) {
   }
 
   elements.forEach((el) => {
+    if (el.hasAttribute('data-no-overflow')) {
+      return;
+    }
+
     if (!el.closest('.overflow-wrapper')) {
       const div = document.createElement('div');
       div.classList.add('overflow-wrapper');
