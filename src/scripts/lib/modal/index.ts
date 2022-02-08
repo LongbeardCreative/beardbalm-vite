@@ -92,7 +92,7 @@ function createModal(props: Props): NodesProps {
     const iframeNode = document.createElement('iframe');
     iframeNode.width = '560';
     iframeNode.height = '315';
-    iframeNode.src = `https://www.youtube-nocookie.com/embed/${youtube.videoID}`;
+    iframeNode.src = `https://www.youtube-nocookie.com/embed/${youtube.videoID}?autoplay=1`;
     iframeNode.title = 'YouTube video player';
     iframeNode.allow =
       'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
