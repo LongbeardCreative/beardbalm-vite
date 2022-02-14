@@ -55,7 +55,7 @@ function showFooterOverlay({ text, actions }: AlertProps) {
 async function checkViteServer() {
   try {
     await fetch('http://localhost:3000/main.ts');
-    // document.cookie = 'prod=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'prod=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
   } catch (err) {
     if (document.cookie.includes('prod=')) {
       showFooterOverlay({
