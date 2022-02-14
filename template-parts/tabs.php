@@ -19,8 +19,25 @@ foreach ($data as $t) {
   $title    = $t['title'];
   $icon     = isset($t['icon']) ? $t['icon'] : null;
   $content  = $t['content'];
+  $link     = isset($t['link']) ? $t['link'] : null;
   $key      = sanitize_key($title);
   $tabindex = $is_selected ? '0' : '-1';
+
+  if ($link) {
+    $link_url = $link['url'];
+    $link_target = isset($link['target']) && $link['target'] ? $link['target'] : '_self';
+    $link_rel = $link['target'] == '_blank' ? 'nooopener noreferrer' : '';
+
+    if ($link_url) {
+      $tabs .= "<a href='$link_url' class='tab' target='$link_target' rel='$link_rel'>";
+      $tabs .= $icon ?: null;
+      $tabs .= '<span>' . $title . '</span>';
+      $tabs .= $link_target == '_blank' ? get_the_svg('external-link') : '';
+      $tabs .= '</a>';
+
+      continue;
+    }
+  }
 
   $tabs .= "<button id='tab-$key' class='tab $is_tab_active' role='tab' aria-selected='$is_selected' aria-controls='$key' tabindex='$tabindex' >";
   $tabs .= $icon ?: null;
@@ -42,9 +59,15 @@ foreach ($data as $t) {
   echo $tabpanels;
 } else { ?>
   <div class="lb-tabs <?php echo $class; ?>">
-    <div class="tabs <?php echo $class ? $class . '__tabs' : ''; ?>" role="tablist" <?php echo $no_overflow ? 'data-no-overflow' : ''; ?>>
-      <?php echo $tabs; ?>
-    </div>
+    <?php if (!$no_overflow) { ?>
+      <div class="overflow-wrapper">
+      <?php } ?>
+      <div class="tabs <?php echo $class ? $class . '__tabs' : ''; ?>" role="tablist" <?php echo $no_overflow ? 'data-no-overflow' : ''; ?>>
+        <?php echo $tabs; ?>
+      </div>
+      <?php if (!$no_overflow) { ?>
+      </div>
+    <?php } ?>
     <div class="tabpanels <?php echo $class ? $class . '__tabpanels' : ''; ?>">
       <?php echo $tabpanels; ?>
     </div>
