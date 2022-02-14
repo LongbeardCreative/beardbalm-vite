@@ -28,12 +28,14 @@ export default function tabsInit() {
         if (tab.getAttribute('aria-controls') === id) {
           tab.classList.add(`tab--${activeClass}`);
           tab.setAttribute('aria-selected', 'true');
+          tab.setAttribute('tabindex', '0');
           if (focus) {
             (tab as HTMLElement).focus();
           }
         } else {
           tab.classList.remove(`tab--${activeClass}`);
           tab.setAttribute('aria-selected', 'false');
+          tab.setAttribute('tabindex', '-1');
           (tab as HTMLElement).blur();
         }
       });
@@ -87,7 +89,10 @@ export default function tabsInit() {
 
       // 2. Set active tab
       const ariaControls = currentTarget.getAttribute('aria-controls');
-      if (ariaControls && !currentTarget.classList.contains(activeClass)) {
+      if (
+        ariaControls &&
+        !currentTarget.classList.contains(`tab--${activeClass}`)
+      ) {
         setActiveTab(ariaControls);
       }
 
@@ -138,13 +143,14 @@ export default function tabsInit() {
     function handleKeyboardNavigation(e: KeyboardEvent) {
       // 1. Get active tab
       const activeTab = [...tabs].find((tab) =>
-        tab.classList.contains(activeClass)
+        tab.classList.contains(`tab--${activeClass}`)
       );
 
       switch (e.key) {
-        case 'ArrowRight':
-        case 'ArrowDown': {
+        case 'ArrowLeft':
+        case 'ArrowUp': {
           e.preventDefault();
+          console.log(activeTab);
           const prev = activeTab?.previousElementSibling
             ? activeTab?.previousElementSibling.getAttribute('aria-controls')
             : tabs[tabs.length - 1].getAttribute('aria-controls');
@@ -153,8 +159,8 @@ export default function tabsInit() {
           }
           break;
         }
-        case 'ArrowLeft':
-        case 'ArrowUp': {
+        case 'ArrowRight':
+        case 'ArrowDown': {
           e.preventDefault();
           const next = activeTab?.nextElementSibling
             ? activeTab?.nextElementSibling.getAttribute('aria-controls')
@@ -195,7 +201,9 @@ export default function tabsInit() {
       [...tabs].some((t) => t.getAttribute('aria-controls') === urlParamsTab)
     ) {
       setActiveTab(urlParamsTab, false);
-    } else if (![...tabs].some((t) => t.classList.contains(activeClass))) {
+    } else if (
+      ![...tabs].some((t) => t.classList.contains(`tab--${activeClass}`))
+    ) {
       targetTabID = tabs[0].getAttribute('aria-controls');
       // 2. Set active the default tab
       if (targetTabID) {
