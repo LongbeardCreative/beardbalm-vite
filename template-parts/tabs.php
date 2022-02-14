@@ -26,7 +26,7 @@ foreach ($data as $t) {
   if ($link) {
     $link_url = $link['url'];
     $link_target = isset($link['target']) && $link['target'] ? $link['target'] : '_self';
-    $link_rel = $link['target'] == '_blank' ? 'nooopener noreferrer' : '';
+    $link_rel = $link_target == '_blank' ? 'nooopener noreferrer' : '';
 
     if ($link_url) {
       $tabs .= "<a href='$link_url' class='tab' target='$link_target' rel='$link_rel'>";
