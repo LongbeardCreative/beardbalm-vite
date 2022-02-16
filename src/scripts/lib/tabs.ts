@@ -32,6 +32,9 @@ export default function tabsInit() {
           if (focus) {
             (tab as HTMLElement).focus();
           }
+          if (focus && useHash && typeof window.history !== 'undefined') {
+            window.history.replaceState(undefined, '', `#${id}`);
+          }
         } else {
           tab.classList.remove(`tab--${activeClass}`);
           tab.setAttribute('aria-selected', 'false');
@@ -41,7 +44,7 @@ export default function tabsInit() {
       });
 
       tabPanels.forEach((tabPanel) => {
-        if (tabPanel.getAttribute('id') === id) {
+        if (tabPanel.id === id) {
           tabPanel.classList.add(`tabpanel--${activeClass}`);
           tabPanel.setAttribute('aria-expanded', 'true');
         } else {
@@ -49,22 +52,6 @@ export default function tabsInit() {
           tabPanel.setAttribute('aria-expanded', 'false');
         }
       });
-
-      // EDGE Case where there are subtab
-      // 1. Check if this has subtabs
-      // 2. Show Subtabs
-      // const subtabs = $(`#${id}`).closest('.lb-tabs').find('.subtabs');
-      // if (subtabs.length) {
-      //   subtabs.each(function () {
-      //     if ($(this).attr('aria-labelledby') === `tab-${id}`) {
-      //       $(this).addClass('active');
-      //       $(this).attr('aria-expanded', true);
-      //     } else {
-      //       $(this).removeClass('active');
-      //       $(this).attr('aria-expanded', false);
-      //     }
-      //   });
-      // }
 
       // Dispatch Event
       const event = new Event('changeTab');
@@ -96,12 +83,7 @@ export default function tabsInit() {
         setActiveTab(ariaControls);
       }
 
-      // 3. Update URL (if required)
-      // if (useHash) {
-      //   history.replaceState({}, '', currentTarget.getAttribute("href"));
-      // }
-
-      // 4. Slide clicked tab into view
+      // 3. Slide clicked tab into view
       if (!currentTarget.classList.contains('slick-slide')) {
         // slide to view
         const buffer = 50; // gradient
@@ -150,7 +132,6 @@ export default function tabsInit() {
         case 'ArrowLeft':
         case 'ArrowUp': {
           e.preventDefault();
-          console.log(activeTab);
           const prev = activeTab?.previousElementSibling
             ? activeTab?.previousElementSibling.getAttribute('aria-controls')
             : tabs[tabs.length - 1].getAttribute('aria-controls');
@@ -183,18 +164,21 @@ export default function tabsInit() {
 
     // 2. Defaults - activate the first tab
     // 1. Check if default tab should be specified by the URL
-    let targetTabID;
     const urlParams = new URLSearchParams(window.location.search);
     const urlParamsTab = urlParams.get('tab');
     if (window.location.hash) {
       const hash = window.location.hash.substring(1);
 
-      if ([...tabs].some((t) => t.getAttribute('aria-controls') === hash)) {
-        targetTabID = hash;
-        setActiveTab(targetTabID, false);
-        // setTimeout(() => {
-        //   document.getElementById(hash).closest("section").scrollIntoView();
-        // }, 50);
+      if ([...tabPanels].some((t) => t.id === hash)) {
+        setActiveTab(hash, false);
+      } else {
+        // Check if any of the current tab has subtab that will be activated
+        for (let i = 0; i < tabPanels.length; i += 1) {
+          if (tabPanels[i].querySelector(`#${hash}`)) {
+            setActiveTab(tabPanels[i].id, false);
+            break;
+          }
+        }
       }
     } else if (
       urlParamsTab &&
@@ -204,10 +188,10 @@ export default function tabsInit() {
     } else if (
       ![...tabs].some((t) => t.classList.contains(`tab--${activeClass}`))
     ) {
-      targetTabID = tabs[0].getAttribute('aria-controls');
+      const ariaControls = tabs[0].getAttribute('aria-controls');
       // 2. Set active the default tab
-      if (targetTabID) {
-        setActiveTab(targetTabID, false);
+      if (ariaControls) {
+        setActiveTab(ariaControls, false);
       }
     }
 
