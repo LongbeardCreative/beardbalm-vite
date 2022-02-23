@@ -9,10 +9,13 @@ export default function tabsInit() {
       return;
     }
 
-    let tabs: NodeListOf<Element> | Element[] =
-      container.querySelectorAll('[role="tab"]');
-    let tabPanels: NodeListOf<Element> | Element[] =
-      container.querySelectorAll('[role="tabpanel"]');
+    let tabs = container.querySelectorAll<Element>('[role="tab"]');
+    let tabPanels = container.querySelectorAll<Element>('[role="tabpanel"]');
+
+    if (!tabs?.length || !tabPanels?.length) {
+      return;
+    }
+
     let useHash = false;
     const useHashAttr = container.getAttribute('data-use-hash');
     if (typeof useHashAttr !== typeof undefined && useHashAttr !== 'false') {
