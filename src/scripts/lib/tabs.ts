@@ -14,7 +14,7 @@ export default function tabsInit() {
     let tabPanels: NodeListOf<Element> | Element[] =
       container.querySelectorAll<Element>('[role="tabpanel"]');
 
-    if (!tabs?.length || !tabPanels?.length) {
+    if (!tabs.length || !tabPanels.length) {
       return;
     }
 
