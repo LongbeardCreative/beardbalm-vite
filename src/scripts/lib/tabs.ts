@@ -9,8 +9,10 @@ export default function tabsInit() {
       return;
     }
 
-    let tabs = container.querySelectorAll<Element>('[role="tab"]');
-    let tabPanels = container.querySelectorAll<Element>('[role="tabpanel"]');
+    let tabs: NodeListOf<Element> | Element[] =
+      container.querySelectorAll<Element>('[role="tab"]');
+    let tabPanels: NodeListOf<Element> | Element[] =
+      container.querySelectorAll<Element>('[role="tabpanel"]');
 
     if (!tabs?.length || !tabPanels?.length) {
       return;
