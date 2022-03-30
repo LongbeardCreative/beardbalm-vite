@@ -203,7 +203,7 @@ add_action('wp_default_scripts', function (WP_Scripts $scripts) {
  * NOTE: Do not include trailing slash.
  */
 add_filter('wptt_get_local_fonts_base_path', function ($path) {
-  return get_template_directory() . '/src/fonts';
+  return get_template_directory() . '/src';
 });
 
 /**
@@ -211,5 +211,5 @@ add_filter('wptt_get_local_fonts_base_path', function ($path) {
  * NOTE: Do not include trailing slash.
  */
 add_filter('wptt_get_local_fonts_base_url', function ($url) {
-  return get_template_directory_uri() . '/src/fonts';
+  return get_template_directory_uri() . '/src';
 });
