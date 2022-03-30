@@ -4,7 +4,8 @@
   "description": "WordPress Boilerplate theme with Vite.js",
   "scripts": {
     "dev": "cross-env APP_ENV=development vite",
-    "build": "cross-env APP_ENV=production vite build"
+    "build": "cross-env APP_ENV=production vite build",
+    "watch": "cross-env APP_ENV=development vite build --watch"
   },
   "repository": {
     "type": "git",

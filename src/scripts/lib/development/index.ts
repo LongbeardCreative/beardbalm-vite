@@ -1,52 +1,193 @@
 import './style.scss';
 
+declare global {
+  // eslint-disable-next-line no-unused-vars
+  interface Window {
+    // eslint-disable-next-line no-unused-vars
+    toggleViteAlert: (value: boolean) => void;
+  }
+}
 interface AlertProps {
   title?: string;
   text: string;
-  actions: {
+  actions?: {
     onclick: string;
     text: string;
   };
 }
 
-function showConsoleOverlay({ title, text, actions }: AlertProps) {
-  document.body.insertAdjacentHTML(
-    'beforeend',
-    `<div id="vite-alert" role="alert" data-vite-styles>
-      <div class="vite-alert-dialog">
-        <div class="vite-alert-dialog__overlay" onclick="document.getElementById('vite-alert').style.display = 'none'; document.getElementById('vite-badge').style.display = 'flex'"></div>
-        <div class="vite-alert-dialog__card">
-          <h2 class="vite-alert-dialog__card__title">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0z" fill="none"/><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
-            ${title}
-          </h2>
-          <p>${text}</p>
-          <p style="text-align: right;">
-            <button onclick="${actions.onclick}">${actions.text}</button>
-          </p>
-        </div>
-      </div>
-    </div>
-    <button id="vite-badge" onclick="document.getElementById('vite-alert').style.display = 'flex'; document.getElementById('vite-badge').style.display = 'none'" data-vite-styles>
-      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0z" fill="none"/><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
-    </button>
-    `
-  );
+interface ManifestProps {
+  [key: string]: {
+    file: string;
+    css?: string[];
+  };
+}
+
+function initRefreshCron() {
+  const manifestPath = '/wp-content/themes/beardbalm/dist/manifest.json';
+  const cronrate = 1;
+  // const loadCount = 0;
+
+  function getStoredTime() {
+    return window.sessionStorage.getItem('nt_css');
+  }
+
+  function parseFile(file: string) {
+    const [fileName, fileHash, fileExt] = file.split('.');
+    return { fileName, fileHash, fileExt };
+  }
+
+  function updateAssets(json: ManifestProps) {
+    const assets = document.querySelectorAll<
+      HTMLScriptElement | HTMLLinkElement
+    >(
+      'script[id*="beardbalm/"], link[id*="beardbalm/"], link[rel="modulepreload"]'
+    );
+
+    async function maybeUpdateAsset(file: string) {
+      const { fileName, fileHash, fileExt } = parseFile(file);
+      if (!fileName || !fileHash || !fileExt) {
+        // Something is off, reload
+        window.location.reload();
+        return;
+      }
+
+      await Promise.all(
+        [...assets].map(async (asset) => {
+          const url = new URL(
+            asset.tagName === 'SCRIPT'
+              ? (asset as HTMLScriptElement).src
+              : (asset as HTMLLinkElement).href
+          ).pathname;
+
+          const match = url.match(
+            new RegExp(`${fileName}\\.(.*?)\\.${fileExt}`)
+          );
+
+          if (match) {
+            const {
+              fileName: currFileName,
+              fileHash: currFileHash,
+              fileExt: currFileExt,
+            } = parseFile(match[0]);
+
+            if (
+              currFileName === fileName &&
+              currFileExt === fileExt &&
+              currFileHash !== fileHash
+            ) {
+              if (asset.tagName === 'SCRIPT') {
+                (asset as HTMLScriptElement).src = (
+                  asset as HTMLScriptElement
+                ).src.replace(currFileHash, fileHash);
+                window.location.reload(); // avoid needing to re-execute script
+              } else {
+                (asset as HTMLLinkElement).href = (
+                  asset as HTMLLinkElement
+                ).href.replace(currFileHash, fileHash);
+              }
+
+              console.log(
+                `${currFileName}.{${currFileHash}->${fileHash}}.${currFileExt} updated `
+              );
+            }
+          }
+        })
+      );
+    }
+
+    Object.keys(json).forEach((key) => {
+      const { file, css } = json[key];
+      if (file) {
+        maybeUpdateAsset(file);
+      }
+      if (css?.length) {
+        css.forEach((cssFile: string) => {
+          maybeUpdateAsset(cssFile);
+        });
+      }
+    });
+  }
+
+  function checkAssets(time: string, json: ManifestProps) {
+    // console.log(json);
+    if (!getStoredTime()) {
+      // if no cookie for file
+      window.sessionStorage.setItem('nt_css', time);
+      updateAssets(json); // refresh CSS
+    } else {
+      const currTS = getStoredTime(); // read cookie
+
+      if (currTS !== time) {
+        // console.log(`res: ${res}cookie: ${currTS}`);
+        window.sessionStorage.setItem('nt_css', time);
+        updateAssets(json); // if no match, refresh stylesheet
+      } else {
+        // otherwise return
+      }
+    }
+  }
+
+  async function checkLastModified() {
+    const res = await fetch(manifestPath, {
+      method: 'GET',
+    });
+    const lastModified = res.headers.get('Last-Modified');
+    const json = await res.json();
+    checkAssets(lastModified || '', json);
+  }
+
+  window.setInterval(() => {
+    checkLastModified();
+  }, cronrate * 1000); // 1 second
 }
 
 function showFooterOverlay({ text, actions }: AlertProps) {
+  window.toggleViteAlert = (show: boolean) => {
+    const alert = document.querySelector<HTMLDivElement>('#vite-alert');
+    const badge = document.querySelector<HTMLDivElement>('#vite-badge');
+    if (alert && badge) {
+      alert.style.display = show ? '' : 'none';
+      badge.style.display = show ? 'none' : '';
+
+      if (show) {
+        document.cookie =
+          'viteAlertHidden=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      } else {
+        document.cookie = 'viteAlertHidden=;';
+      }
+    }
+  };
+
+  const hasViteAlertHiddenCookie = document.cookie.includes('viteAlertHidden=');
+
   document.body.insertAdjacentHTML(
     'beforeend',
-    `<div id="vite-alert" role="alert" data-vite-styles>
+    `
+    <button id="vite-badge" onclick="toggleViteAlert(true)" data-vite-styles ${
+      hasViteAlertHiddenCookie ? '' : 'style="display:none;"'
+    }>
+      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0z" fill="none"/><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+    </button>
+    <div id="vite-alert" role="alert" data-vite-styles ${
+      hasViteAlertHiddenCookie ? 'style="display:none;"' : ''
+    }>
       <div class="vite-alert-bar">
         <div class="vite-alert-bar__inner">
           <div class="vite-alert-bar__text">
             <p>${text}</p>
           </div>
+          ${
+            actions
+              ? `
           <div class="vite-alert-bar__actions">
             <button onclick="${actions.onclick}">${actions.text}</button>
           </div>
+          `
+              : ''
+          }
         </div>
+        <button class="vite-alert-bar__close" onclick="toggleViteAlert(false)">&times;</button>
       </div>
     </div>`
   );
@@ -55,25 +196,23 @@ function showFooterOverlay({ text, actions }: AlertProps) {
 async function checkViteServer() {
   try {
     await fetch('http://localhost:3000/main.ts');
-    document.cookie = 'prod=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+
+    // IS DEV MODE
+    // Remove cookie and refresh, so that the server knows to be in Dev mode
+    if (document.cookie.includes('prod=')) {
+      document.cookie = 'prod=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      window.location.reload();
+    }
   } catch (err) {
+    // IS WATCH MODE
     if (document.cookie.includes('prod=')) {
       showFooterOverlay({
-        text: 'Showing built assets. Update assets by running <code>npm run build</code>.',
-        actions: {
-          onclick: `document.cookie = 'prod=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'; location.reload();`,
-          text: `<svg width="16" height="22" viewBox="0 0 16 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 5V8L12 4L8 0V3C3.58 3 0 6.58 0 11C0 12.57 0.46 14.03 1.24 15.26L2.7 13.8C2.25 12.97 2 12.01 2 11C2 7.69 4.69 5 8 5ZM14.76 6.74L13.3 8.2C13.74 9.04 14 9.99 14 11C14 14.31 11.31 17 8 17V14L4 18L8 22V19C12.42 19 16 15.42 16 11C16 9.43 15.54 7.97 14.76 6.74V6.74Z" fill="currentColor"/></svg> Development Mode`,
-        },
+        text: '<strong>Showing built assets.</strong> Develop locally with <code>npm run dev</code> or using watch mode with <code>npm run watch</code>.',
       });
+      initRefreshCron();
     } else {
-      showConsoleOverlay({
-        title: 'Vite server not running ...',
-        text: 'For development mode, please run your Vite server via <code>npm run dev</code>. If you want to preview the production assets, load the built assets:',
-        actions: {
-          onclick: `document.cookie='prod=;'; location.reload();`,
-          text: `<svg width="16" height="22" viewBox="0 0 16 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 5V8L12 4L8 0V3C3.58 3 0 6.58 0 11C0 12.57 0.46 14.03 1.24 15.26L2.7 13.8C2.25 12.97 2 12.01 2 11C2 7.69 4.69 5 8 5ZM14.76 6.74L13.3 8.2C13.74 9.04 14 9.99 14 11C14 14.31 11.31 17 8 17V14L4 18L8 22V19C12.42 19 16 15.42 16 11C16 9.43 15.54 7.97 14.76 6.74V6.74Z" fill="currentColor"/></svg> Production Mode`,
-        },
-      });
+      document.cookie = 'prod=;';
+      window.location.reload();
     }
   }
 }

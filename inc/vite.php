@@ -2,7 +2,15 @@
 require_once ABSPATH . "/wp-admin/includes/file.php";
 WP_Filesystem();
 
-define('IS_DEVELOPMENT', is_dev());
+define('VITE_IS_DEVELOPMENT', is_dev());
+
+if (!defined('VITE_DIST_PATH')) {
+  define('VITE_DIST_PATH', get_template_directory() . '/dist/');
+}
+
+if (!defined('VITE_DIST_URL')) {
+  define('VITE_DIST_URL', get_template_directory_uri() . '/dist/');
+}
 
 function is_dev() {
   if (isset($_COOKIE['prod'])) {
@@ -19,7 +27,7 @@ add_filter('script_loader_tag', function ($tag, $handle) {
   }
 
   $attrs = 'type="module"';
-  $attrs .= IS_DEVELOPMENT ? ' crossorigin' : '';
+  $attrs .= VITE_IS_DEVELOPMENT ? ' crossorigin' : '';
 
   $tag = str_replace("<script ", "<script $attrs ", $tag);
   return $tag;
@@ -28,11 +36,7 @@ add_filter('script_loader_tag', function ($tag, $handle) {
 class Vite {
 
   public static function base_path(?bool $public = true): string {
-    if ($public) {
-      return get_template_directory_uri() . '/dist/';
-    }
-
-    return get_template_directory() . '/dist/';
+    return $public ? VITE_DIST_URL : VITE_DIST_PATH;
   }
 
   public static function load(string $entry = 'main.ts', ?bool $load_from_manifest = false): void {
@@ -42,7 +46,7 @@ class Vite {
   }
 
   public static function register(string $entry, ?bool $load_from_manifest = false): void {
-    $url = IS_DEVELOPMENT && !$load_from_manifest
+    $url = VITE_IS_DEVELOPMENT && !$load_from_manifest
       ? 'http://localhost:3000/' . $entry
       : self::asset_url($entry);
 
@@ -52,8 +56,8 @@ class Vite {
 
     if ($entry == 'login.ts' || $entry == 'login.js') {
       // Special treatment for login
-      add_action('login_head', function () use (&$url) {
-        echo '<script type="module" crossorigin src="' . $url . '"></script>';
+      add_action('login_head', function () use (&$url, &$entry) {
+        echo '<script type="module" crossorigin src="' . $url . '" data-key="' . $entry . '"></script>';
       });
     } else {
       wp_register_script("module/beardbalm/$entry", $url, false, true);
@@ -62,7 +66,7 @@ class Vite {
   }
 
   private static function js_preload_imports(string $entry, ?bool $load_from_manifest = false): void {
-    if (IS_DEVELOPMENT && !$load_from_manifest) {
+    if (VITE_IS_DEVELOPMENT && !$load_from_manifest) {
       return;
     }
 
@@ -78,7 +82,7 @@ class Vite {
   }
 
   private static function css_tag(string $entry, ?bool $load_from_manifest = false): void {
-    if (IS_DEVELOPMENT && !$load_from_manifest) {
+    if (VITE_IS_DEVELOPMENT && !$load_from_manifest) {
       return;
     }
 
