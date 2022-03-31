@@ -33,6 +33,23 @@ add_filter('script_loader_tag', function ($tag, $handle) {
   return $tag;
 }, 10, 2);
 
+
+add_action('rest_api_init', function () {
+  register_rest_route('beardbalm/v1', '/manifest', array(
+    'methods' => WP_REST_Server::READABLE,
+    'callback' => function () {
+      $manifest = Vite::get_manifest();
+      $result = new WP_REST_Response($manifest, 200);
+      $result->set_headers(array(
+        'Cache-Control' => 'no-cache, must-revalidate, max-age=0',
+        'Last-Modified' => Vite::get_manifest_modified_time()
+      ));
+      return $result;
+    },
+  ));
+});
+
+
 class Vite {
 
   public static function base_path(?bool $public = true): string {
@@ -65,6 +82,20 @@ class Vite {
     }
   }
 
+  public static function get_manifest(): array {
+    global $wp_filesystem;
+
+    $url = self::base_path(false) . 'manifest.json';
+    $data = $wp_filesystem->get_contents($url);
+
+    return json_decode($data ?: "{}", true);
+  }
+
+  public static function get_manifest_modified_time(): string {
+    $url = self::base_path(false) . 'manifest.json';
+    return $url ? filemtime($url) : '';
+  }
+
   private static function js_preload_imports(string $entry, ?bool $load_from_manifest = false): void {
     if (VITE_IS_DEVELOPMENT && !$load_from_manifest) {
       return;
@@ -90,15 +121,6 @@ class Vite {
       wp_register_style("beardbalm/$entry", $url);
       wp_enqueue_style("beardbalm/$entry", $url);
     }
-  }
-
-  private static function get_manifest(): array {
-    global $wp_filesystem;
-
-    $url = self::base_path(false) . 'manifest.json';
-    $data = $wp_filesystem->get_contents($url);
-
-    return json_decode($data ?: "{}", true);
   }
 
   private static function asset_url(string $entry): string {

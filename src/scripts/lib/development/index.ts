@@ -24,9 +24,10 @@ interface ManifestProps {
 }
 
 function initRefreshCron() {
-  const manifestPath = '/wp-content/themes/beardbalm/dist/manifest.json';
+  const manifestPath = '/wp-json/beardbalm/v1/manifest';
   const cronrate = 1;
-  // const loadCount = 0;
+
+  console.log('👀 Vite watching for assets changes ...');
 
   function getStoredTime() {
     return window.sessionStorage.getItem('nt_css');
@@ -129,17 +130,23 @@ function initRefreshCron() {
   }
 
   async function checkLastModified() {
-    const res = await fetch(manifestPath, {
-      method: 'GET',
-    });
-    const lastModified = res.headers.get('Last-Modified');
-    const json = await res.json();
-    checkAssets(lastModified || '', json);
+    try {
+      const res = await fetch(`${manifestPath}`, {
+        method: 'GET',
+      });
+      const lastModified = res.headers.get('Last-Modified');
+      const json = await res.json();
+      checkAssets(lastModified || '', json);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      window.setTimeout(() => {
+        checkLastModified();
+      }, cronrate * 1000); // 1 second
+    }
   }
 
-  window.setInterval(() => {
-    checkLastModified();
-  }, cronrate * 1000); // 1 second
+  checkLastModified();
 }
 
 function showFooterOverlay({ text, actions }: AlertProps) {
