@@ -46,6 +46,7 @@ add_action('rest_api_init', function () {
       ));
       return $result;
     },
+    'permission_callback' => '__return_true'
   ));
 });
 
