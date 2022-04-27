@@ -136,3 +136,11 @@ import '../styles/style.scss';
 ## Known Issues
 
 (Work in progress)
+
+## Migration Guide
+
+- Installing deps
+- Add necessary PHP files + folders
+- Change how main CSS is enqueued
+- Update package.json (remove browserslist)
+- setup github repo + workflows + secrets

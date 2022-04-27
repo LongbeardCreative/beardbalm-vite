@@ -159,7 +159,7 @@ function showFooterOverlay({ text, actions }: AlertProps) {
 
       if (show) {
         document.cookie =
-          'viteAlertHidden=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+          'viteAlertHidden=; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
       } else {
         document.cookie = 'viteAlertHidden=;';
       }
@@ -207,7 +207,7 @@ async function checkViteServer() {
     // IS DEV MODE
     // Remove cookie and refresh, so that the server knows to be in Dev mode
     if (document.cookie.includes('prod=')) {
-      document.cookie = 'prod=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      document.cookie = 'prod=; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
       window.location.reload();
     }
   } catch (err) {
