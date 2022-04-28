@@ -1,1 +1,3 @@
-import './lib/development';
+import { initViteDevelopment } from '@longbeard/vite-development';
+
+initViteDevelopment();
