@@ -158,10 +158,9 @@ function showFooterOverlay({ text, actions }: AlertProps) {
       badge.style.display = show ? 'none' : '';
 
       if (show) {
-        document.cookie =
-          'viteAlertHidden=; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
+        document.cookie = 'viteAlertHidden=;max-age=-1;path=/';
       } else {
-        document.cookie = 'viteAlertHidden=;';
+        document.cookie = 'viteAlertHidden=;max-age=86400;path=/';
       }
     }
   };
@@ -207,8 +206,9 @@ async function checkViteServer() {
     // IS DEV MODE
     // Remove cookie and refresh, so that the server knows to be in Dev mode
     if (document.cookie.includes('prod=')) {
-      document.cookie = 'prod=; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
-      window.location.reload();
+      console.log(document.cookie);
+      document.cookie = 'prod=;max-age=-1;path=/';
+      // window.location.reload();
     }
   } catch (err) {
     // IS WATCH MODE
@@ -218,7 +218,7 @@ async function checkViteServer() {
       });
       initRefreshCron();
     } else {
-      document.cookie = 'prod=;';
+      document.cookie = `prod=;max-age=86400;path=/`;
       window.location.reload();
     }
   }
