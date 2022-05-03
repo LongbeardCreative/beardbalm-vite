@@ -17,7 +17,7 @@ function is_dev() {
     return false;
   }
 
-  return wp_get_environment_type() == 'development' ? true : false;
+  return WP_ENVIRONMENT_TYPE == 'development' ? true : false;
 }
 
 add_filter('script_loader_tag', function ($tag, $handle) {

@@ -141,7 +141,7 @@ add_action('wp_enqueue_scripts', function () {
   // Main Scripts & Styles
   Vite::load('main.ts');
 
-  if (wp_get_environment_type() == 'development' || wp_get_environment_type() == 'staging') {
+  if (WP_ENVIRONMENT_TYPE == 'development' || WP_ENVIRONMENT_TYPE == 'staging') {
     Vite::load('development.ts', true);
   }
 
