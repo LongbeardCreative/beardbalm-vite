@@ -1,0 +1,47 @@
+name: Deploy to Kinsta
+
+on:
+  workflow_call:
+    secrets:
+      SSH_HOST:
+        required: true
+      SSH_USERNAME:
+        required: true
+      SSH_PASSWORD:
+        required: true
+      REMOTE_TARGET:
+        required: true
+      DEPENDENCY_PATH:
+        required: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Checks git branch name
+        id: git-branch-name
+        uses: EthanSK/git-branch-name-action@v1
+
+      - name: Run git pull & build dependencies on target server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ env.GIT_BRANCH_NAME == 'main' && secrets.SSH_PORT || secrets.SSH_PORT_STAGING }}
+          script: |
+            cd ${{ secrets.REMOTE_TARGET }}
+            git fetch https://${{ secrets.PAT }}@github.com/${{ github.repository }}.git ${{ env.GIT_BRANCH_NAME }}
+            git checkout ${{ env.GIT_BRANCH_NAME }}
+            git pull https://${{ secrets.PAT }}@github.com/${{ github.repository }}.git ${{ env.GIT_BRANCH_NAME }}
+            cd ${{ secrets.DEPENDENCY_PATH || 'wp-content/themes/beardbalm' }}
+            composer install
+            rm -rf node_modules
+            npm install
+            npm run build
+            wp kinsta cache purge
+            wp kinsta cache purge --object
