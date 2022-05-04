@@ -1,0 +1,10 @@
+name: Deploy to Kinsta
+
+on:
+  push:
+    branches: [main, staging]
+
+jobs:
+  deploy:
+    uses: LongbeardCreative/beardbalm-vite/.github/workflows/deploy.yml@main
+    secrets: inherit
