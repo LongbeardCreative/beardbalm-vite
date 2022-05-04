@@ -43,5 +43,6 @@ jobs:
             rm -rf node_modules
             npm install
             npm run build
+            wp cache flush
             wp kinsta cache purge
             wp kinsta cache purge --object
