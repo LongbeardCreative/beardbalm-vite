@@ -35,7 +35,6 @@ jobs:
           port: ${{ env.GIT_BRANCH_NAME == 'main' && secrets.SSH_PORT || secrets.SSH_PORT_STAGING }}
           script: |
             cd ${{ secrets.REMOTE_TARGET }}
-            git init
             git fetch https://${{ secrets.PAT }}@github.com/${{ github.repository }}.git ${{ env.GIT_BRANCH_NAME }}
             git checkout ${{ env.GIT_BRANCH_NAME }}
             git pull https://${{ secrets.PAT }}@github.com/${{ github.repository }}.git ${{ env.GIT_BRANCH_NAME }}
