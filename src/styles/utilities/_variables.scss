@@ -25,6 +25,9 @@ $lg-margin: 5.21%;
 $icons-dir: '/wp-content/themes/beardbalm/src/assets/icons/';
 $images-dir: '/wp-content/themes/beardbalm/src/assets/images/';
 
+// Needs to be in Hex, without #. Used for SVGs, etc.
+$color-primary: cb0000;
+
 :root {
   // Colors
   --red-hsl: 0deg 100% 40%;
@@ -98,6 +101,12 @@ $images-dir: '/wp-content/themes/beardbalm/src/assets/images/';
 
   // Spacings
   --container-margin: 1rem;
+  --section-break: 3.5rem;
+  --content-break: 2.5rem;
+  --page-break: var(--content-break);
+  --p-break: 1.5rem;
+  --h-break: 0.75em;
+  --li-break: 0.75rem;
 
   @include breakpoint($mobile-sm) {
     --container-margin: 5.263%;
@@ -105,13 +114,26 @@ $images-dir: '/wp-content/themes/beardbalm/src/assets/images/';
 
   @include breakpoint($tablet-sm) {
     --container-margin: 4.167%;
+    --section-break: 4.5rem;
   }
 
   @include breakpoint($laptop-sm) {
     --container-margin: 6.25%;
+    --section-break: 6rem;
+    --content-break: 3rem;
+  }
+
+  @include breakpoint($laptop) {
+    --content-break: 4rem;
   }
 
   @include breakpoint($laptop-lg) {
     --container-margin: 5.21%;
+    --section-break: 7.5rem;
+    --page-break: 5rem;
+  }
+
+  @include breakpoint($desktop) {
+    --container-margin: calc(50vw - 860px);
   }
 }

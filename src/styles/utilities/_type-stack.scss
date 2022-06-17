@@ -7,81 +7,51 @@ Stylesheet: Typography
 /*********************
 FONT FACE
 *********************/
-// font stacks
-$sans-serif: 'Helvetica Neue', helvetica, arial, sans-serif;
-$serif: 'Georgia', cambria, times new roman, times, serif;
-$primary: arial;
-$secondary: times new roman;
 
-// theme fonts
-$body-font: 400 1rem / 1.5em var(--font-secondary);
-$h1: 700 1.75rem / 1em $primary, $sans-serif;
-$h2: 700 1.625rem / 1.25em $primary, $sans-serif;
-$h3: 600 1.5rem / 1.25em $primary, $sans-serif;
-$h4: 500 1.125rem / 1.4em $secondary, $sans-serif;
-$h5: 600 1.125rem / 1.4em $secondary, $sans-serif;
-$h6: 500 1rem / 1.5em $secondary, $sans-serif;
+@mixin body-font {
+  font-size: var(--font-size-0);
+  font-family: var(--font-secondary);
+  line-height: 1.5;
+}
 
 @mixin h1 {
-  font-size: var(--font-size-5);
+  font-size: var(--font-size-3);
   font-family: var(--font-primary);
   line-height: 1.25;
+  font-weight: 700;
 }
 
 @mixin h2 {
-  font-size: var(--font-size-4);
+  font-size: var(--font-size-3);
   font-family: var(--font-primary);
   line-height: 1.25;
+  font-weight: 700;
 }
 
 @mixin h3 {
-  font: $h3;
-
-  @include breakpoint($tablet-sm) {
-    font-size: 1.5rem;
-  }
-
-  @include breakpoint($laptop-lg) {
-    font-size: 1.75rem;
-  }
-
-  @include breakpoint($desktop) {
-    font-size: 2rem;
-  }
+  font-size: var(--font-size-2);
+  font-family: var(--font-primary);
+  line-height: 1.25;
+  font-weight: 700;
 }
 
 @mixin h4 {
-  font: $h4;
-
-  @include breakpoint($tablet-sm) {
-    font-size: 1.25rem;
-  }
-
-  @include breakpoint($laptop-sm) {
-    font-size: 1.375rem;
-  }
-
-  @include breakpoint($desktop) {
-    font-size: 1.625rem;
-  }
+  font-size: var(--font-size-1);
+  font-family: var(--font-primary);
+  line-height: 1.5;
+  font-weight: 700;
 }
 
 @mixin h5 {
-  font: $h5;
-
-  @include breakpoint($laptop-sm) {
-    font-size: 1.25rem;
-  }
+  font-size: var(--font-size-0);
+  font-family: var(--font-primary);
+  line-height: 1.5;
+  font-weight: 600;
 }
 
 @mixin h6 {
-  font: $h6;
-
-  @include breakpoint($laptop-sm) {
-    font-size: 1.125rem;
-  }
-
-  @include breakpoint($desktop) {
-    font-size: 1.25rem;
-  }
+  font-size: var(--font-size-00);
+  font-family: var(--font-primary);
+  line-height: 1.5;
+  font-weight: 600;
 }

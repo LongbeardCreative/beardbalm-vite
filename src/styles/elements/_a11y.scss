@@ -3,6 +3,19 @@ Stylesheet: A11Y (Accessibility)
 @since 1.0.0
 @updated 1.0.0
 ******************************************************************/
+// Focus styles
+*:not(:active):focus-visible {
+  outline-offset: 4px;
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition-duration: 0.25s;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  *:focus-visible {
+    transition: outline-offset 145ms cubic-bezier(0.25, 0, 0.4, 1);
+  }
+}
 
 body.is-mouse {
   *:active,

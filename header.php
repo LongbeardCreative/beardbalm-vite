@@ -66,10 +66,10 @@
 	<div id="page" class="site">
 		<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e('Skip to content', 'beardbalm'); ?></a>
 		<header id="masthead" class="header">
-			<?php if ('' === locate_template('template-parts/header-top.php', true, false))
-				include('template-parts/header-top.php'); ?>
-			<?php if ('' === locate_template('template-parts/header-bottom.php', true, false))
-				include('template-parts/header-bottom.php'); ?>
+			<?php if ('' === locate_template('template-parts/header/header-top.php', true, false))
+				include('template-parts/header/header-top.php'); ?>
+			<?php if ('' === locate_template('template-parts/header/header-bottom.php', true, false))
+				include('template-parts/header/header-bottom.php'); ?>
 		</header><!-- #masthead -->
 
 		<div id="content" class="site-content">

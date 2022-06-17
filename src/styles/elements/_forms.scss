@@ -1,369 +1,167 @@
-/******************************************************************
-Stylesheet: Gravity Form Styles
+:root {
+  --input-padding-top: 0.75rem;
+  --input-padding-right: 1rem;
+  --input-padding-bottom: 0.75rem;
+  --input-padding-left: 1rem;
+  --color-input: var(--color-p);
+  --color-input-bg: var(--white);
+  --form-field-gap: var(--size-2);
+  --select-dropdown-arrow-right: var(--size-2);
+  --input-radio-checkbox-size: 1rem;
+  --input-radio-checkbox-gap: var(--size-1);
 
-For universal gravity forms style overrides. For individual page form overrides please use the specific page SCSS file.
-
-This is not an exhaustive list. 
-For other GF CSS classes, go here: https://www.gravityhelp.com/documentation/article/css-targeting-samples/
-
-@since 1.0.0
-@updated 1.0.0
-******************************************************************/
-%checkbox-custom-input {
-  display: inline-block;
-  position: relative;
-  padding-left: 1.25em;
-  margin-right: 0;
-  cursor: pointer;
-
-  // color: var(--color-primary);
-
-  &::before {
-    width: 0.65em;
-    height: 0.65em;
-    content: '';
-    position: absolute;
-    top: 0.425em;
-    left: 0;
-    border: 1px solid var(--color-p);
-  }
-
-  &::after {
-    width: 0.55em;
-    height: 0.55em;
-    content: '';
-    position: absolute;
-    background: url(#{$icons-dir}checkmark.svg) transparent no-repeat center
-      center;
-    background-size: contain;
-    top: 0.5em;
-    left: 0.15rem;
-    opacity: 0;
-    transition: var(--transition);
+  @include breakpoint($laptop-sm) {
+    --input-padding-top: 0.75rem;
+    --input-padding-right: 1.25rem;
+    --input-padding-bottom: 0.75rem;
+    --input-padding-left: 1.25rem;
   }
 }
 
-%checkbox-custom-input-checked {
-  &::before {
-    background-color: var(--color-primary);
-  }
-
-  &::after {
-    opacity: 1;
-  }
-}
-
-%radio-custom-input {
-  display: inline-flex;
-  position: relative;
-  padding-left: 1.5em;
-  line-height: 1;
-  cursor: pointer;
-
-  &::before {
-    box-sizing: border-box;
-    width: 1em;
-    height: 1em;
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: var(--color-primary);
-    border: 0;
-    border-radius: 50%;
-    transition: var(--transition);
-  }
-
-  &::after {
-    width: 0.6em;
-    height: 0.6em;
-    content: '';
-    position: absolute;
-    background: var(--color-primary);
-    background-size: cover !important;
-    background-position: center !important;
-    top: 0.2em;
-    left: 0.2em;
-    opacity: 0;
-    transition: var(--transition);
-    border-radius: 100%;
-  }
-
-  &:hover {
-    &::after {
-      opacity: 0.4;
-    }
-  }
-}
-
-%radio-custom-input-checked {
-  &::after {
-    opacity: 1;
-  }
-}
-
-input {
-  &[type='search'] {
-    &::-webkit-search-cancel-button {
-      position: relative;
-      right: 10px;
-      appearance: none;
-      height: 10px;
-      width: 10px;
-      background-image: url("data:image/svg+xml,%3Csvg width='19' height='16' viewBox='0 0 19 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.838235 16C0.598739 16 0.39916 15.9385 0.239496 15.8154C0.079832 15.6923 0 15.5385 0 15.3538C0 15.1692 0.0931372 14.9744 0.279412 14.7692L7.22479 7.81538L0.718487 1.2C0.505602 0.974359 0.39916 0.789744 0.39916 0.646154C0.39916 0.461539 0.478992 0.307693 0.638655 0.184617C0.82493 0.0615389 1.02451 0 1.23739 0H3.15336C3.55252 0 3.89846 0.164103 4.19118 0.492309L9.57983 5.87692L14.9685 0.492309C15.1281 0.328206 15.2745 0.205128 15.4076 0.123077C15.5672 0.0410255 15.7668 0 16.0063 0H17.8424C18.0553 0 18.2416 0.0615389 18.4013 0.184617C18.5609 0.307693 18.6408 0.451283 18.6408 0.615386C18.6408 0.820514 18.5476 1.01538 18.3613 1.2L11.7752 7.87692L18.7206 14.7692C18.9069 14.9744 19 15.1692 19 15.3538C19 15.5385 18.9202 15.6923 18.7605 15.8154C18.6008 15.9385 18.4013 16 18.1618 16H16.2059C15.8067 16 15.4608 15.8462 15.1681 15.5385L9.46008 9.84615L3.7521 15.5385C3.59244 15.6821 3.43277 15.7949 3.27311 15.8769C3.14006 15.959 2.95378 16 2.71429 16H0.838235Z' fill='%2338455b'/%3E%3C/svg%3E");
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center center;
-
-      // opacity: 0.75;
-    }
-  }
-}
-
-.ginput_container_radio {
-  overflow: visible;
-  width: 100%;
-
-  .gfield_radio {
-    display: flex;
-    flex-flow: wrap;
-    margin: -0.5625rem;
-
-    @include breakpoint($tablet-sm) {
-      margin: -0.5625rem -1rem;
-    }
-
-    .gchoice {
-      display: flex;
-      box-sizing: border-box;
-      padding: 0.5625rem;
-      position: relative;
-
-      @include breakpoint($tablet-sm) {
-        padding: 0.5625rem 1rem;
-      }
-
-      label {
-        @extend %radio-custom-input;
-
-        font-size: 1rem;
-        font-weight: 600;
-        color: var(--color-primary);
-
-        @include breakpoint($laptop-sm) {
-          font-size: 1.125rem;
-        }
-      }
-
-      input[type='radio'] {
-        border: 0;
-        clip: rect(1px, 1px, 1px, 1px);
-        clip-path: inset(50%);
-        height: 1px;
-        margin: -1px;
-        overflow: hidden;
-        padding: 0;
-        position: absolute;
-        width: 1px;
-        word-wrap: normal !important;
-
-        &:focus-visible + label::before {
-          outline: 3px auto Highlight;
-          outline: 3px auto -webkit-focus-ring-color;
-        }
-
-        &:checked {
-          + label {
-            @extend %radio-custom-input-checked;
-          }
-        }
-      }
-
-      input[id*='other'] {
-        width: 100%;
-        margin-right: 0;
-        margin-top: calc((-30px + 1em) * 0.5);
-        margin-left: 0;
-      }
-    }
-  }
-}
-
-// Consent / Checkbox
-.gfield_checkbox > .gchoice,
-.ginput_container_consent {
-  input {
-    @extend %screen-reader-text;
-
-    &:focus-visible + label::before {
-      box-shadow: 0 0 0 3px var(--color-primary);
-      outline: 3px solid transparent; /* For Windows high contrast mode. */
-    }
-
-    &:checked + label {
-      @extend %checkbox-custom-input-checked;
-    }
-  }
-
-  label {
-    @extend %checkbox-custom-input;
-
-    font-size: 0.875rem;
-    line-height: 1.5;
-
-    // a {
-    //   @extend %checkbox-link;
-    // }
-
-    &:hover {
-      &::after {
-        opacity: 0.4;
-      }
-    }
-  }
-}
-
-.gform_ajax_spinner {
-  max-width: 15px !important;
-  max-height: 15px !important;
-  position: absolute;
-  right: -1.5rem;
-  top: calc(50% - 7.5px);
-  opacity: 0.9;
-  animation: rotate linear 1.5s infinite;
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(359deg);
-  }
-}
-
-// To prevent the invisible recaptcha badge from disappearing behind content.
-.recaptcha,
-.ginput_recaptcha {
-  z-index: 9999;
-  display: none;
-}
-
-input:not([type='submit']),
+// Base Form Input Styles
+input[type='text'],
+input[type='email'],
+input[type='url'],
+input[type='date'],
+input[type='tel'],
+input[type='password'],
+input[type='search'],
+input[type='number'],
 select,
 textarea {
-  font: $body-font;
-  border: 0;
+  @include body-font;
+
+  border: 2px solid var(--color-input-bg);
+  border-radius: 0;
   color: var(--color-p);
-  padding: 0.5rem 0.75rem;
-  transition: background var(--transition);
+  padding: var(--input-padding-top) var(--input-padding-right)
+    var(--input-padding-bottom) var(--input-padding-left);
+  transition: background var(--transition), border var(--transition);
   display: block;
-  background: var(--white);
+  background: var(--color-input-bg);
   box-shadow: var(--shadow-1);
+  appearance: none;
 
   &::placeholder {
-    color: rgb(var(--color-p) 0.7);
-
-    // transition: color var(--transition);
+    color: hsl(var(--color-p-hsl) / 50%);
   }
 
-  // &:focus {
-  //   // background: rgba($color7, 0.5);
-  //   // box-shadow: inset 0px 1px 5px rgba(var(--white), 0.8),
-  //   //   inset 0px 1px 5px -18px rgba(var(--color-primary), 0.8);
+  &:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
 
-  //   &::placeholder {
-  //     color: rgba(var(--color-p), 0.65);
-  //   }
-  // }
+    // Custom focus styles
+    border: 2px solid var(--color-primary);
+  }
+
+  &[aria-invalid='true'] {
+    border: 1px solid var(--color-error);
+  }
+}
+
+select {
+  -moz-padding-start: calc(0.75rem - 3px);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-position: right 0.75rem center;
+  background-size: 1rem 0.75rem;
+  background-repeat: no-repeat;
+  padding-right: calc(var(--input-padding-right) + 1rem);
 }
 
 textarea {
-  resize: none;
+  resize: vertical;
   max-height: 8.375rem;
   width: 100%;
 
   @include breakpoint($tablet-sm) {
     max-height: 13.75rem;
   }
+}
 
-  &.small {
-    max-height: 5.5rem;
+fieldset {
+  border: 0;
+  padding: inherit;
+}
 
-    @include breakpoint($laptop-lg) {
-      max-height: 6.25rem;
-    }
+label {
+  @include body-font;
+}
+
+// Radios & Checkboxes
+
+%input-radio-checkbox-common {
+  width: var(--input-radio-checkbox-size);
+  height: var(--input-radio-checkbox-size);
+  color: var(--color-accent);
+  background-color: var(--color-input-bg);
+  border: 2px solid var(--color-p);
+  background-repeat: no-repeat;
+  background-size: 0.5rem 0.5rem;
+  background-position: center center;
+  appearance: none;
+  display: inline-block;
+  padding: 0;
+  margin-right: 0.5rem;
+}
+
+%input-radio {
+  @extend %input-radio-checkbox-common;
+
+  border-radius: 50%;
+
+  &:checked {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 17 16'%3E%3Ccircle cx='8.509' cy='8' r='8' fill='%23#{$color-primary}'/%3E%3C/svg%3E");
   }
 }
 
-.gform_wrapper {
-  position: relative;
+%input-checkbox {
+  @extend %input-radio-checkbox-common;
 
-  .gform_footer {
-    display: flex;
-    justify-content: flex-end;
+  &:checked {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 16'%3E%3Cpath fill='%23#{$color-primary}' d='M15.479 2.29a1.78 1.78 0 0 1 0 2.518l-8.901 8.901a1.78 1.78 0 0 1-2.518 0L.5 10.15A1.78 1.78 0 0 1 3.017 7.63l2.302 2.302 7.642-7.642a1.78 1.78 0 0 1 2.518 0Z'/%3E%3C/svg%3E");
+  }
+}
+
+input[type='radio'] {
+  @extend %input-radio;
+}
+
+input[type='checkbox'] {
+  @extend %input-checkbox;
+}
+
+// Search
+
+input[type='search'] {
+  &::-webkit-search-cancel-button {
     position: relative;
+    right: 0.75rem;
+    appearance: none;
+    height: 0.75rem;
+    width: 0.75rem;
+    background-image: url("data:image/svg+xml,%3Csvg width='19' height='16' viewBox='0 0 19 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.838235 16C0.598739 16 0.39916 15.9385 0.239496 15.8154C0.079832 15.6923 0 15.5385 0 15.3538C0 15.1692 0.0931372 14.9744 0.279412 14.7692L7.22479 7.81538L0.718487 1.2C0.505602 0.974359 0.39916 0.789744 0.39916 0.646154C0.39916 0.461539 0.478992 0.307693 0.638655 0.184617C0.82493 0.0615389 1.02451 0 1.23739 0H3.15336C3.55252 0 3.89846 0.164103 4.19118 0.492309L9.57983 5.87692L14.9685 0.492309C15.1281 0.328206 15.2745 0.205128 15.4076 0.123077C15.5672 0.0410255 15.7668 0 16.0063 0H17.8424C18.0553 0 18.2416 0.0615389 18.4013 0.184617C18.5609 0.307693 18.6408 0.451283 18.6408 0.615386C18.6408 0.820514 18.5476 1.01538 18.3613 1.2L11.7752 7.87692L18.7206 14.7692C18.9069 14.9744 19 15.1692 19 15.3538C19 15.5385 18.9202 15.6923 18.7605 15.8154C18.6008 15.9385 18.4013 16 18.1618 16H16.2059C15.8067 16 15.4608 15.8462 15.1681 15.5385L9.46008 9.84615L3.7521 15.5385C3.59244 15.6821 3.43277 15.7949 3.27311 15.8769C3.14006 15.959 2.95378 16 2.71429 16H0.838235Z' fill='%2338455b'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
   }
 }
 
-// Errors
-.gform_validation_errors {
-  color: var(--color-error);
-  padding: 1rem;
-  background-color: rgb(var(--color-error) 0.15);
-  margin-bottom: 1.5rem;
-}
-
-.gform_submission_error {
-  // @include h6;
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--color-error);
-}
-
-.gfield_description {
-  &.validation_message {
-    font-size: 0.75rem;
-    line-height: 1.25;
-    font-weight: 400;
-    color: var(--color-error);
-
-    // position: absolute;
-    // right: 15px;
-    // bottom: 15px;
-    text-align: right;
-
-    @include breakpoint($tablet-sm) {
-      font-size: 0.875rem;
-    }
+// File
+input[type='file'] {
+  &::-webkit-file-upload-button {
+    visibility: hidden;
+    width: 1rem;
   }
-}
 
-.gfield_error {
-  position: relative;
-
-  .ginput_container_consent {
-    input[type='checkbox']:not(:checked) {
-      + .gfield_consent_label {
-        color: var(--color-error);
-
-        a {
-          color: var(--color-error);
-        }
-      }
-    }
-
-    + .gfield_description.validation_message {
-      @extend %screen-reader-text;
-      @extend %screen-reader-text-focus;
-    }
+  &::before {
+    content: '';
+    display: inline-block;
+    height: 1.5rem;
+    width: 1rem;
+    background-image: url("data:image/svg+xml,%0A%3Csvg width='11' height='22' viewBox='0 0 11 22' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.5 5V16.5C9.5 18.71 7.71 20.5 5.5 20.5C3.29 20.5 1.5 18.71 1.5 16.5V4C1.5 2.62 2.62 1.5 4 1.5C5.38 1.5 6.5 2.62 6.5 4V14.5C6.5 15.05 6.05 15.5 5.5 15.5C4.95 15.5 4.5 15.05 4.5 14.5V5H3V14.5C3 15.88 4.12 17 5.5 17C6.88 17 8 15.88 8 14.5V4C8 1.79 6.21 0 4 0C1.79 0 0 1.79 0 4V16.5C0 19.54 2.46 22 5.5 22C8.54 22 11 19.54 11 16.5V5H9.5Z' fill='%23bed48c'/%3E%3C/svg%3E%0A");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    vertical-align: middle;
   }
-}
-
-.gfield_label {
-  font-weight: 500;
-  font-size: 1rem;
-  color: var(--color-primary);
-  margin-bottom: 0.5rem;
 }

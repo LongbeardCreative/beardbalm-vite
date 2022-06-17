@@ -5,15 +5,15 @@ Stylesheet: Global Header
 ******************************************************************/
 // This is the base font size that all typographic elements should be scaled to.
 html {
-  font-size: 16px;
+  font-size: 100%; // 16px
 }
 
 body {
-  font: $body-font;
+  @include body-font;
+
   font-size: 100%;
   color: var(--color-p);
-  color-adjust: economy;
-  -webkit-print-color-adjust: economy;
+  print-color-adjust: economy;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -94,51 +94,31 @@ WP STANDARD POST IMAGE & ALIGNMENTS
 }
 
 // Setting universal font styles
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-h1,
-h2,
-h3,
-h4,
-h5 {
-  text-rendering: optimizeLegibility;
-}
-
 h1,
 .h1 {
   @include h1;
-
-  &:not(:last-child),
-  &.m-b {
-    margin-bottom: 0.5em;
-  }
 }
 
 h2,
 .h2 {
   @include h2;
-
-  &:not(:last-child),
-  &.m-b {
-    margin-bottom: 0.5em;
-  }
 }
 
 h3,
 .h3 {
+  --h-break: 1em;
   @include h3;
 }
 
 h4,
 .h4 {
+  --h-break: 1em;
   @include h4;
 }
 
 h5,
 .h5 {
+  --h-break: 1em;
   @include h5;
 }
 
@@ -147,8 +127,38 @@ h6,
   @include h6;
 }
 
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-rendering: optimizelegibility;
+  margin-top: 0;
+  margin-bottom: var(--h-break);
+
+  &.mb {
+    margin-bottom: var(--h-break);
+  }
+
+  &:last-child:not(.mb) {
+    margin-bottom: 0;
+  }
+
+  p + &,
+  ul + & {
+    margin-top: calc(var(--h-break) * 2);
+  }
+}
+
 p {
-  font: $body-font;
+  @include body-font;
 
   // -ms-word-wrap: break-word;
   // word-break: break-word;
@@ -159,11 +169,267 @@ p {
   }
 }
 
-.narrow {
-  max-inline-size: var(--size-content-3);
+small,
+.small {
+  font-size: var(--font-size-00);
+}
+
+table {
+  border-collapse: collapse;
+  margin: -0.25rem -0.75rem;
+  margin-bottom: calc(var(--p-break) - 0.25rem);
+
+  &:last-child {
+    margin-bottom: -0.25rem;
+  }
+
+  th,
+  td {
+    padding: 0.25rem 0.75rem;
+    vertical-align: top;
+
+    strong {
+      font-weight: 600;
+    }
+  }
+}
+
+address {
+  font-style: normal;
+}
+
+blockquote {
+  margin-bottom: var(--p-break);
+  font-size: var(--font-size-1);
+  font-weight: 600;
+  position: relative;
+  padding-left: 0;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 2rem;
+    width: 2rem;
+    background-color: var(--green-0);
+    z-index: -1;
+    border-radius: 0.25rem;
+    transform: translate(-50%, -25%);
+  }
+
+  &::before {
+    top: -0.5rem;
+    left: 0.5rem;
+    background-color: var(--yellow-0);
+  }
+
+  > p {
+    font-size: inherit;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  > cite {
+    font-size: var(--font-size-0);
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  &.wp-block-quote {
+    padding-left: 1.75em;
+
+    &::before {
+      content: '“';
+      font-size: 3em;
+      height: auto;
+      width: auto;
+      background-color: transparent;
+      border-radius: 0;
+      transform: none;
+      line-height: 0.85;
+      color: var(--green-2);
+      top: 0;
+      left: 0;
+    }
+
+    &::after {
+      content: none;
+    }
+  }
+}
+
+img,
+video,
+audio,
+iframe {
+  max-width: 100%;
+}
+
+img {
+  height: auto;
 }
 
 ::selection {
   background: var(--color-accent);
   color: var(--white);
+}
+
+// Type Utilities
+.narrow {
+  max-inline-size: var(--size-content-3);
+}
+
+.narrow-col {
+  @include breakpoint($tablet-sm) {
+    column-count: 2;
+    column-gap: 2.5rem;
+  }
+
+  > * {
+    max-inline-size: var(--size-content-3);
+  }
+
+  &-md {
+    @include breakpoint($laptop-sm) {
+      column-count: 2;
+      column-gap: 2.5rem;
+    }
+
+    > * {
+      max-inline-size: var(--size-content-3);
+    }
+  }
+}
+
+.align-right {
+  text-align: right;
+}
+
+.text-block {
+  ol {
+    counter-reset: item;
+
+    > li {
+      &::before {
+        content: counter(item) '.';
+        counter-increment: item;
+      }
+
+      ol {
+        li::before {
+          content: counter(item, lower-latin) '.';
+        }
+      }
+    }
+  }
+
+  ul {
+    > li {
+      &::before {
+        content: '•';
+        font-weight: bold;
+        color: var(--color-p);
+      }
+
+      > ul {
+        > li {
+          &::before {
+            content: '–';
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+
+  ol,
+  ul {
+    list-style: none;
+    margin-bottom: var(--p-break);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    > li {
+      position: relative;
+      padding-left: 1.5em;
+      margin-bottom: var(--li-break);
+
+      &::before {
+        width: 1em;
+        text-align: left;
+        position: absolute;
+        left: 0.25em;
+      }
+
+      > ol,
+      > ul {
+        margin-top: var(--li-break);
+      }
+    }
+
+    &.no-bullets {
+      > li {
+        padding-left: 0;
+
+        &::before {
+          content: none;
+        }
+      }
+    }
+  }
+
+  a {
+    &:not(.button) {
+      --color-link-hover: var(--green-3);
+
+      text-decoration: underline;
+
+      &[target='_blank'] {
+        @include external-link;
+      }
+    }
+  }
+}
+
+.skeleton {
+  background: var(--light-grey);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(
+      90deg,
+      hsl(var(--white-hsl) / 0%) 0,
+      hsl(var(--white-hsl) / 30%) 30%,
+      hsl(var(--white-hsl) / 60%) 60%,
+      hsl(var(--white-hsl) / 0%) 100%
+    );
+    z-index: 1;
+    animation: shimmer 1.5s infinite;
+    transform: translateX(-100%);
+
+    @at-root {
+      @keyframes shimmer {
+        100% {
+          transform: translateX(100%);
+        }
+      }
+    }
+  }
 }

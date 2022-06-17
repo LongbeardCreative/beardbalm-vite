@@ -1,0 +1,58 @@
+:root {
+  --contact-info-color-link: var(--color-p);
+  --contact-info-color-link-hover: var(--green-3);
+  --contact-info-color-icon: var(--color-p);
+}
+
+.contact-info {
+  --font-weight-link: 400;
+
+  list-style: none;
+
+  a,
+  button {
+    color: var(--contact-info-color-link);
+    transition: color var(--transition);
+
+    &:hover,
+    &:focus {
+      color: var(--contact-info-color-link-hover);
+    }
+  }
+
+  a[href^='mailto'] {
+    word-break: break-all;
+  }
+
+  &__inner {
+    display: flex;
+    align-items: flex-start;
+    text-align: left;
+    line-height: 1.5;
+  }
+
+  &__icon {
+    display: flex;
+    margin-right: 0.5em;
+
+    svg {
+      height: 1.5em;
+      width: 1.5em;
+      min-width: 1.5em;
+      color: var(--contact-info-color-icon);
+    }
+  }
+}
+
+.contact-info-list {
+  list-style: none;
+  display: flex;
+  flex-flow: wrap;
+  margin: -0.5rem -1rem;
+
+  li {
+    padding: 0.5rem 1rem;
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}

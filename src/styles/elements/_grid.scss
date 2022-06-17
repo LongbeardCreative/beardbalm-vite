@@ -13,13 +13,17 @@ $flexboxgrid-outer-margin: var(--container-margin) !default;
 // Syntax:
 // name SIZErem CONTAINERrem,
 $flexboxgrid-breakpoints: sm list.nth($tablet-sm, 2) 100%,
-  md list.nth($laptop-sm, 2) 100%, lg list.nth($laptop-lg, 2) 100% !default; // using list.nth ($var, 2) to strip min-width
+  md list.nth($laptop-sm, 2) 100%, lg list.nth($laptop, 2) 100% !default; // using list.nth ($var, 2) to strip min-width
 $flexboxgrid-max-width: 1200px !default;
 
 // -- Stop editing -- //
 
-$gutter-compensation: $flexboxgrid-gutter-width * 0.5 * -1;
 $half-gutter-width: $flexboxgrid-gutter-width * 0.5;
+
+:root {
+  --grid-gutter: #{$half-gutter-width};
+  --grid-col-width: 100%;
+}
 
 .wrapper {
   box-sizing: border-box;
@@ -44,12 +48,17 @@ $half-gutter-width: $flexboxgrid-gutter-width * 0.5;
   display: flex;
   flex: 0 1 auto;
   flex-flow: row wrap;
-  margin-right: $gutter-compensation;
-  margin-left: $gutter-compensation;
+  margin-right: calc(var(--grid-gutter) * -1);
+  margin-left: calc(var(--grid-gutter) * -1);
+
+  &.container {
+    width: calc(100% + var(--grid-gutter) * 2);
+  }
 }
 
 .row.reverse {
-  flex-direction: row-reverse;
+  flex-flow: row-reverse;
+  justify-content: flex-end;
 }
 
 .col.reverse {
@@ -67,8 +76,8 @@ $half-gutter-width: $flexboxgrid-gutter-width * 0.5;
   // in some spots we need it and some we dont
   // more why here: https://github.com/kristoferjoseph/flexboxgrid/issues/126
 
-  padding-right: $half-gutter-width;
-  padding-left: $half-gutter-width;
+  padding-right: var(--grid-gutter);
+  padding-left: var(--grid-gutter);
 }
 
 $name: xs;
@@ -139,6 +148,17 @@ $name: xs;
 
 .last-#{$name} {
   order: 1;
+}
+
+.reverse-#{$name} {
+  &.row {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+
+  &.col {
+    flex-direction: column-reverse;
+  }
 }
 
 .hide-#{$name} {
@@ -228,6 +248,17 @@ $name: xs;
 
     .last-#{$name} {
       order: 1;
+    }
+
+    .reverse-#{$name} {
+      &.row {
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+      }
+
+      &.col {
+        flex-direction: column-reverse;
+      }
     }
 
     .hide-#{$name} {
