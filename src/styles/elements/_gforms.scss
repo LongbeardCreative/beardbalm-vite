@@ -374,6 +374,10 @@ $collapse-bp-lg: $laptop-lg; // when 25% fields no longer collapses
   margin-bottom: 0.5rem;
 }
 
+legend.gfield_label {
+  padding-top: 0.5em;
+}
+
 // Main Layout
 .gform_wrapper {
   position: relative;
