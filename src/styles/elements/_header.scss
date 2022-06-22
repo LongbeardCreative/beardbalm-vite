@@ -10,7 +10,8 @@ Commons
 
 :root {
   --menu-spacing: 1.5rem;
-  --hamburger-height: 12px;
+  --hamburger-height: 1rem;
+  --hamburger-width: 1.5rem;
   --hamburger-bar-height: 2px;
   --hamburger-bar-color: var(--color-primary);
   --hamburger-bar-color-hover: var(--color-primary);
@@ -370,7 +371,7 @@ Hamburger Menu Toggle
   }
 
   .menu-hamburger {
-    width: 18px;
+    width: var(--hamburger-width);
     height: var(--hamburger-height);
     position: relative;
     transform: rotate(0deg);
