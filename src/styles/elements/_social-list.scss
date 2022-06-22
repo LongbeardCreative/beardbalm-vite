@@ -1,0 +1,26 @@
+.social-list {
+  --color-link-hover: var(--green-3);
+  --link-decoration: none;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-flow: wrap;
+    align-items: center;
+    margin: calc(var(--size-1) * -1);
+
+    li {
+      padding: var(--size-1);
+    }
+
+    svg {
+      height: var(--size-2);
+      transition: color var(--transition);
+    }
+
+    a {
+      display: flex;
+    }
+  }
+}

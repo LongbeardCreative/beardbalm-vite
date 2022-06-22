@@ -1,100 +1,91 @@
 {
-    "key": "group_5e98ce21b0f3b",
-    "title": "Social Media",
-    "fields": [
+  "key": "group_5e98ce21b0f3b",
+  "title": "Social Media",
+  "fields": [
+    {
+      "key": "field_5e98ce4067833",
+      "label": "Social Media Platform",
+      "name": "social_media_platform",
+      "type": "repeater",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "return_format": "id",
+      "collapsed": "",
+      "min": 0,
+      "max": 0,
+      "layout": "table",
+      "button_label": "",
+      "sub_fields": [
         {
-            "key": "field_5e98ce4067833",
-            "label": "Social Media Platform",
-            "name": "social_media_platform",
-            "type": "repeater",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "id",
-            "collapsed": "",
-            "min": 0,
-            "max": 0,
-            "layout": "table",
-            "button_label": "",
-            "sub_fields": [
-                {
-                    "key": "field_5e98ce6f67834",
-                    "label": "Name",
-                    "name": "name",
-                    "type": "text",
-                    "instructions": "Ie. Facebook",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                },
-                {
-                    "key": "field_5e98ce7667835",
-                    "label": "Icon",
-                    "name": "icon",
-                    "type": "text",
-                    "instructions": "SVG image code.",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                },
-                {
-                    "key": "field_5e98ce8e67836",
-                    "label": "Link",
-                    "name": "link",
-                    "type": "url",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": ""
-                }
-            ]
+          "key": "field_5e98ce6f67834",
+          "label": "Name",
+          "name": "name",
+          "type": "select",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "choices": {
+            "facebook": "Facebook",
+            "twitter": "Twitter",
+            "youtube": "YouTube",
+            "linkedin": "LinkedIn",
+            "instagram": "Instagram"
+          },
+          "default_value": false,
+          "allow_null": 0,
+          "multiple": 0,
+          "ui": 0,
+          "return_format": "value",
+          "ajax": 0,
+          "placeholder": ""
+        },
+        {
+          "key": "field_5e98ce8e67836",
+          "label": "Link",
+          "name": "link",
+          "type": "url",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+            "width": "",
+            "class": "",
+            "id": ""
+          },
+          "default_value": "",
+          "placeholder": ""
         }
-    ],
-    "location": [
-        [
-            {
-                "param": "options_page",
-                "operator": "==",
-                "value": "theme-general-settings"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "",
-    "modified": 1589982720
+      ]
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "options_page",
+        "operator": "==",
+        "value": "theme-general-settings"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": 0,
+  "modified": 1650470909
 }
