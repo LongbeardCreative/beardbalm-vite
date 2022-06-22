@@ -3,14 +3,9 @@
     <div class="col-xs-12 col-lg-10 col-lg-offset-1">
       <div class="header__top__inner">
         <div class="site-branding">
-          <a href="<?php echo esc_url(home_url('/')); ?>" rel="home">
-            <?php
-            $logo = get_field('header_logo', 'option');
-            $size = 'full';
-            if ($logo) {
-              echo wp_get_attachment_image($logo, $size);
-            }
-            ?></a>
+          <a href="<?php echo esc_url(home_url('/')); ?>" rel="home" class="header__logo">
+            <img src="<?php the_theme_image_src('logo.png'); ?>" alt="" width="120" height="120" />
+          </a>
         </div>
         <nav id="site-navigation" class="header__nav main-navigation end-xs middle-xs">
           <div class="hide-xs show-md">
