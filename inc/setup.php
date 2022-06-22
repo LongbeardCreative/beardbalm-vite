@@ -76,7 +76,7 @@ add_action('after_setup_theme', function () {
    */
   register_nav_menus(
     array(
-      'menu-1' => esc_html__('Primary', 'beardbalm'),
+      'menu-primary' => esc_html__('Primary', 'beardbalm'),
     )
   );
 });

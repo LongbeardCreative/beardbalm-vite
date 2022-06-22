@@ -181,7 +181,8 @@ export function isVisible(el: HTMLElement): boolean {
 // Removes 'active' class on an element on clicking outside of it
 export function hideOnClickOutside(
   element: HTMLElement,
-  wrapper?: HTMLElement
+  wrapper?: HTMLElement,
+  callback?: () => void
 ) {
   let elWrapper = wrapper;
 
@@ -201,6 +202,9 @@ export function hideOnClickOutside(
       // or use: event.target.closest(selector) === null
       // element.style.display = "none";
       element.classList.remove('active');
+      if (typeof callback === 'function') {
+        callback();
+      }
       removeClickListener(); // eslint-disable-line no-use-before-define
     }
   };

@@ -26,14 +26,14 @@ $icons-dir: '/wp-content/themes/beardbalm/src/assets/icons/';
 $images-dir: '/wp-content/themes/beardbalm/src/assets/images/';
 
 // Needs to be in Hex, without #. Used for SVGs, etc.
-$color-primary: cb0000;
+$color-primary: ebac00; // Gold
 
 :root {
   // Colors
-  --red-hsl: 0deg 100% 40%;
-  --gold-hsl: 51deg 100% 50%;
-  --red: hsl(var(--red-hsl));
+  --gold-hsl: 44deg 100% 46%;
   --gold: hsl(var(--gold-hsl));
+  --blue-hsl: 210deg 100% 28%;
+  --blue: hsl(var(--blue-hsl));
 
   // Grays
   @for $i from 0 through 9 {
@@ -45,9 +45,9 @@ $color-primary: cb0000;
   --black: hsl(var(--black-hsl));
   --white-hsl: 0deg 0% 100%;
   --white: hsl(var(--white-hsl));
-  --color-primary-hsl: var(--red-hsl);
+  --color-primary-hsl: var(--gold-hsl);
   --color-primary: hsl(var(--color-primary-hsl));
-  --color-accent-hsl: var(--gold-hsl);
+  --color-accent-hsl: var(--blue-hsl);
   --color-accent: hsl(var(--color-accent-hsl));
   --color-p: var(--gray-9);
   --color-error: #ff1654;
@@ -80,9 +80,30 @@ $color-primary: cb0000;
   }
 
   // Font sizes
-  @for $i from 0 through 8 {
+  @for $i from -1 through 6 {
+    $key: $i;
+
+    @if $key == -1 {
+      $key: '00';
+    }
+
     /* stylelint-disable-next-line custom-property-pattern */
-    --font-size-#{$i}: #{math.pow(1.333, $i) * 1rem};
+    --font-size-#{$key}: #{math.pow(1.125, $i) * 1rem};
+
+    @include breakpoint($tablet-sm) {
+      /* stylelint-disable-next-line custom-property-pattern */
+      --font-size-#{$key}: #{math.pow(1.2, $i) * 1rem};
+    }
+
+    @include breakpoint($laptop) {
+      /* stylelint-disable-next-line custom-property-pattern */
+      --font-size-#{$key}: #{math.pow(1.25, $i) * 1rem};
+    }
+
+    @include breakpoint($laptop-lg) {
+      /* stylelint-disable-next-line custom-property-pattern */
+      --font-size-#{$key}: #{math.pow(1.333, $i) * 1rem};
+    }
   }
 
   // Font Families

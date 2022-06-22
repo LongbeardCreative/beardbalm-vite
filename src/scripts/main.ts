@@ -17,6 +17,7 @@ import tabs from './lib/tabs';
  */
 import '../styles/style.scss';
 import formInput from './lib/formInput';
+import headerSearch from './lib/headerSearch';
 
 declare let jQuery: Function;
 
@@ -31,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
   horizontalScroll('.lb-tabs .tabs');
   modal();
   slider();
+  headerSearch();
 });
 
 if (typeof jQuery !== 'undefined') {

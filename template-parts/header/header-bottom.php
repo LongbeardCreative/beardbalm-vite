@@ -10,7 +10,7 @@
 
     <?php
     wp_nav_menu([
-        'theme_location' => 'menu-1',
+        'theme_location' => 'menu-primary',
         'menu_id'        => 'primary-menu-mobile',
         'menu_class'     => 'header__nav-mobile__menu menu',
         'link_before'    => '<span>',

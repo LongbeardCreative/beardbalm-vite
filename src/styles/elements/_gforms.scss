@@ -394,6 +394,22 @@ legend.gfield_label {
   }
 }
 
+// Field Description
+.gfield_description {
+  margin-top: 0.5rem;
+  font-size: var(--font-size-00);
+  text-align: right;
+
+  .gfield.field_description_above & {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.validation_message {
+  color: var(--color-error);
+}
+
 // // Errors
 // .gform_validation_errors {
 //   color: var(--color-error);

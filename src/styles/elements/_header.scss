@@ -9,18 +9,45 @@ Commons
 *********************/
 
 :root {
-  --menu-spacing: 1rem;
+  --menu-spacing: 1.5rem;
 
-  @include breakpoint($tablet-sm) {
-    --menu-spacing: 0.75rem;
+  @include breakpoint($laptop-sm) {
+    --menu-spacing: 1.5rem;
+  }
+
+  @include breakpoint($laptop-lg) {
+    --menu-spacing: 2.5rem;
   }
 }
 
 .menu-item {
-  font-weight: bold;
+  font-weight: 500;
   list-style: none;
+  white-space: nowrap;
 
-  &-has-children {
+  > a {
+    text-decoration: none;
+
+    &[target='_blank'] {
+      @include external-link;
+    }
+  }
+
+  &.current-menu-item,
+  &.current-page-ancestor,
+  &.current-menu-ancestor {
+    > a {
+      font-weight: 700;
+    }
+  }
+
+  &.menu-item-anchor {
+    > a {
+      font-weight: 500;
+    }
+  }
+
+  &.menu-item-has-children {
     --arrow-rotate: 0deg;
 
     position: relative;
@@ -28,7 +55,7 @@ Commons
     > a {
       display: inline-flex;
       position: relative;
-      padding-right: 1.75rem;
+      padding-right: 1.5rem;
 
       &::after {
         content: '';
@@ -74,13 +101,18 @@ Commons
 }
 
 ul.menu {
-  // display: flex;
+  display: flex;
   flex-flow: wrap;
+  justify-content: flex-start;
   padding: 0;
-  margin: calc(var(--menu-spacing) * -1);
+  margin: calc(var(--menu-spacing) * -0.25) calc(var(--menu-spacing) * -0.5);
 
   li {
-    padding: var(--menu-spacing);
+    padding: calc(var(--menu-spacing) * 0.25) calc(var(--menu-spacing) * 0.5);
+  }
+
+  @include breakpoint($laptop-sm) {
+    justify-content: flex-end;
   }
 }
 
@@ -106,6 +138,8 @@ Header
   // Main Navigation
   &__nav {
     padding: 2rem 0;
+    display: flex;
+    align-items: center;
   }
 
   // Mobile Navigation
@@ -159,6 +193,114 @@ Header
 
         > a {
           display: inline-flex;
+        }
+      }
+    }
+  }
+
+  &__search {
+    margin-left: calc(var(--menu-spacing) * 1);
+
+    @include breakpoint($laptop-sm) {
+      position: relative;
+    }
+
+    &__toggle {
+      display: flex;
+      align-items: center;
+      transition: var(--transition);
+
+      svg {
+        height: var(--size-3);
+        width: var(--size-3);
+      }
+
+      &:hover {
+        color: var(--color-accent);
+      }
+    }
+
+    &__box {
+      position: absolute;
+      top: 100%;
+      right: -1rem;
+      width: 100%;
+      min-width: 16rem;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      z-index: -1;
+      transition: opacity var(--transition);
+
+      @include breakpoint($mobile) {
+        min-width: 20rem;
+      }
+
+      &.active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        z-index: 10;
+      }
+
+      &__inner {
+        background-color: var(--white);
+        box-shadow: var(--shadow-1);
+        padding-top: 1rem;
+      }
+
+      form {
+        display: flex;
+        align-items: center;
+        width: 100%;
+      }
+    }
+
+    &__results {
+      padding: 0.5rem var(--input-padding-left);
+
+      ul {
+        list-style: none;
+      }
+
+      li {
+        text-align: left;
+      }
+
+      > ul {
+        border-top: 1px solid var(--green-0);
+        padding: 1rem 0;
+
+        > li {
+          &:not(:last-child) {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--green-0);
+          }
+        }
+
+        .post-type {
+          margin-bottom: 0.5rem;
+        }
+      }
+
+      a {
+        padding: 0.25rem 0;
+        display: flex;
+        font-weight: 500;
+      }
+
+      > ul.skeleton {
+        > li {
+          &:not(:last-child) {
+            border-bottom: 1px solid var(--green-0);
+          }
+
+          > ul {
+            > li {
+              margin-bottom: 5px;
+            }
+          }
         }
       }
     }

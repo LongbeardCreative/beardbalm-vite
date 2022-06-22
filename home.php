@@ -19,7 +19,7 @@ get_header();
 <div id="primary" class="content-area">
 	<main id="main" class="site-main">
 
-		<section class="container row section-m-t section-m-b">
+		<section class="container row mt-section mb-section">
 			<div class="col-xs-12 col-lg-10 col-lg-offset-1">
 				<h2>Accordions</h2>
 				<?php
@@ -38,13 +38,13 @@ get_header();
 
 			</div>
 		</section>
-		<section class="container row section-m-b">
+		<section class="container row mb-section">
 			<div class="col-xs-12 col-lg-10 col-lg-offset-1">
 				<h2>Gravity Forms</h2>
 				<?php echo do_shortcode('[gravityform id="1" ajax="true" title="false" description="false"]'); ?>
 			</div>
 		</section>
-		<section class="container row section-m-b">
+		<section class="container row mb-section">
 			<div class="col-xs-12 col-lg-10 col-lg-offset-1">
 				<h2>Read More</h2>
 				<div data-rm data-rm-xs="0" data-rm-sm="0" data-rm-md="1" data-rm-lg="1">
@@ -53,7 +53,7 @@ get_header();
 				</div>
 			</div>
 		</section>
-		<section class="container row section-m-b">
+		<section class="container row mb-section">
 			<div class="col-xs-12 col-lg-10 col-lg-offset-1">
 				<h2>Modal</h2>
 				<ul>
@@ -67,7 +67,7 @@ get_header();
 				</div>
 			</div>
 		</section>
-		<section class="container row section-m-b">
+		<section class="container row mb-section">
 			<div class="col-xs-12 col-lg-10 col-lg-offset-1">
 				<h2>Minimal Slider</h2>
 				<p class="narrow">This uses very minimal JS for the arrow navigation and CSS <code>scroll-snap</code> feature for easy snapping. The rest is good ol' <code>overflow</code>!</p>
@@ -84,7 +84,7 @@ get_header();
 				</div>
 			</div>
 		</section>
-		<section class="container row section-m-b">
+		<section class="container row mb-section">
 			<div class="col-xs-12 col-lg-10 col-lg-offset-1">
 				<h2>Tabs</h2>
 				<?php

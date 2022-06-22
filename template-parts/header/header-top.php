@@ -13,23 +13,27 @@
             ?></a>
         </div>
         <nav id="site-navigation" class="header__nav main-navigation end-xs middle-xs">
-          <?php wp_nav_menu([
-            'theme_location' => 'menu-1',
-            'menu_id'        => 'primary-menu',
-            'menu_class'     => 'header__menu menu hide-xs show-md--flex',
-            'link_before'    => '<span>',
-            'link_after'     => '</span>',
-          ]); ?>
-          <!-- <div id="site-search" class="header__search xs-hide md-show">
-            <button id="site-search-trigger" class="header__search__button menu-item">
+          <div class="hide-xs show-md">
+            <?php wp_nav_menu([
+              'theme_location' => 'menu-primary',
+              'menu_id'        => 'primary-menu',
+              'menu_class'     => 'header__menu menu hide-xs show-md--flex',
+              'link_before'    => '<span>',
+              'link_after'     => '</span>',
+            ]); ?>
+          </div>
+          <div id="site-search" class="header__search" data-js="header-search">
+            <button class="header__search__toggle" data-js="header-search-toggle">
               <?php the_svg('search'); ?>
-              <span class="header__search__label"><?php _e('Search', 'beardbalm'); ?></span>
+              <span class="header__search__label screen-reader-text"><?php _e('Search', 'beardbalm'); ?></span>
             </button>
-            <div id="site-search-box" class="header__search-box">
-              <?php get_search_form(); ?>
-              <div id="site-search-results" class="header__search-box__results"></div>
+            <div class="header__search__box container" data-js="header-search-box">
+              <div class="header__search__box__inner">
+                <?php get_template_part('template-parts/search-form', '', []); ?>
+                <div class="header__search__results" data-js="header-search-results"></div>
+              </div>
             </div>
-          </div> -->
+          </div>
           <button id="mobile-menu-toggle" class="menu-toggle show-xs--flex hide-md" aria-controls="primary-menu" aria-expanded="false">
             <span class="menu-toggle__label menu-toggle__label--close" style="display:none;"><?php esc_html_e('Close', 'beardbalm'); ?></span>
             <span class="menu-hamburger">

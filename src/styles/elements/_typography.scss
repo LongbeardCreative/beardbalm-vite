@@ -151,6 +151,14 @@ h6 {
     margin-bottom: 0;
   }
 
+  &.mt {
+    margin-top: calc(var(--h-break) * 1.5);
+  }
+
+  &:first-child:not(.mt) {
+    margin-top: 0;
+  }
+
   p + &,
   ul + & {
     margin-top: calc(var(--h-break) * 2);
@@ -167,6 +175,12 @@ p {
   &:not(:last-child) {
     margin-bottom: 1.5rem;
   }
+}
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
 }
 
 small,
@@ -402,7 +416,7 @@ img {
 }
 
 .skeleton {
-  background: var(--light-grey);
+  background: var(--gray-1);
   position: relative;
   overflow: hidden;
 

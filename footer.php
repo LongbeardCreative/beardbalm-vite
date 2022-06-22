@@ -16,9 +16,12 @@
 
 </div><!-- #content -->
 
-<footer id="footer" class="site-footer">
-
-</footer><!-- #footer -->
+<footer id="footer" class="footer">
+  <?php if ('' === locate_template('template-parts/footer/footer-top.php', true, false))
+    include('template-parts/footer/footer-top.php'); ?>
+  <?php if ('' === locate_template('template-parts/footer/footer-bottom.php', true, false))
+    include('template-parts/footer/footer-bottom.php'); ?>
+</footer>
 </div><!-- #page -->
 
 <?php wp_footer(); ?>
