@@ -10,6 +10,10 @@ Commons
 
 :root {
   --menu-spacing: 1.5rem;
+  --hamburger-height: 12px;
+  --hamburger-bar-height: 2px;
+  --hamburger-bar-color: var(--color-primary);
+  --hamburger-bar-color-hover: var(--color-primary);
 
   @include breakpoint($laptop-sm) {
     --menu-spacing: 1.5rem;
@@ -132,6 +136,36 @@ Header
       display: flex;
       align-items: center;
       justify-content: space-between;
+    }
+  }
+
+  &__logo {
+    &__link {
+      display: flex;
+      width: 100%;
+      max-width: 10rem;
+
+      @include breakpoint($mobile-lg) {
+        width: 10rem;
+        max-width: initial;
+      }
+
+      @include breakpoint($tablet-sm) {
+        width: 15rem;
+      }
+
+      @include breakpoint($laptop) {
+        width: 17rem;
+      }
+
+      @include breakpoint($laptop-lg) {
+        width: 18rem;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+      }
     }
   }
 
@@ -310,11 +344,6 @@ Header
 /*********************
 Hamburger Menu Toggle
 *********************/
-// hamburger vars
-$hamburger-height: 12px;
-$bar-height: 2px;
-$bar-color: var(--color-primary);
-$bar-color-hover: var(--color-primary);
 
 .menu-toggle {
   display: inline-flex;
@@ -342,7 +371,7 @@ $bar-color-hover: var(--color-primary);
 
   .menu-hamburger {
     width: 18px;
-    height: $hamburger-height;
+    height: var(--hamburger-height);
     position: relative;
     transform: rotate(0deg);
     transition: var(--transition);
@@ -352,9 +381,9 @@ $bar-color-hover: var(--color-primary);
     > span {
       display: block;
       position: absolute;
-      height: $bar-height;
+      height: var(--hamburger-bar-height);
       width: 100%;
-      background: $bar-color;
+      background-color: var(--hamburger-bar-color);
       opacity: 1;
       left: 0;
       transform: rotate(0deg);
@@ -366,18 +395,24 @@ $bar-color-hover: var(--color-primary);
 
       &:nth-child(2),
       &:nth-child(3) {
-        top: ($hamburger-height - ($bar-height * 3)) * 0.5 + $bar-height;
+        top: calc(
+          (var(--hamburger-height) - (var(--hamburger-bar-height) * 3)) * 0.5 +
+            var(--hamburger-bar-height)
+        );
       }
 
       &:nth-child(4) {
-        top: $hamburger-height - $bar-height;
+        top: calc(var(--hamburger-height) - var(--hamburger-bar-height));
       }
     }
   }
 
   &[aria-expanded='true'] .menu-hamburger > span {
     &:nth-child(1) {
-      top: ($hamburger-height - ($bar-height * 3)) * 0.5 + $bar-height;
+      top: calc(
+        (var(--hamburger-height) - (var(--hamburger-bar-height) * 3)) * 0.5 +
+          var(--hamburger-bar-height)
+      );
       width: 0%;
       left: 50%;
     }
@@ -391,7 +426,7 @@ $bar-color-hover: var(--color-primary);
     }
 
     &:nth-child(4) {
-      top: $hamburger-height - $bar-height;
+      top: calc(var(--hamburger-height) - var(--hamburger-bar-height));
       width: 0%;
       left: 50%;
     }
