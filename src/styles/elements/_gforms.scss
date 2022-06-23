@@ -525,8 +525,14 @@ legend.gfield_label {
   &.hidden_label label.gfield_label,
   .ginput_container_address > span label,
   .ginput_container_name > span label {
-    --left: calc(var(--form-field-gap) * 0.5 + var(--input-padding-left));
-    --right: calc(var(--form-field-gap) * 0.5 + var(--input-padding-right));
+    --left: calc(
+      var(--form-field-gap) * 0.5 + var(--input-padding-left) +
+        var(--input-border-width)
+    );
+    --right: calc(
+      var(--form-field-gap) * 0.5 + var(--input-padding-right) +
+        var(--input-border-width)
+    );
 
     position: absolute;
     left: var(--left);

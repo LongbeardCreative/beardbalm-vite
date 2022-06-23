@@ -3,6 +3,7 @@
   --input-padding-right: 1rem;
   --input-padding-bottom: 0.75rem;
   --input-padding-left: 1rem;
+  --input-border-width: 2px;
   --color-input: var(--color-p);
   --color-input-bg: var(--white);
   --form-field-gap: var(--size-2);
@@ -31,7 +32,7 @@ select,
 textarea {
   @include body-font;
 
-  border: 2px solid var(--color-input-bg);
+  border: var(--input-border-width) solid var(--color-input-bg);
   border-radius: 0;
   color: var(--color-p);
   padding: var(--input-padding-top) var(--input-padding-right)
