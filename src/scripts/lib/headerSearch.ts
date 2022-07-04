@@ -66,7 +66,10 @@ export default function headerSearch() {
       // Delete current content
       removeChildren(searchResults);
       // Replace
-      searchResults.insertAdjacentHTML('afterbegin', skeletonHtml);
+      searchResults.insertAdjacentHTML(
+        'afterbegin',
+        `<div class="header__search__results__inner">${skeletonHtml}</div>`
+      );
     }
 
     function processResults(
@@ -111,7 +114,10 @@ export default function headerSearch() {
       // Delete current content
       removeChildren(searchResults);
       // Replace
-      searchResults.insertAdjacentHTML('afterbegin', finalHtml);
+      searchResults.insertAdjacentHTML(
+        'afterbegin',
+        `<div class="header__search__results__inner">${finalHtml}</div>`
+      );
     }
 
     async function fetchSearchResults(query: string) {
@@ -127,7 +133,7 @@ export default function headerSearch() {
         removeChildren(searchResults);
         searchResults.insertAdjacentHTML(
           'afterbegin',
-          `<p>Error searching for posts</p>`
+          `<div class="header__search__results__inner"><p>Error searching for posts</p></div>`
         );
       }
     }

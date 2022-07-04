@@ -234,8 +234,6 @@ Header
   }
 
   &__search {
-    margin-left: calc(var(--menu-spacing) * 1);
-
     @include breakpoint($laptop-sm) {
       position: relative;
     }
@@ -243,7 +241,9 @@ Header
     &__toggle {
       display: flex;
       align-items: center;
+      justify-content: center;
       transition: var(--transition);
+      color: var(--color-primary);
 
       svg {
         height: var(--size-3);
@@ -251,16 +251,15 @@ Header
       }
 
       &:hover {
-        color: var(--color-accent);
+        color: var(--brown-8);
       }
     }
 
     &__box {
       position: absolute;
       top: 100%;
-      right: -1rem;
+      right: 0;
       width: 100%;
-      min-width: 16rem;
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
@@ -269,6 +268,10 @@ Header
 
       @include breakpoint($mobile) {
         min-width: 20rem;
+      }
+
+      @include breakpoint($laptop-sm) {
+        right: -1rem;
       }
 
       &.active {
@@ -281,18 +284,29 @@ Header
       &__inner {
         background-color: var(--white);
         box-shadow: var(--shadow-1);
-        padding-top: 1rem;
+
+        @include breakpoint($laptop-sm) {
+          margin-top: 1rem;
+        }
       }
 
       form {
         display: flex;
         align-items: center;
         width: 100%;
+
+        input[type='search'] {
+          box-shadow: none;
+        }
       }
     }
 
     &__results {
-      padding: 0.5rem var(--input-padding-left);
+      padding: 0 var(--input-padding-left);
+
+      &__inner {
+        padding: 1rem 0;
+      }
 
       ul {
         list-style: none;
