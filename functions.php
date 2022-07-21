@@ -23,7 +23,7 @@ if (!defined('LB_VERSION')) {
 if (!defined('WP_ENVIRONMENT_TYPE')) {
 
   function get_environment_by_url(): string {
-    $http_host = $_SERVER['HTTP_HOST'];
+    $http_host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
 
     if (strpos($http_host, '.local') !== false) {
       $is_devkinsta_preview = strpos($_SERVER['HTTP_USER_AGENT'], 'DevKinsta') !== false;
