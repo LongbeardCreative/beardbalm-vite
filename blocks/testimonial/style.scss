@@ -1,0 +1,57 @@
+/**
+ * Note that these styles are loaded *after* common styles, so that
+ * editor-specific styles using the same selectors will take precedence.
+ */
+
+.wp-block-beardbalm-testimonial {
+  color: #000;
+  background: #fff;
+  box-shadow: 0 3px 6px rgb(0 0 0 / 16%);
+  padding: 20px;
+  border-radius: 20px;
+}
+
+blockquote.testimonial-header {
+  margin: 0;
+
+  p {
+    font-size: 1.25rem;
+    margin: 0;
+  }
+}
+
+.testimonial-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.testimonial-author-name {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.testimonial-author-byline {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.testimonial-image-wrapper {
+  border: 0;
+  height: 5rem;
+  width: 5rem;
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  padding: 0 !important;
+}
+
+.testimonial-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+}

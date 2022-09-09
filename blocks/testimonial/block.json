@@ -1,0 +1,40 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "title": "Testimonial",
+  "name": "beardbalm/testimonial",
+  "category": "text",
+  "icon": "testimonial",
+  "attributes": {
+    "quote": {
+      "type": "string",
+      "source": "html",
+      "selector": "p"
+    },
+    "color": {
+      "type": "string",
+      "default": "#000"
+    },
+    "mediaID": {
+      "type": "number"
+    },
+    "mediaURL": {
+      "type": "string",
+      "source": "attribute",
+      "selector": "img",
+      "attribute": "src"
+    },
+    "authorName": {
+      "type": "string",
+      "source": "html",
+      "selector": ".testimonial-author-name span"
+    },
+    "authorByline": {
+      "type": "string",
+      "source": "html",
+      "selector": ".testimonial-author-byline span"
+    }
+  },
+  "editorScript": "file:./dist/index.js",
+  "style": "file:./dist/style.css"
+}

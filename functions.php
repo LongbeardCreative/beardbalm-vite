@@ -51,7 +51,7 @@ require_once get_template_directory() . '/inc/template-functions.php';
 require_once get_template_directory() . '/inc/relevanssi.php';
 require_once get_template_directory() . '/inc/login.php';
 require_once get_template_directory() . '/inc/cli.php';
-
+require_once get_template_directory() . '/blocks/blocks.php';
 
 /**
  * Clean up admin bar

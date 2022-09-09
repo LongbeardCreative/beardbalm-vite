@@ -1,0 +1,26 @@
+{
+  "name": "beardbalm-blocks",
+  "version": "0.1.0",
+  "description": "Beardbalm Gutenberg Blocks",
+  "author": "Longbeard",
+  "license": "GPL-2.0-or-later",
+  "scripts": {
+    "build": "LIB=testimonial vite build",
+    "dev": "LIB=testimonial vite dev"
+  },
+  "devDependencies": {
+    "@types/wordpress__block-editor": "^7.0.0",
+    "@vitejs/plugin-react": "^2.0.1",
+    "rollup-plugin-wp-resolve": "^1.0.9",
+    "sass": "^1.54.8",
+    "tsx": "^3.9.0",
+    "typescript": "^4.8.3",
+    "vite": "^3.0.9"
+  },
+  "dependencies": {
+    "@wordpress/block-editor": "^9.8.0",
+    "@wordpress/blocks": "^11.15.0",
+    "@wordpress/components": "^20.0.0",
+    "@wordpress/i18n": "^4.16.0"
+  }
+}
